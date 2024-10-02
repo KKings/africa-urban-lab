@@ -1,0 +1,17 @@
+fragment LecturersSection on LecturersSectionRecord {
+  lecturersTitle: title
+  lecturers {
+    id
+    name
+    jobTitle
+    email
+    cvLink
+    category
+    biography
+    image {
+      responsiveImage(imgixParams: { auto: format, w: 400 }) {
+        ...DatoImage_responsiveImage
+      }
+    }
+  }
+}

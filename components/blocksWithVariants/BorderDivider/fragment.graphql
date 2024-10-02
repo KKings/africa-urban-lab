@@ -1,0 +1,5 @@
+fragment BorderDivider on BorderDividerRecord {
+  borderImage {
+    url
+  }
+}

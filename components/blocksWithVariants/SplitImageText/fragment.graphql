@@ -1,0 +1,20 @@
+fragment SplitImageTextSection on SplitImageTextSectionRecord {
+  splitImageTitle: title
+  splitImageText: text
+  imageAlignment
+  bgColor {
+    hex
+  }
+  textColor {
+    hex
+  }
+  image {
+    responsiveImage(imgixParams: { auto: format, w: 793 }) {
+      alt
+      src
+      width
+      height
+      sizes
+    }
+  }
+}

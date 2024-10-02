@@ -1,0 +1,10 @@
+fragment CourseTableSection on CourseTableSectionRecord {
+  title
+  courses {
+    text
+  }
+  brochure {
+    url
+  }
+  buttonText
+}

@@ -1,0 +1,15 @@
+fragment AccordionSection on AccordionSectionRecord {
+  title
+  items {
+    id
+    title
+    subtitle
+    text
+  }
+  bgColor {
+    hex
+  }
+  textColor {
+    hex
+  }
+}

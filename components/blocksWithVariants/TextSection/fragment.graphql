@@ -1,0 +1,11 @@
+fragment TextSection on TextSectionRecord {
+  textSectionTitle: title
+  textSectionText: text
+  textBlockSize
+  bgColor {
+    hex
+  }
+  textColor {
+    hex
+  }
+}

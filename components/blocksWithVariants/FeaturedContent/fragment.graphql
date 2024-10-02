@@ -1,0 +1,26 @@
+fragment FeaturedContentSection on FeaturedContentSectionRecord {
+  title
+  features {
+    id
+    title
+    text
+    link {
+      slug
+    }
+  }
+  textColor {
+    hex
+  }
+  bgColor {
+    hex
+  }
+  image {
+    responsiveImage(imgixParams: { auto: format, w: 1152 }) {
+      alt
+      src
+      width
+      height
+      sizes
+    }
+  }
+}

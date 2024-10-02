@@ -1,0 +1,15 @@
+fragment ImageHeroSection on ImageHeroSectionRecord {
+  bgImage {
+    responsiveImage(imgixParams: { auto: format, w: 1920 }) {
+      alt
+      src
+      width
+      height
+      sizes
+    }
+  }
+  bgColor {
+    hex
+  }
+  useImageHeight
+}

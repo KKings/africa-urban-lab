@@ -1,0 +1,13 @@
+fragment LogoCarouselSection on LogoCarouselSectionRecord {
+  logoCarouselTitle: title
+  cards {
+    id
+    name
+    image {
+      url
+      alt
+      height
+      width
+    }
+  }
+}
