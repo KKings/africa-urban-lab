@@ -24,7 +24,7 @@ export default async function RootLayout({ children, ...pageProps }: Params) {
   return (
     <DialogProvider>
       {children}
-      <ScrollToTop globalPageProps={pageProps} isDraft={isDraft} />
+      {/* <ScrollToTop globalPageProps={pageProps} isDraft={isDraft} /> */}
       <Suspense fallback={null}>
         <ManinMenuEvents />
       </Suspense>

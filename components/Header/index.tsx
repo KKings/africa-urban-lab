@@ -3,7 +3,6 @@
 import type { CommonLayoutQuery } from "@/graphql/types/graphql";
 import type { GlobalPageProps } from "@/utils/globalPageProps";
 import { buildUrl } from "@/utils/globalPageProps";
-import { isEmptyDocument } from "datocms-structured-text-utils";
 import Image from "next/image";
 import Link from "next/link";
 import { type Menu, MainMenu, MainMenuMobile } from "../MainMenu/main-menu";

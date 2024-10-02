@@ -5,9 +5,10 @@ import React, { useEffect, useState } from 'react';
 
 type Props = {
   url: string | URL;
+  className?: string;
 };
 
-const SvgRenderer = ({ url }: Props) => {
+const SvgRenderer = ({ url, className }: Props) => {
   const [svgContent, setSvgContent] = useState('');
 
   useEffect(() => {
@@ -26,7 +27,7 @@ const SvgRenderer = ({ url }: Props) => {
 
   return (
     <div
-      className="fill-current [&>*]:text-primary"
+      className={className}
       dangerouslySetInnerHTML={{ __html: svgContent }}
     />
   );

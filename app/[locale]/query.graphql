@@ -6,11 +6,4 @@ query Layout {
       tag
     }
   }
-  layout {
-    mainColor {
-      red
-      blue
-      green
-    }
-  }
 }
