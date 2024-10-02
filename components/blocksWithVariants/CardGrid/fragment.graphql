@@ -1,0 +1,24 @@
+fragment CardSection on CardSectionRecord {
+  cardTitle: title
+  bgColor {
+    hex
+  }
+  textColor {
+    hex
+  }
+  cards {
+    id
+    title
+    text
+    url
+    image {
+      responsiveImage(imgixParams: { auto: format, w: 400 }) {
+        alt
+        src
+        width
+        height
+        sizes
+      }
+    }
+  }
+}

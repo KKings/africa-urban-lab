@@ -50,6 +50,9 @@ query Page($locale: SiteLocale, $fallbackLocale: [SiteLocale!], $slug: String) {
       ... on StaffSectionRecord {
         ...StaffSection
       }
+      ... on CardSectionRecord {
+        ...CardSection
+      }
     }
     id
     label
