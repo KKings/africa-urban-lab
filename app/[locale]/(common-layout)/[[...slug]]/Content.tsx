@@ -8,11 +8,13 @@ import PageImageTitle from '@/components/blocksWithVariants/PageImageTitle';
 import TextSection from '@/components/blocksWithVariants/TextSection';
 import BorderDivider from '@/components/blocksWithVariants/BorderDivider';
 import ImageHero from '@/components/blocksWithVariants/ImageHero';
-import SplitImageText from '@/components/blocksWithVariants/SplitImageText';
+import SplitImageTextFullWidth from '@/components/blocksWithVariants/SplitImageText/FullWidth';
 import AccordionSection from '@/components/blocksWithVariants/Accordion';
 import CourseTable from '@/components/blocksWithVariants/CourseTable';
 import FeaturedContent from '@/components/blocksWithVariants/FeaturedContent';
 import StaffGrid from '@/components/blocksWithVariants/StaffGrid';
+import SplitImageTextBoxed from '@/components/blocksWithVariants/SplitImageText/Boxed';
+import { SplitImageTextSectionFragment } from '@/graphql/types/graphql';
 
 const Content: ContentPage<PageProps, Query> = ({
   data,
@@ -57,9 +59,18 @@ const Content: ContentPage<PageProps, Query> = ({
             );
           }
           case 'SplitImageTextSectionRecord': {
-            return (
-              <SplitImageText fragment={section} globalPageProps={globalPageProps} />
-            )
+            switch ((section as unknown as SplitImageTextSectionFragment).displayVariant) {
+              case 'boxed': {
+                return (
+                  <SplitImageTextBoxed fragment={section} globalPageProps={globalPageProps} />
+                )
+              }
+              default: {
+                return (
+                  <SplitImageTextFullWidth fragment={section} globalPageProps={globalPageProps} />
+                )
+              }
+            }
           }
           case 'AccordionSectionRecord': {
             return (

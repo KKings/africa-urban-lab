@@ -20,7 +20,7 @@ type LecturerGroupProps = {
 
 export const LecturerGroup = ({ kind, lecturers }: LecturerGroupProps) => {
   return (
-    <div className="container space-y-w8 max-w-[1024px] text-foreground">
+    <div className="container space-y-w8 text-foreground">
       {kind && (
         <Text as="h2" caps size="meta" align="center">
           {kind}
@@ -28,14 +28,14 @@ export const LecturerGroup = ({ kind, lecturers }: LecturerGroupProps) => {
       )}
       <div
         className={cn(
-          "flex gap-w6 w-full justify-center items-start",
-          lecturers.length > 3 ? "flex-wrap" : "flex-nowrap"
+          "flex flex-wrap",
+          "gap-x-6 gap-y-10 w-full justify-center items-start"
         )}
       >
         {lecturers.map((item) => (
           <Dialog key={item.id}>
             <DialogTrigger asChild>
-              <button className={clsx("space-y-w4 basis-1/3")}>
+              <button className={clsx("space-y-w4 w-full md:basis-1/2-gap-6 lg:basis-1/3-gap-6")}>
                 <div className="relative aspect-[320/290]">
                   <NextImage
                     src={item?.image?.responsiveImage?.src ?? ""}

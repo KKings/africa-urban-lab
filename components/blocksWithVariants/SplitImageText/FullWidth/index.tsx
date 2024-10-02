@@ -18,7 +18,7 @@ enum ImageAlignment {
   Right = 'right',
 };
 
-const SplitImageText = ({ fragment }: Props) => {
+const SplitImageTextFullWidth = ({ fragment }: Props) => {
   const { splitImageTitle: title, splitImageText: text, image, imageAlignment, bgColor, textColor } = getFragmentData(
     SplitImageTextSectionFragmentDoc,
     fragment
@@ -67,4 +67,4 @@ const SplitImageText = ({ fragment }: Props) => {
   );
 };
 
-export default SplitImageText;
+export default SplitImageTextFullWidth;

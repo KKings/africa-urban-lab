@@ -2,6 +2,7 @@ fragment SplitImageTextSection on SplitImageTextSectionRecord {
   splitImageTitle: title
   splitImageText: text
   imageAlignment
+  displayVariant
   bgColor {
     hex
   }
