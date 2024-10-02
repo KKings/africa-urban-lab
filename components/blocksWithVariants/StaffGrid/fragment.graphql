@@ -1,0 +1,28 @@
+fragment StaffSection on StaffSectionRecord {
+  staffTitle: title
+  bgColor {
+    hex
+  }
+  textColor {
+    hex
+  }
+  staff {
+    id
+    name
+    jobTitle
+    email
+    cvLink {
+      url
+    }
+    biography
+    image {
+      responsiveImage(imgixParams: { auto: format, w: 400 }) {
+        alt
+        src
+        width
+        height
+        sizes
+      }
+    }
+  }
+}

@@ -12,6 +12,7 @@ import SplitImageText from '@/components/blocksWithVariants/SplitImageText';
 import AccordionSection from '@/components/blocksWithVariants/Accordion';
 import CourseTable from '@/components/blocksWithVariants/CourseTable';
 import FeaturedContent from '@/components/blocksWithVariants/FeaturedContent';
+import StaffGrid from '@/components/blocksWithVariants/StaffGrid';
 
 const Content: ContentPage<PageProps, Query> = ({
   data,
@@ -73,6 +74,11 @@ const Content: ContentPage<PageProps, Query> = ({
           case 'FeaturedContentSectionRecord': {
             return (
               <FeaturedContent fragment={section} globalPageProps={globalPageProps} />
+            )
+          }
+          case 'StaffSectionRecord': {
+            return (
+              <StaffGrid fragment={section} globalPageProps={globalPageProps} />
             )
           }
           case 'RedirectSectionRecord': {

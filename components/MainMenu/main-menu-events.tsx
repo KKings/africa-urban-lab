@@ -1,24 +1,29 @@
 "use client";
 
 import { useDialogContext } from "@/components/Dialog/hooks/use-dialog-context";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
 
-// NavEvents are set in layout to handle closing on route change
-// https://nextjs.org/docs/app/api-reference/functions/use-router#router-events
-export function NavEvents() {
+export function ManinMenuEvents() {
   const { closeDialog } = useDialogContext();
   const pathname = usePathname();
   const prevPathnameRef = useRef(pathname);
 
   useEffect(() => {
+    console.log('events', {
+      current: prevPathnameRef.current,
+      latest: pathname,
+    })
+
+
     // Compare the previous pathname with the current one
     if (prevPathnameRef.current !== pathname) {
       closeDialog();
     }
+
     // Update the ref to the current pathname
     prevPathnameRef.current = pathname;
-  }, [pathname, closeDialog]);
+  }, [pathname]);
 
   return null;
 }

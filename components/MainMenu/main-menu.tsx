@@ -23,8 +23,9 @@ export type MenuProps = {
 
 export const MainMenu = ({ globalPageProps, menus = []}: MenuProps) => {
   const pathname = usePathname();
+
   return (
-    <NavigationMenu.Root className="z-10 hidden min-[1140px]:block">
+    <NavigationMenu.Root key={pathname} className="z-10 hidden min-[1140px]:block">
       <NavigationMenu.List className="flex items-center justify-end gap-w8 text-foreground">
         {menus.map((item) => (
           <NavigationMenu.Item
@@ -94,7 +95,7 @@ export const MainMenuMobile = ({ globalPageProps, menus = []}: MenuProps) => {
   const pathname = usePathname();
 
   return (     
-    <MainMenuDialog>
+    <MainMenuDialog key={pathname}>
       <NavigationMenu.Root className="w-screen" orientation="vertical">
         <NavigationMenu.List className="flex flex-col text-foreground">
           {menus.map((item, index) => (
@@ -103,19 +104,21 @@ export const MainMenuMobile = ({ globalPageProps, menus = []}: MenuProps) => {
               className="flex flex-col hover:text-primary relative w-full"
             >
               {(!item.submenu || item.submenu.length === 0) && (
-                <Link
-                  key={item.id}
-                  href={buildUrl(globalPageProps, item.path)}
-                  className={clsx(
-                    item.path === pathname ? "text-primary" : "",
-                    { 'py-3': index !== 0 },
-                    { 'pb-3': index === 0 },
-                  )}
-                >
-                  <Text as="span" weight="semi" className="text-white">
-                    {item.title}
-                  </Text>
-                </Link>
+                <NavigationMenu.Link asChild>
+                  <Link
+                    key={item.id}
+                    href={buildUrl(globalPageProps, item.path)}
+                    className={clsx(
+                      item.path === pathname ? "text-primary" : "",
+                      { 'py-3': index !== 0 },
+                      { 'pb-3': index === 0 },
+                    )}
+                  >
+                    <Text as="span" weight="semi" className="text-white">
+                      {item.title}
+                    </Text>
+                  </Link>
+                </NavigationMenu.Link>
               )}
               {item.submenu && item.submenu.length > 0 && (
                 <>
@@ -146,20 +149,22 @@ export const MainMenuMobile = ({ globalPageProps, menus = []}: MenuProps) => {
                           <NavigationMenu.Item
                             key={`${submenu.id}`}
                           >
-                            <Link
-                              key={submenu.id}
-                              href={buildUrl(globalPageProps, submenu.path)}
-                              className={clsx(
-                                item.path === pathname
-                                  ? "text-primary"
-                                  : "",
-                                "py-2 px-4 block text-white"
-                              )}
-                            >
-                              <Text as="span" size="small">
-                                {submenu.title}
-                              </Text>
-                            </Link>
+                            <NavigationMenu.Link asChild>
+                              <Link
+                                key={submenu.id}
+                                href={buildUrl(globalPageProps, submenu.path)}
+                                className={clsx(
+                                  item.path === pathname
+                                    ? "text-primary"
+                                    : "",
+                                  "py-2 px-4 block text-white"
+                                )}
+                              >
+                                <Text as="span" size="small">
+                                  {submenu.title}
+                                </Text>
+                              </Link>
+                            </NavigationMenu.Link>
                           </NavigationMenu.Item>
                         ))}
                       </NavigationMenu.List>
@@ -174,56 +179,3 @@ export const MainMenuMobile = ({ globalPageProps, menus = []}: MenuProps) => {
     </MainMenuDialog>
   );
 };
-
-// const nav: Menu = [
-//   {
-//     name: "Home",
-//     href: "/",
-//   },
-//   {
-//     name: "ASE",
-//     href: "/about-ase",
-//   },
-//   {
-//     name: "ASE Zanzibar",
-//     href: "/about-ase-zanzibar",
-//   },
-//   {
-//     name: "Africa Urban Lab",
-//     href: "/africa-urban-lab",
-//     // submenu: [
-//     //   {
-//     //     name: "AUL Home",
-//     //     href: "/africa-urban-lab",
-//     //   },
-//     //   {
-//     //     name: "Research Agenda",
-//     //     href: "/africa-urban-lab",
-//     //   },
-//     //   {
-//     //     name: "Policy Briefs",
-//     //     href: "/africa-urban-lab",
-//     //   },
-//     //   {
-//     //     name: "Publications",
-//     //     href: "/africa-urban-lab",
-//     //   },
-//     //   {
-//     //     name: "Working Papers",
-//     //     href: "/africa-urban-lab",
-//     //   },
-//     //   {
-//     //     name: "AUL Blog",
-//     //     href: "/africa-urban-lab",
-//     //   },
-//     // ],
-//   },
-//   {
-//     name: "Admission",
-//     href: "/admission",
-//   },
-//   // {
-//   //   name: "Support ASE",
-//   //   href: "/support",
-//   // },
-// ];

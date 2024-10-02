@@ -140,7 +140,13 @@ const config = {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-      },
+      }, 
+      flexBasis: {
+        "1/2-gap-4": "calc(50% - (1/2 * 1rem))",
+        "1/2-gap-6": "calc(50% - (1/2 * 1.5rem))",
+        "1/3-gap-4": "calc(33.3% - (2/3 * 1rem))",
+        "1/3-gap-6": "calc(33.3% - (2/3 * 1.5rem))"
+      }
     },
   },
   plugins: [require("tailwindcss-animate")]

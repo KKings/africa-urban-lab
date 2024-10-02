@@ -6,8 +6,8 @@ import { buildUrl } from "@/utils/globalPageProps";
 import { isEmptyDocument } from "datocms-structured-text-utils";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import { type Menu, MainMenu, MainMenuMobile } from "../MainMenu/main-menu";
+import { usePathname } from "next/navigation";
 
 type Props = {
   globalPageProps: GlobalPageProps;
@@ -15,6 +15,7 @@ type Props = {
 };
 
 const Header = ({ globalPageProps, data }: Props) => {
+  const pathname = usePathname();
   const menuData: Menu[] = [];
 
   data.layout?.menu.map((item) => {
@@ -44,19 +45,6 @@ const Header = ({ globalPageProps, data }: Props) => {
     }
   });
 
-  // Sticky Navbar
-  const [sticky, setSticky] = useState(false);
-  const handleStickyNavbar = () => {
-    if (window.scrollY >= 80) {
-      setSticky(true);
-    } else {
-      setSticky(false);
-    }
-  };
-  useEffect(() => {
-    window.addEventListener("scroll", handleStickyNavbar);
-  });
-
   return (
     <>
       {/* {notificationStrip && (
@@ -69,7 +57,7 @@ const Header = ({ globalPageProps, data }: Props) => {
       <header className="sticky top-0 w-full bg-background z-50 drop-shadow-sm">
         <div className="container h-navH flex items-center justify-between">
           <Link
-            href={buildUrl(globalPageProps, '/')}
+            href={buildUrl(globalPageProps, "/")}
             className="h-navH flex items-center"
           >
             {data.layout?.logo.url && (
@@ -83,15 +71,20 @@ const Header = ({ globalPageProps, data }: Props) => {
             )}
           </Link>
           <div className="relative flex justify-end z-[1]">
-            <MainMenu globalPageProps={globalPageProps} menus={menuData} />
+            <MainMenu
+              key={pathname}
+              globalPageProps={globalPageProps}
+              menus={menuData}
+            />
           </div>
           <div className="relative flex justify-end z-50 min-[1140px]:hidden">
             <MainMenuMobile
+              key={pathname}
               globalPageProps={globalPageProps}
               menus={menuData}
             />
             <hr />
-          </div> 
+          </div>
         </div>
       </header>
     </>
