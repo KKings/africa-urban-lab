@@ -39,7 +39,7 @@ const SplitImageTextFullWidth = ({ fragment }: Props) => {
   return (
     <div 
       className={clsx([
-        "grid grid-flow-row md:grid-flow-col gap-16",
+        "grid grid-flow-row md:grid-flow-col",
         "bg-theme-grey text-background",
         {['md:grid-cols-[var(--image-grid-size)_auto] md:[grid-template-areas:"image_text"]']: imageAlignment === ImageAlignment.Left},
         {['md:grid-cols-[auto_var(--image-grid-size)] md:[grid-template-areas:"text_image"]']: imageAlignment === ImageAlignment.Right}
@@ -60,7 +60,7 @@ const SplitImageTextFullWidth = ({ fragment }: Props) => {
       </div>
       <div className={clsx([
         "flex flex-col text-center justify-center",
-        "space-y-8 md:px-4 md:py-16",
+        "space-y-8 py-16 px-4 md:p-16",
         "md:[grid-area:text]"
       ])} style={{ color: textColor?.hex ?? ''}}>
         {title && <Text as="h2" size="subheading">{title}</Text>}

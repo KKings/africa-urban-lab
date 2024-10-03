@@ -16,6 +16,7 @@ import StaffGrid from '@/components/blocksWithVariants/StaffGrid';
 import SplitImageTextBoxed from '@/components/blocksWithVariants/SplitImageText/Boxed';
 import { SplitImageTextSectionFragment } from '@/graphql/types/graphql';
 import CardGrid from '@/components/blocksWithVariants/CardGrid';
+import BannerCTA from '@/components/blocksWithVariants/BannerCTA';
 
 const Content: ContentPage<PageProps, Query> = ({
   data,
@@ -96,6 +97,11 @@ const Content: ContentPage<PageProps, Query> = ({
           case 'CardSectionRecord': {
             return (
               <CardGrid fragment={section} globalPageProps={globalPageProps} />
+            )
+          }
+          case 'BannerCtaSectionRecord': {
+            return (
+              <BannerCTA fragment={section} globalPageProps={globalPageProps} />
             )
           }
           case 'RedirectSectionRecord': {

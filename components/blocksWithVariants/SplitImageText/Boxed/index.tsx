@@ -43,7 +43,7 @@ const SplitImageTextBoxed = ({ fragment }: Props) => {
           backgroundColor: bgColor?.hex ?? "",
           ...vars
         }}>
-        <div className="w-full relative md:[grid-area:image] md:justify-center shadow-md">
+        <div className="w-full relative md:[grid-area:image] md:justify-center">
           <NextImage
             src={image?.responsiveImage?.src ?? ""}
             alt={image?.responsiveImage?.alt ?? ""}

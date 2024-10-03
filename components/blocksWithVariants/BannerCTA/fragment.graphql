@@ -1,0 +1,20 @@
+fragment BannerCTASection on BannerCtaSectionRecord {
+  bannerTitle: title
+  subtitle
+  link {
+    url
+    label
+  }
+  bannerBGImage: bgImage {
+    url
+  }
+  bgColor {
+    hex
+  }
+  textBgColor {
+    hex
+  }
+  textColor {
+    hex
+  }
+}
