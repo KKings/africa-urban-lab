@@ -3,6 +3,9 @@ fragment SplitImageTextSection on SplitImageTextSectionRecord {
   splitImageText: text
   imageAlignment
   displayVariant
+  imageGrid
+  buttonUrl
+  buttonLabel
   bgColor {
     hex
   }

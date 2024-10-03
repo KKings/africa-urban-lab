@@ -27,8 +27,6 @@ const buildVariables: BuildVariablesFn<PageProps, Variables> = ({
   const slug = Array.isArray(params.slug) ? params.slug.join('/') : params.slug;
   const locale = params?.locale ?? SiteLocale.En;
 
-  console.log(slug.replace(`${locale}/`, '/'))
-
   return {
     locale: locale,
     fallbackLocale: [fallbackLocale],
