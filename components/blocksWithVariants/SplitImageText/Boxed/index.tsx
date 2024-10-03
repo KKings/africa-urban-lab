@@ -72,7 +72,7 @@ const SplitImageTextBoxed = ({ fragment }: Props) => {
           style={{ color: textColor?.hex ?? "" }}
         >
           {title && (
-            <Text as="h2" size="subheading">
+            <Text as="h2" serif size="subheading" weight="semi">
               {title}
             </Text>
           )}

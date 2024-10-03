@@ -17,6 +17,7 @@ import SplitImageTextBoxed from '@/components/blocksWithVariants/SplitImageText/
 import { SplitImageTextSectionFragment } from '@/graphql/types/graphql';
 import CardGrid from '@/components/blocksWithVariants/CardGrid';
 import BannerCTA from '@/components/blocksWithVariants/BannerCTA';
+import FeautredBlogPostsGrid from '@/components/blocksWithVariants/FeaturedBlogPostsGrid';
 
 const Content: ContentPage<PageProps, Query> = ({
   data,
@@ -102,6 +103,11 @@ const Content: ContentPage<PageProps, Query> = ({
           case 'BannerCtaSectionRecord': {
             return (
               <BannerCTA fragment={section} globalPageProps={globalPageProps} />
+            )
+          }
+          case 'FeaturedBlogPostsSectionRecord': {
+            return (
+              <FeautredBlogPostsGrid fragment={section} globalPageProps={globalPageProps} />
             )
           }
           case 'RedirectSectionRecord': {

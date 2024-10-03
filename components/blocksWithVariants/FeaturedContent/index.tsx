@@ -48,7 +48,7 @@ const FeaturedContent = ({ fragment }: Props) => {
               className="flex flex-col space-y-6 md:space-y-8 text-center"
             >
               <Link href={feature.link.slug}>
-                <Text as="h3" size="subheading">
+                <Text as="h3" serif size="subheading">
                   {feature.title}
                 </Text>
               </Link>

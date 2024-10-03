@@ -28,7 +28,7 @@ const BannerCTA = ({ fragment }: Props) => {
       className={clsx(
         "py-w24 md:py-w32 relative min-h-[50vh] lg:min-h-[700px]",
         "flex flex-col items-center justify-center",
-        "!min-h-[auto] bg-theme-turquoise text-background relative",
+        "!min-h-[auto] text-background relative",
         "bg-cover bg-no-repeat bg-center"
       )}
       style={{

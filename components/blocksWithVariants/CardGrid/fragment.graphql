@@ -1,5 +1,6 @@
 fragment CardSection on CardSectionRecord {
   cardTitle: title
+  cardText: text
   bgColor {
     hex
   }

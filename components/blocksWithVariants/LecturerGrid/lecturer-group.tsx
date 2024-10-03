@@ -22,7 +22,7 @@ export const LecturerGroup = ({ kind, lecturers }: LecturerGroupProps) => {
   return (
     <div className="container space-y-w8 text-foreground">
       {kind && (
-        <Text as="h2" caps size="meta" align="center">
+        <Text as="h2" serif caps size="meta" align="center">
           {kind}
         </Text>
       )}

@@ -92,7 +92,7 @@ const StaffGrid = ({ fragment }: Props) => {
                     </div>
                   </div>
                   <div className="space-y-2">
-                    <Text as="h2" caps size="lead" align="center">
+                    <Text as="h2" serif caps size="lead" align="center">
                       {item.name}
                     </Text>
                     {item.jobTitle && (

@@ -1,0 +1,20 @@
+fragment FeaturedBlogPostsSection on FeaturedBlogPostsSectionRecord {
+  title
+  text
+  bgColor {
+    hex
+  }
+  textColor {
+    hex
+  }
+  posts {
+    id
+    _publishedAt
+    title
+    description
+    slug
+    author {
+      name
+    }
+  }
+}

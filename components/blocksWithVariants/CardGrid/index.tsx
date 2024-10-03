@@ -16,7 +16,8 @@ type Props = {
 
 const CardGrid = ({ fragment }: Props) => {
   const {
-    cardTitle,
+    cardTitle: title,
+    cardText: text,
     cards = [],
     bgColor,
     textColor,
@@ -24,7 +25,8 @@ const CardGrid = ({ fragment }: Props) => {
 
   return (
     <Section
-      title={cardTitle ?? ""}
+      title={title ?? ""}
+      description={text ?? ""}
       bgColor={bgColor?.hex}
       textColor={textColor?.hex}
       className="space-y-w16"
@@ -55,18 +57,30 @@ const CardGrid = ({ fragment }: Props) => {
               </div>
               <div className="flex flex-col space-y-2">
                 { item.url && 
-                  <Link
-                    href={item.url}
-                    >
-                    <Text as="h3" caps size="base" weight="bold" align="center">
-                      {item.title}
+                  <>
+                    <Link
+                      href={item.url}
+                      >
+                      <Text as="h3" caps size="base" weight="bold" align="center">
+                        {item.title}
+                      </Text>
+                    </Link>
+                    <Text as="div" size="base" align="center">
+                      {item.text}
                     </Text>
-                  </Link>
+                  </>
                 }
                 { !item.url && 
-                  <Text as="h3" caps size="base" weight="bold" align="center">
-                    {item.title}
-                  </Text>
+                  <>
+                    <Text as="h3" caps size="base" weight="bold" align="center">
+                      {item.title}
+                    </Text>   
+                    { item.text && 
+                      <Text as="div" size="base" align="center">
+                        {item.text}
+                      </Text>
+                    }
+                  </>
                 }
               </div>
             </div>

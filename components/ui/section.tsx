@@ -3,6 +3,7 @@ import clsx from "clsx";
 
 export type SectionProps =  JSX.IntrinsicElements['div'] & {
   title?: string | null;
+  description?: string | null;
   bgColor?: string;
   textColor?: string;
   fullWidth?: boolean;
@@ -13,6 +14,7 @@ export type SectionProps =  JSX.IntrinsicElements['div'] & {
 
 export const Section = ({
   title,
+  description,
   children,
   className,
   bgColor,
@@ -38,19 +40,34 @@ export const Section = ({
         {['container']: !fullWidth },
         {['w-full']: fullWidth },
       ])} style={{ color: textColor ?? ''}} >
-        {title && (
-          <Text
-            as={as}
-            caps
-            serif
-            size="subheading"
-            weight="medium"
-            align="center"
-            color="default"
-          >
-            {title}
-          </Text>
-        )}
+        { (title || description) && 
+          <div className="flex flex-col space-y-4">
+            {title && (
+              <Text
+                as={as}
+                caps
+                serif
+                size="subheading"
+                weight="medium"
+                align="center"
+                color="default"
+              >
+                {title}
+              </Text>
+            )}
+            {description && (
+              <Text
+                as="div"
+                serif
+                size="lead"
+                align="center"
+                color="default"
+              >
+                {description}
+              </Text>
+            )}
+          </div>
+        }
         {children}
       </div>
     </div>

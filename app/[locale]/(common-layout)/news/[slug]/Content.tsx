@@ -40,7 +40,7 @@ const Content: ContentPage<PageProps, Query> = ({
                 </Text>
               )}
               <div className='mb-10 border-b border-body-color border-opacity-10 pb-4'>
-                <Text as="h1" size="title" className="text-3xl font-bold leading-tight sm:text-4xl sm:leading-tight">
+                <Text as="h1" size="title" serif className="text-3xl font-bold leading-tight sm:text-4xl sm:leading-tight">
                   {data.post.title}
                 </Text>
               </div>
