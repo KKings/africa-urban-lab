@@ -10,14 +10,17 @@ type Props = {
 const DEFAULT_IMAGE = '/images/border-graphic.png';
 
 const BorderDivider = ({ fragment }: Props) => {
-  const { borderImage } = getFragmentData(
+  const { borderImage, bgColor } = getFragmentData(
     BorderDividerFragmentDoc,
     fragment
   );
   return (
     <div
       className="w-full h-[20px] bg-contain bg-center bg-repeat-x"
-      style={{ backgroundImage: `url(${borderImage?.url ? borderImage?.url : DEFAULT_IMAGE })` }}
+      style={{ 
+        backgroundImage: `url(${borderImage?.url ? borderImage?.url : DEFAULT_IMAGE })`,
+        backgroundColor: bgColor?.hex ? bgColor.hex : '',
+      }}
     ></div>
   );
 };

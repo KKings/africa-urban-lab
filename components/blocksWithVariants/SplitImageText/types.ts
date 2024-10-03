@@ -3,6 +3,11 @@ export enum ImageAlignment {
   Right = "right",
 }
 
+export enum TextVariants {
+  Default = "default",
+  Large = "large",
+}
+
 export enum ImageGrid {
   '1/2' = '1/2',
   '1/3' = '1/3',

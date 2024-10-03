@@ -1,4 +1,7 @@
 fragment BorderDivider on BorderDividerRecord {
+  bgColor {
+    hex
+  }
   borderImage {
     url
   }

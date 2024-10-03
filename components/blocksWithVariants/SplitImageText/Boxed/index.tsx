@@ -7,7 +7,7 @@ import { GlobalPageProps } from "@/utils/globalPageProps";
 import { Markdown } from "@/components/ui/markdown";
 import { Button, Text } from "@/components/ui";
 import { Section } from "@/components/ui/section";
-import { ImageAlignment, ImageGrid } from "../types";
+import { ImageAlignment, ImageGrid, TextVariants } from "../types";
 import { IMAGE_SIZES } from "../constants";
 
 type Props = {
@@ -24,25 +24,36 @@ const SplitImageTextBoxed = ({ fragment }: Props) => {
     imageGrid = ImageGrid["2/5"],
     bgColor,
     textColor,
-    buttonUrl,
-    buttonLabel,
+    textVariant,
+    link,
   } = getFragmentData(SplitImageTextSectionFragmentDoc, fragment);
 
-  const vars = { 
-    "--image-grid-size": imageGrid ? IMAGE_SIZES[imageGrid as ImageGrid] : IMAGE_SIZES[ImageGrid["2/5"]]
+  const vars = {
+    "--image-grid-size": imageGrid
+      ? IMAGE_SIZES[imageGrid as ImageGrid]
+      : IMAGE_SIZES[ImageGrid["2/5"]],
   } as React.CSSProperties;
 
   return (
     <Section bgColor={bgColor?.hex}>
-      <div className={clsx([
-        "grid grid-flow-row md:grid-flow-column gap-16 items-center",
-        "bg-theme-grey text-background",
-        {['md:grid-cols-[var(--image-grid-size)_auto] md:[grid-template-areas:"image_text"]']: imageAlignment === ImageAlignment.Left},
-        {['md:grid-cols-[auto_var(--image-grid-size)] md:[grid-template-areas:"text_image"]']: imageAlignment === ImageAlignment.Right}
-      ])} style={{ 
+      <div
+        className={clsx([
+          "grid grid-flow-row md:grid-flow-column gap-16 items-center",
+          "bg-theme-grey text-background",
+          {
+            ['md:grid-cols-[var(--image-grid-size)_auto] md:[grid-template-areas:"image_text"]']:
+              imageAlignment === ImageAlignment.Left,
+          },
+          {
+            ['md:grid-cols-[auto_var(--image-grid-size)] md:[grid-template-areas:"text_image"]']:
+              imageAlignment === ImageAlignment.Right,
+          },
+        ])}
+        style={{
           backgroundColor: bgColor?.hex ?? "",
-          ...vars
-        }}>
+          ...vars,
+        }}
+      >
         <div className="w-full relative md:[grid-area:image] md:justify-center">
           <NextImage
             src={image?.responsiveImage?.src ?? ""}
@@ -72,21 +83,23 @@ const SplitImageTextBoxed = ({ fragment }: Props) => {
               balance
               className={clsx(
                 "space-y-w4 mx-auto",
-                "[&_img]:mx-auto [&_img]:w-[72px] [&_img]:pt-w8 [&_img+h2]:!pt-0"
+                "[&_img]:mx-auto [&_img]:w-[72px] [&_img]:pt-w8 [&_img+h2]:!pt-0",
+                {["[&_p.text-base]:text-4xl"]: textVariant === TextVariants.Large}
               )}
             >
               <Markdown>{text}</Markdown>
             </Text>
           )}
-          { buttonUrl && 
-            <Button asChild variant="outline" size="default" className="w-max self-center">
-              <Link
-                href={buttonUrl}
-              >
-                { buttonLabel || 'Read More' }
-              </Link>
+          {link?.url && (
+            <Button
+              asChild
+              variant="outline"
+              size="default"
+              className="w-max self-center"
+            >
+              <Link href={link?.url}>{link?.label || "Read More"}</Link>
             </Button>
-          }
+          )}
         </div>
       </div>
     </Section>

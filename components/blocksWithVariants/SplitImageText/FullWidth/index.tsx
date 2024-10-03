@@ -25,8 +25,7 @@ const SplitImageTextFullWidth = ({ fragment }: Props) => {
     bgColor, 
     imageGrid,
     textColor,
-    buttonLabel,
-    buttonUrl,
+    link,
   } = getFragmentData(
     SplitImageTextSectionFragmentDoc,
     fragment
@@ -77,12 +76,10 @@ const SplitImageTextFullWidth = ({ fragment }: Props) => {
             <Markdown>{text}</Markdown>
           </Text>
         )}
-        { buttonUrl && 
+        { link?.url && 
           <Button asChild variant="outline" className="w-max self-center">
-            <Link
-              href={buttonUrl}
-            >
-              { buttonLabel || 'Read More' }
+            <Link href={link?.url}>
+              { link?.label || 'Read More' }
             </Link>
           </Button>
         }
