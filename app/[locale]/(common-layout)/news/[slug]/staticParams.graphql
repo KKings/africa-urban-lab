@@ -1,0 +1,10 @@
+
+query NewsStaticParams {
+  allNewsPosts(
+    filter: { title: { isBlank: "false" } }
+    orderBy: _createdAt_DESC
+    first: 9
+  ) {
+    slug
+  }
+}

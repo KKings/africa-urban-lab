@@ -23,7 +23,7 @@ export function ManinMenuEvents() {
 
     // Update the ref to the current pathname
     prevPathnameRef.current = pathname;
-  }, [pathname]);
+  }, [pathname, closeDialog]);
 
   return null;
 }

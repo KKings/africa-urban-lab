@@ -1,9 +1,9 @@
-import DatoImage from '@/components/DatoImage';
-import { type FragmentType, getFragmentData } from '@/graphql/types';
-import { PostExcerptFragmentDoc } from '@/graphql/types/graphql';
-import { type GlobalPageProps, buildUrl } from '@/utils/globalPageProps';
-import transformDate from '@/utils/transformDate';
-import Link from 'next/link';
+import DatoImage from "@/components/DatoImage";
+import { type FragmentType, getFragmentData } from "@/graphql/types";
+import { PostExcerptFragmentDoc } from "@/graphql/types/graphql";
+import { type GlobalPageProps, buildUrl } from "@/utils/globalPageProps";
+import transformDate from "@/utils/transformDate";
+import Link from "next/link";
 
 type Props = {
   fragment: FragmentType<typeof PostExcerptFragmentDoc>;
@@ -13,7 +13,7 @@ type Props = {
 const PostExcerpt = ({ fragment, globalPageProps }: Props) => {
   const { title, seoTags, author, tags, _publishedAt, slug } = getFragmentData(
     PostExcerptFragmentDoc,
-    fragment,
+    fragment
   );
 
   return (
@@ -49,28 +49,23 @@ const PostExcerpt = ({ fragment, globalPageProps }: Props) => {
           </h3>
           <div className="mb-6 border-b border-body-color border-opacity-10 pb-6 text-base font-medium text-body-color dark:border-white dark:border-opacity-10" />
           <div className="flex h-full items-center justify-between">
-            <Link
-              href={buildUrl(globalPageProps, `/posts/author/${author.slug}`)}
-              className="mr-5 flex items-center border-r border-body-color border-opacity-10 pr-5 dark:border-white dark:border-opacity-10 xl:mr-3 xl:pr-3 2xl:mr-5 2xl:pr-5"
-            >
-              <div className="mr-4">
-                <div className="relative h-12 w-12 overflow-hidden rounded-full object-contain">
-                  <DatoImage
-                    className="h-full w-full object-cover"
-                    layout="fill"
-                    objectFit="cover"
-                    objectPosition="50% 50%"
-                    fragment={author.picture.responsiveImage}
-                  />
-                </div>
+            <div className="mr-4">
+              <div className="relative h-12 w-12 overflow-hidden rounded-full object-contain">
+                <DatoImage
+                  className="h-full w-full object-cover"
+                  layout="fill"
+                  objectFit="cover"
+                  objectPosition="50% 50%"
+                  fragment={author.picture.responsiveImage}
+                />
               </div>
-              <div className="w-full">
-                <h4 className="mb-1 text-sm font-medium text-dark dark:text-white">
-                  {author.name}
-                </h4>
-                <div className="text-xs text-body-color">{author.bio}</div>
-              </div>
-            </Link>
+            </div>
+            <div className="w-full">
+              <h4 className="mb-1 text-sm font-medium text-dark dark:text-white">
+                {author.name}
+              </h4>
+              <div className="text-xs text-body-color">{author.jobTitle}</div>
+            </div>
             {_publishedAt && (
               <div className="inline-block">
                 <div className="text-xs text-body-color">

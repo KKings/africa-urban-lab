@@ -2,7 +2,7 @@ import getAvailableLocales from '@/app/i18n/settings';
 import { generateMetadataFn } from '@/components/WithRealTimeUpdates/generateMetadataFn';
 import { generateWrapper } from '@/components/WithRealTimeUpdates/generateWrapper';
 import type { BuildVariablesFn } from '@/components/WithRealTimeUpdates/types';
-import { PageStaticParamsDocument, SiteLocale } from '@/graphql/types/graphql';
+import { NewsStaticParamsDocument } from '@/graphql/types/graphql';
 import queryDatoCMS from '@/utils/queryDatoCMS';
 import Content from './Content';
 import RealTime from './RealTime';
@@ -10,11 +10,11 @@ import { type PageProps, type Query, type Variables, query } from './meta';
 
 export async function generateStaticParams() {
   const locales = await getAvailableLocales();
-  const { allPages } = await queryDatoCMS(PageStaticParamsDocument);
+  const { allNewsPosts } = await queryDatoCMS(NewsStaticParamsDocument);
 
-  return allPages.flatMap((page) =>
+  return allNewsPosts.flatMap((page) =>
     locales.map((locale): PageProps['params'] => ({
-      slug: [locale, page.slug],
+      slug: page.slug,
       locale,
     })),
   );
@@ -23,19 +23,17 @@ export async function generateStaticParams() {
 const buildVariables: BuildVariablesFn<PageProps, Variables> = ({
   params,
   fallbackLocale,
-}) => {
-  return {
-    locale: params?.locale ?? SiteLocale.En,
-    fallbackLocale: [fallbackLocale],
-    slug: Array.isArray(params.slug) ? params.slug.join('/') : params.slug,
-  };
-}
+}) => ({
+  locale: params.locale,
+  fallbackLocale: [fallbackLocale],
+  slug: params.slug,
+});
 
 export const generateMetadata = generateMetadataFn<PageProps, Query, Variables>(
   {
     query,
     buildVariables,
-    generate: (data) => data.page?.seo,
+    generate: (data) => data.post?.seo,
   },
 );
 

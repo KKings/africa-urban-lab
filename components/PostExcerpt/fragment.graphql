@@ -16,8 +16,7 @@ fragment PostExcerpt on PostRecord {
   }
   author {
     name
-    bio
-    slug
+    jobTitle
     picture {
       responsiveImage(imgixParams: { w: "64", h: "64", fit: crop }) {
         ...DatoImage_responsiveImage
