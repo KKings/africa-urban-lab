@@ -2,6 +2,10 @@ fragment TextSection on TextSectionRecord {
   textSectionTitle: title
   textSectionText: text
   textBlockSize
+  link {
+    url
+    label
+  }
   bgColor {
     hex
   }

@@ -1,5 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  webpack: (config) => {
+    // react-pdf install instructions
+    config.resolve.alias.canvas = false;
+    return config;
+  },
   images: {
     remotePatterns: [
       {

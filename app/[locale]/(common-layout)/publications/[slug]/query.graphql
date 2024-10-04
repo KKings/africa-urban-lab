@@ -1,0 +1,56 @@
+query Publications($slug: String, $locale: SiteLocale, $fallbackLocale: [SiteLocale!]) {
+  publication(
+    filter: { slug: { eq: $slug }, title: { isBlank: "false" } }
+    locale: $locale
+    fallbackLocales: $fallbackLocale
+  ) {
+    seo: _seoMetaTags {
+      attributes
+      content
+      tag
+    }
+    _publishedAt
+    title
+    content {
+      value
+      links {
+        ... on RecordInterface {
+          id
+          __typename
+        }
+        _publishedAt
+        slug
+        title
+        seoTags {
+          description
+          image {
+            responsiveImage {
+              ...DatoImage_responsiveImage
+            }
+          }
+        }
+      }
+      blocks {
+        ... on RecordInterface {
+          id
+          __typename
+        }
+        ... on ImageBlockRecord {
+          image {
+            id
+            responsiveImage {
+              ...DatoImage_responsiveImage
+            }
+          }
+        }
+        ... on PdfBlockRecord {
+          url
+        }
+        ... on ButtonRecord {
+          linkUrl: url
+          linkLabel: label
+        }
+      }
+    }
+  }
+}

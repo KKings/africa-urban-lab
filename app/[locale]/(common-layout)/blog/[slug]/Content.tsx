@@ -30,7 +30,7 @@ const Content: ContentPage<PageProps, Query> = ({
 
   return (
     <section className="bg-theme-canvas">
-      <div className="container pt-24 pb-[120px] bg-white">
+      <div className="container py-12 md:py-24 bg-white">
         <div className="flex flex-wrap justify-center">
           <div className="w-full px-4 lg:w-8/12">
             <div>
@@ -39,7 +39,7 @@ const Content: ContentPage<PageProps, Query> = ({
                   {transformDate(data.post._publishedAt)}
                 </Text>
               )}
-              <Text as="h1" size="title" serif className="mb-8 text-3xl font-bold leading-tight sm:text-4xl sm:leading-tight">
+              <Text as="h1" serif className="mb-8 font-bold leading-tight [&.text-base]:text-3xl [&.text-base]:sm:text-4xl sm:leading-tight">
                 {data.post.title}
               </Text>
               <div className="mb-10 flex items-center justify-between border-b border-body-color border-opacity-10 dark:border-white dark:border-opacity-10">
