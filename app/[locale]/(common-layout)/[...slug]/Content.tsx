@@ -18,6 +18,7 @@ import { SplitImageTextSectionFragment } from '@/graphql/types/graphql';
 import CardGrid from '@/components/blocksWithVariants/CardGrid';
 import BannerCTA from '@/components/blocksWithVariants/BannerCTA';
 import FeautredBlogPostsGrid from '@/components/blocksWithVariants/FeaturedBlogPostsGrid';
+import PageTitle from '@/components/blocksWithVariants/PageTitle';
 
 const Content: ContentPage<PageProps, Query> = ({
   data,
@@ -49,6 +50,11 @@ const Content: ContentPage<PageProps, Query> = ({
           case 'PageImageTitleSectionRecord': {
             return (
               <PageImageTitle fragment={section} globalPageProps={globalPageProps} />
+            )
+          }
+          case 'PageTitleSectionRecord': {
+            return (
+              <PageTitle fragment={section} globalPageProps={globalPageProps} />
             )
           }
           case 'BorderDividerRecord': {

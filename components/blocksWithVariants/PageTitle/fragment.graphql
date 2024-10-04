@@ -1,11 +1,6 @@
-fragment PageImageTitleSection on PageImageTitleSectionRecord {
+fragment PageTitleSection on PageTitleSectionRecord {
   pageTitle: title
-  pageImage: image {
-    url
-    alt
-    height
-    width
-  }
+  pageSubTitle: subtitle
   bgColor {
     hex
   }

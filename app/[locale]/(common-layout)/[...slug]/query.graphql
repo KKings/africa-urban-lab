@@ -59,6 +59,9 @@ query Page($locale: SiteLocale, $fallbackLocale: [SiteLocale!], $slug: String) {
       ... on FeaturedBlogPostsSectionRecord {
         ...FeaturedBlogPostsSection
       }
+      ... on PageTitleSectionRecord {
+        ...PageTitleSection
+      }
     }
     id
     label
