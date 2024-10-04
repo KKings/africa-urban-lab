@@ -19,6 +19,7 @@ import CardGrid from '@/components/blocksWithVariants/CardGrid';
 import BannerCTA from '@/components/blocksWithVariants/BannerCTA';
 import FeautredBlogPostsGrid from '@/components/blocksWithVariants/FeaturedBlogPostsGrid';
 import PageTitle from '@/components/blocksWithVariants/PageTitle';
+import FeaturedPublicationsGrid from '@/components/blocksWithVariants/FeaturedPublicationsGrid';
 
 const Content: ContentPage<PageProps, Query> = ({
   data,
@@ -34,86 +35,91 @@ const Content: ContentPage<PageProps, Query> = ({
         switch (section.__typename) {
           case 'LogoCarouselSectionRecord': {
             return (
-              <LogoCarousel fragment={section} globalPageProps={globalPageProps} />
+              <LogoCarousel key={section.id} fragment={section} globalPageProps={globalPageProps} />
             );
           }
           case 'TextSectionRecord': {
             return (
-              <TextSection fragment={section} globalPageProps={globalPageProps} />
+              <TextSection key={section.id} fragment={section} globalPageProps={globalPageProps} />
             )
           }
           case 'LecturersSectionRecord': {
             return (
-              <LecturerGrid fragment={section} globalPageProps={globalPageProps} />
+              <LecturerGrid key={section.id} fragment={section} globalPageProps={globalPageProps} />
             );
           }
           case 'PageImageTitleSectionRecord': {
             return (
-              <PageImageTitle fragment={section} globalPageProps={globalPageProps} />
+              <PageImageTitle key={section.id} fragment={section} globalPageProps={globalPageProps} />
             )
           }
           case 'PageTitleSectionRecord': {
             return (
-              <PageTitle fragment={section} globalPageProps={globalPageProps} />
+              <PageTitle key={section.id} fragment={section} globalPageProps={globalPageProps} />
             )
           }
           case 'BorderDividerRecord': {
             return (
-              <BorderDivider fragment={section} globalPageProps={globalPageProps} />
+              <BorderDivider key={section.id} fragment={section} globalPageProps={globalPageProps} />
             )
           }
           case 'ImageHeroSectionRecord': {
             return (
-              <ImageHero fragment={section} globalPageProps={globalPageProps} />
+              <ImageHero key={section.id} fragment={section} globalPageProps={globalPageProps} />
             );
           }
           case 'SplitImageTextSectionRecord': {
             switch ((section as unknown as SplitImageTextSectionFragment).displayVariant) {
               case 'boxed': {
                 return (
-                  <SplitImageTextBoxed fragment={section} globalPageProps={globalPageProps} />
+                  <SplitImageTextBoxed key={section.id} fragment={section} globalPageProps={globalPageProps} />
                 )
               }
               default: {
                 return (
-                  <SplitImageTextFullWidth fragment={section} globalPageProps={globalPageProps} />
+                  <SplitImageTextFullWidth key={section.id} fragment={section} globalPageProps={globalPageProps} />
                 )
               }
             }
           }
           case 'AccordionSectionRecord': {
             return (
-              <AccordionSection fragment={section} globalPageProps={globalPageProps} />
+              <AccordionSection key={section.id} fragment={section} globalPageProps={globalPageProps} />
             )
           }
           case 'CourseTableSectionRecord': {
             return (
-              <CourseTable fragment={section} globalPageProps={globalPageProps} />
+              <CourseTable key={section.id} fragment={section} globalPageProps={globalPageProps} />
             )
           }
           case 'FeaturedContentSectionRecord': {
             return (
-              <FeaturedContent fragment={section} globalPageProps={globalPageProps} />
+              <FeaturedContent key={section.id} fragment={section} globalPageProps={globalPageProps} />
             )
           }
           case 'StaffSectionRecord': {
             return (
-              <StaffGrid fragment={section} globalPageProps={globalPageProps} />
+              <StaffGrid key={section.id} fragment={section} globalPageProps={globalPageProps} />
             )
           }
           case 'CardSectionRecord': {
             return (
-              <CardGrid fragment={section} globalPageProps={globalPageProps} />
+              <CardGrid key={section.id} fragment={section} globalPageProps={globalPageProps} />
             )
           }
           case 'BannerCtaSectionRecord': {
             return (
-              <BannerCTA fragment={section} globalPageProps={globalPageProps} />
+              <BannerCTA key={section.id} fragment={section} globalPageProps={globalPageProps} />
             )
           }
           case 'FeaturedBlogPostsSectionRecord': {
             return (
-              <FeautredBlogPostsGrid fragment={section} globalPageProps={globalPageProps} />
+              <FeautredBlogPostsGrid key={section.id} fragment={section} globalPageProps={globalPageProps} />
+            )
+          }
+          case 'FeaturedPublicationsSectionRecord': {
+            return (
+              <FeaturedPublicationsGrid key={section.id} fragment={section} globalPageProps={globalPageProps} />
             )
           }
           case 'RedirectSectionRecord': {

@@ -12,7 +12,7 @@ export type PdfViewerProps = JSX.IntrinsicElements["div"] & {
 };
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-  `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.mjs`,
+  `https://unpkg.com/pdfjs-dist@${pdfjs.version}/legacy/build/pdf.worker.min.mjs`,
   import.meta.url
 ).toString();
 

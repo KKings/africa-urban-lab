@@ -38,27 +38,28 @@ const PageTitle = ({ fragment }: Props) => {
           className={cn([
             "inline-flex flex-col space-y-8",
             "lg:w-[60%]",
-            {['p-12 shadow-md']: textBgColor?.hex}
+            { ["p-12 shadow-md"]: textBgColor?.hex },
           ])}
           style={{
             backgroundColor: textBgColor?.hex ?? "",
             color: textColor?.hex ?? "",
           }}
         >
-          <Text 
-            as="h1" 
-            size="subheading"
-            caps 
+          <Text
+            as="h1"
+            size="heading"
+            caps
+            serif
             weight="bold"
             align="center"
           >
             {pageTitle}
           </Text>
-          {pageSubTitle && 
+          {pageSubTitle && (
             <Text as="p" size="base" align="center">
               {pageSubTitle}
             </Text>
-          }
+          )}
         </div>
       </div>
     </div>

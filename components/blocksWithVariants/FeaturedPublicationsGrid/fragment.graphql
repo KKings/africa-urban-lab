@@ -1,0 +1,16 @@
+fragment FeaturedPublicationsSection on FeaturedPublicationsSectionRecord {
+  title
+  text
+  bgColor {
+    hex
+  }
+  textColor {
+    hex
+  }
+  posts {
+    id
+    _publishedAt
+    title
+    slug
+  }
+}

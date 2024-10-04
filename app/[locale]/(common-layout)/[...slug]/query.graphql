@@ -62,6 +62,9 @@ query Page($locale: SiteLocale, $fallbackLocale: [SiteLocale!], $slug: String) {
       ... on PageTitleSectionRecord {
         ...PageTitleSection
       }
+      ... on FeaturedPublicationsSectionRecord {
+        ...FeaturedPublicationsSection
+      }
     }
     id
     label

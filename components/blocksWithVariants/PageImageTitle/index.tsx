@@ -47,7 +47,7 @@ const PageImageTitle = ({ fragment }: Props) => {
             backgroundColor: textBgColor?.hex ?? "",
           }}
         >
-          <Text as="h1" size="large" caps align="center" color="foreground">
+          <Text as="h1" size="large" serif caps align="center" color="foreground">
             {pageTitle}
           </Text>
         </div>
