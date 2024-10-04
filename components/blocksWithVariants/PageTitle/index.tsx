@@ -37,7 +37,8 @@ const PageTitle = ({ fragment }: Props) => {
         <div
           className={cn([
             "inline-flex flex-col space-y-8",
-            {['p-12']: textBgColor?.hex}
+            "lg:w-[60%]",
+            {['p-12 shadow-md']: textBgColor?.hex}
           ])}
           style={{
             backgroundColor: textBgColor?.hex ?? "",
