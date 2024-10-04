@@ -49,19 +49,30 @@ const FeautredBlogPostsGrid = ({ fragment, globalPageProps }: Props) => {
             >
               <div className={clsx([
                 "flex flex-col relative",
-                "p-12 h-full space-y-4",
+                "p-12 pb-20 h-full space-y-4",
                 "shadow-md  bg-white",
               ])}>
-                <Text caps size="large" weight="bold">
-                  {item.title}
-                </Text>
-                {item.description && 
-                  <Text as="div" size="base">
-                    {item.description}
+                
+                <div className="mb-2 border-b border-body-color border-opacity-10 pb-4">   
+                  <Text as="p" size="meta" weight="bold">
+                    {item.author?.name}
                   </Text>
-                }
-                <Link href={buildUrl(globalPageProps, `/blog/${item.slug}`)} className="underline">
-                  <Text size="base">
+                </div>
+                <Text caps size="large" weight="bold">
+                    {item.title}
+                  </Text>
+                  {item.description && 
+                    <Text as="div" size="base">
+                      {item.description}
+                    </Text>
+                  }
+                <Link 
+                  href={buildUrl(globalPageProps, `/blog/${item.slug}`)} 
+                  className="underline"
+                >
+                  <Text size="base" className="underline absolute bottom-0 pb-[inherit]" style={{
+                    transform: 'translateY(-210%)'
+                  }}>
                     Read More
                   </Text>
                 </Link>
