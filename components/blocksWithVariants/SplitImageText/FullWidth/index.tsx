@@ -1,15 +1,13 @@
+import NextImage from "next/image";
+import clsx from "clsx";
 import { type FragmentType, getFragmentData } from "@/graphql/types";
 import { SplitImageTextSectionFragmentDoc } from "@/graphql/types/graphql";
 import { GlobalPageProps } from "@/utils/globalPageProps";
-import { Section } from "@/components/ui/section";
-import NextImage from "next/image";
 import { Markdown } from "@/components/ui/markdown";
-import { cn } from "@/components/utils";
-import clsx from "clsx";
 import { Button, Text } from "@/components/ui";
 import Link from "next/link";
 import { IMAGE_SIZES } from "../constants";
-import { ImageAlignment, ImageGrid, TextVariants } from "../types";
+import { ImageAlignment, ImageGrid, TextVariants } from "@/components/types";
 
 type Props = {
   fragment: FragmentType<typeof SplitImageTextSectionFragmentDoc>;
@@ -72,7 +70,7 @@ const SplitImageTextFullWidth = ({ fragment }: Props) => {
         style={{ color: textColor?.hex ?? "" }}
       >
         {title && (
-          <Text as="h2" serif caps size="subheading" weight="semi">
+          <Text as="h2" caps size="subheading" weight="semi">
             {title}
           </Text>
         )}

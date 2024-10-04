@@ -39,7 +39,7 @@ const Content: ContentPage<PageProps, Query> = ({
                   {transformDate(data.post._publishedAt)}
                 </Text>
               )}
-              <Text as="h1" serif className="mb-8 font-bold leading-tight [&.text-base]:text-3xl [&.text-base]:sm:text-4xl sm:leading-tight">
+              <Text as="h1" className="mb-8 font-bold leading-tight [&.text-base]:text-3xl [&.text-base]:sm:text-4xl sm:leading-tight">
                 {data.post.title}
               </Text>
               <div className="mb-10 flex items-center justify-between border-b border-body-color border-opacity-10 dark:border-white dark:border-opacity-10">

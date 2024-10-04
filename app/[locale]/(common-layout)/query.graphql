@@ -33,6 +33,12 @@ query CommonLayout($locale: SiteLocale, $fallbackLocale: [SiteLocale!]) {
     }
     footerSubtitle
     footerCopyright
+    footerLogoAttributionText
+    footerLogoAttribution {
+      url
+      height
+      width
+    }
     footerLogoLeft {
       url
       height
@@ -49,14 +55,14 @@ query CommonLayout($locale: SiteLocale, $fallbackLocale: [SiteLocale!]) {
       id
       iconName
     }
-    footerLinks {
-      ... on LegalPageRecord {
-        id
-        slug
-        title
-        id
-      }
-    }
+    # footerLinks {
+    #   ... on LegalPageRecord {
+    #     id
+    #     slug
+    #     title
+    #     id
+    #   }
+    # }
   }
   _site {
     locales

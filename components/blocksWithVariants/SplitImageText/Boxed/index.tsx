@@ -7,7 +7,7 @@ import { GlobalPageProps } from "@/utils/globalPageProps";
 import { Markdown } from "@/components/ui/markdown";
 import { Button, Text } from "@/components/ui";
 import { Section } from "@/components/ui/section";
-import { ImageAlignment, ImageGrid, TextVariants } from "../types";
+import { ImageAlignment, ImageGrid, TextVariants } from "@/components/types";
 import { IMAGE_SIZES } from "../constants";
 
 type Props = {
@@ -72,7 +72,7 @@ const SplitImageTextBoxed = ({ fragment }: Props) => {
           style={{ color: textColor?.hex ?? "" }}
         >
           {title && (
-            <Text as="h2" serif caps size="subheading" weight="semi">
+            <Text as="h2" caps size="subheading" weight="semi">
               {title}
             </Text>
           )}

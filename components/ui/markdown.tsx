@@ -32,7 +32,7 @@ export const components = {
   blockquote: (props: any) => <blockquote className="py-2" {...props} />,
   h1: (props: any) => <Text as="h1" {...props} />,
   h2: (props: any) => (
-    <Text as="h2" size="meta" serif caps className="pt-w8 first:pt-0" {...props} />
+    <Text as="h2" size="lead" caps className="pt-w8 first:pt-0" {...props} />
   ),
   h3: (props: any) => (
     <Text

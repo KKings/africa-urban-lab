@@ -10,7 +10,6 @@ export const defaultInputStyle = [
   "flex h-[44px] w-full rounded-0 border border-foreground bg-background px-3 py-2 text-foreground",
   // "text-meta uppercase",
   textVariants({ size: "meta", caps: true }),
-  // For some fucked up reason, textVariants will NOT pass size="meta". But everything else works fine! WTFF.
   "text-meta",
 ];
 

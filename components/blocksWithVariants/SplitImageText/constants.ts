@@ -1,4 +1,4 @@
-import { ImageGrid } from "./types";
+import { ImageGrid } from "../../types";
 
 export const IMAGE_SIZES = {
   [ImageGrid["1/2"]]: '50%',

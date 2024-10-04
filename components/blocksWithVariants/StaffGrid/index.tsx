@@ -49,14 +49,15 @@ const StaffGrid = ({ fragment }: Props) => {
                       // width={320}
                       fill
                       className="object-cover"
+                      quality={90}
                     />
                   </div>
                   <div className="flex flex-col space-y-2">
-                    <Text as="h3" caps size="base" weight="bold" align="center">
+                    <Text as="h3" caps size="meta" weight="bold" align="center">
                       {item.name}
                     </Text>
                     {item.jobTitle && (
-                      <Text as="h4" size="small" align="center">
+                      <Text as="p" size="small" align="center">
                         {item.jobTitle}
                       </Text>
                     )}
@@ -92,11 +93,11 @@ const StaffGrid = ({ fragment }: Props) => {
                     </div>
                   </div>
                   <div className="space-y-2">
-                    <Text as="h2" serif caps size="lead" align="center">
+                    <Text as="h2" caps size="lead" align="center">
                       {item.name}
                     </Text>
                     {item.jobTitle && (
-                      <Text as="h3" size="small" align="center">
+                      <Text as="p" size="small" align="center">
                         {item.jobTitle}
                       </Text>
                     )}

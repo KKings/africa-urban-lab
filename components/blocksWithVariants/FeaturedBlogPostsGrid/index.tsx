@@ -68,11 +68,9 @@ const FeautredBlogPostsGrid = ({ fragment, globalPageProps }: Props) => {
                   }
                 <Link 
                   href={buildUrl(globalPageProps, `/blog/${item.slug}`)} 
-                  className="underline"
+                  className="underline absolute bottom-[2rem]"
                 >
-                  <Text size="base" className="underline absolute bottom-0 pb-[inherit]" style={{
-                    transform: 'translateY(-210%)'
-                  }}>
+                  <Text size="base" className="underline pb-[inherit]">
                     Read More
                   </Text>
                 </Link>

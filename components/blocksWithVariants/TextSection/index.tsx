@@ -5,6 +5,7 @@ import { Section } from "@/components/ui/section";
 import { Markdown } from "@/components/ui/markdown";
 import { cn } from "@/components/utils";
 import { Button } from "@/components/ui";
+import { TextVariants } from "@/components/types";
 import Link from "next/link";
 
 type Props = {
@@ -25,7 +26,8 @@ const TextSection = ({ fragment }: Props) => {
     bgColor,
     textColor,
     link,
-    textBlockSize = "medium",
+    textVariant = TextVariants.Default,
+    textBlockSize = TextBlockSize.Medium,
   } = getFragmentData(TextSectionFragmentDoc, fragment);
 
   return (
@@ -35,18 +37,20 @@ const TextSection = ({ fragment }: Props) => {
       textColor={textColor?.hex}
     >
       <div className="flex flex-col space-y-8">
-        <Markdown
-          className={cn([
-            "text-base text-center text-balance space-y-w4 mx-auto",
-            "[&_img]:mx-auto [&_img]:w-[72px] [&_img]:pt-w8 [&_img+h2]:!pt-0",
-            { ["lg:w-[60%]"]: textBlockSize === TextBlockSize.Small },
-            { ["lg:w-[70%]"]: textBlockSize === TextBlockSize.Medium },
-            { ["w-full"]: textBlockSize === TextBlockSize.Large },
-          ])}
-        >
-          {textSectionText ?? ""}
-        </Markdown>
-
+        { textSectionText &&
+          <Markdown
+            className={cn([
+              "text-base text-center text-balance space-y-w4 mx-auto",
+              "[&_img]:mx-auto [&_img]:w-[72px] [&_img]:pt-w8 [&_img+h2]:!pt-0",
+              { ["lg:w-[60%]"]: textBlockSize === TextBlockSize.Small },
+              { ["lg:w-[70%]"]: textBlockSize === TextBlockSize.Medium },
+              { ["w-full"]: textBlockSize === TextBlockSize.Large },
+              {["[&_p.text-base]:text-4xl"]: textVariant === TextVariants.Large },
+            ])}
+          >
+            {textSectionText ?? ""}
+          </Markdown>
+        }
         {link?.url && (
           <Button
             asChild

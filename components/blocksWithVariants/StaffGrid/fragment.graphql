@@ -16,7 +16,7 @@ fragment StaffSection on StaffSectionRecord {
     }
     biography
     image {
-      responsiveImage(imgixParams: { auto: format, w: 400 }) {
+      responsiveImage(imgixParams: { auto: format, w: 400, fit: crop, q: 100 }) {
         alt
         src
         width

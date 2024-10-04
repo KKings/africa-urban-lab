@@ -1,6 +1,7 @@
 fragment TextSection on TextSectionRecord {
   textSectionTitle: title
   textSectionText: text
+  textVariant
   textBlockSize
   link {
     url

@@ -55,7 +55,6 @@ const BannerCTA = ({ fragment }: Props) => {
           <Text
             as="h2"
             caps
-            serif
             balance
             size="subheading"
             weight="medium"

@@ -22,7 +22,7 @@ export const LecturerGroup = ({ kind, lecturers }: LecturerGroupProps) => {
   return (
     <div className="container space-y-w8 text-foreground">
       {kind && (
-        <Text as="h2" serif caps size="meta" align="center">
+        <Text as="h3" size="lead" align="center">
           {kind}
         </Text>
       )}
@@ -46,7 +46,7 @@ export const LecturerGroup = ({ kind, lecturers }: LecturerGroupProps) => {
                     className="object-cover"
                   />
                 </div>
-                <Text as="h3" caps size="meta" weight="medium" align="center">
+                <Text as="h3" caps size="meta" weight="bold" align="center">
                   {item.name}
                 </Text>
               </button>
@@ -75,9 +75,11 @@ export const LecturerGroup = ({ kind, lecturers }: LecturerGroupProps) => {
                   <Text as="h2" caps size="lead" align="center">
                     {item.name}
                   </Text>
-                  <Text as="h3" size="small" align="center">
-                    {item.jobTitle}
-                  </Text>
+                  { item.jobTitle &&
+                    <Text as="p" size="small" align="center">
+                      {item.jobTitle}
+                    </Text>
+                  }
                   {item.email && (
                     <Text caps size="meta">
                       <Link href={`mailto:${item.email}`} className="flex justify-center items-center">

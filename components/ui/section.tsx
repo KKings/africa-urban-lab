@@ -46,7 +46,6 @@ export const Section = ({
               <Text
                 as={as}
                 caps
-                serif
                 size="subheading"
                 weight="medium"
                 align="center"
@@ -58,7 +57,6 @@ export const Section = ({
             {description && (
               <Text
                 as="div"
-                serif
                 size="lead"
                 align="center"
                 color="default"

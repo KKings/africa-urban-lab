@@ -49,7 +49,6 @@ const PageTitle = ({ fragment }: Props) => {
             as="h1"
             size="heading"
             caps
-            serif
             weight="bold"
             align="center"
           >
