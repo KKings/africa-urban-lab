@@ -1,11 +1,9 @@
 "use client";
 
-import "./polyfill";
 import { useCallback, useState } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
 import type {
   DocumentCallback,
-  Options,
 } from "react-pdf/dist/cjs/shared/types";
 import { PdfViewerControls } from "./PdfViewerControls";
 
@@ -13,7 +11,10 @@ export type PdfViewerProps = JSX.IntrinsicElements["div"] & {
   source: string;
 };
 
-pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.mjs`;
+pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+  `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.mjs`,
+  import.meta.url
+).toString();
 
 enum Status {
   Loading = "loading",
