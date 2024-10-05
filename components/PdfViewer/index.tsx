@@ -54,9 +54,7 @@ const PdfViewer = ({
 
   const handleResize = useCallback((entry: Size) => {
     const { width } = entry;
-    console.log('here');
     if (width) {
-      console.log(width);
       setPageWidth(width);
     }
   }, []);

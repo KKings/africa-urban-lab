@@ -13,7 +13,7 @@ export default async function RootLayout({
   params: { locale },
 }: Params) {
   return (
-    <html lang={locale}>
+    <html lang={locale || 'en'}>
       <meta content="width=device-width, initial-scale=1" name="viewport" />
       <body  className={clsx(sans.variable, serif.variable)}>{children}</body> 
       { false && <GoogleAnalytics gaId="G-NWH42RW0GZ" /> }

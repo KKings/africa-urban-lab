@@ -10,12 +10,6 @@ export function ManinMenuEvents() {
   const prevPathnameRef = useRef(pathname);
 
   useEffect(() => {
-    console.log('events', {
-      current: prevPathnameRef.current,
-      latest: pathname,
-    })
-
-
     // Compare the previous pathname with the current one
     if (prevPathnameRef.current !== pathname) {
       closeDialog();
