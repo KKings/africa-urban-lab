@@ -45,24 +45,29 @@ const FeaturedPublicationsGrid = ({ fragment, globalPageProps }: Props) => {
             <div
               key={item.id}
               className={cn(
-                "w-full md:basis-1/2-gap-6 xl:basis-1/3-gap-6 "
+                "w-full md:basis-1/2-gap-6 xl:basis-1/2-gap-6 relative",
               )}
             >
               <div className={clsx([
                 "flex flex-col relative",
-                "p-12 pb-20 h-full space-y-4",
+                "px-12 pt-12 pb-20 h-full space-y-4",
                 "shadow-md  bg-white",
+                "before:content-['_'] before:-ml-12 before:bg-[url(/images/section-bg.png)] before:absolute before:w-full before:h-2.5 before:bg-cover before:bg-no-repeat before:top-0",
+                "before:bg-theme-turquoise"
               ])}>
+                <div className="mb-2 border-b border-body-color border-opacity-10 pb-4">
+                  <Text as="p" size="meta" weight="bold">
+                    {item.author?.name}
+                  </Text>
+                </div>
                 <Text caps size="large" weight="bold">
                   {item.title}
                 </Text>
                 <Link 
                   href={buildUrl(globalPageProps, `/publications/${item.slug}`)} 
-                  className="underline"
+                  className="underline absolute bottom-[2.5rem]"
                 >
-                  <Text size="base" className="underline absolute bottom-0 pb-[inherit]" style={{
-                    transform: 'translateY(-210%)'
-                  }}>
+                  <Text size="base" className="underline pb-[inherit]">
                     Read More
                   </Text>
                 </Link>

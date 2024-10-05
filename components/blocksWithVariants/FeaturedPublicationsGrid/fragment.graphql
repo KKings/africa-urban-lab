@@ -11,6 +11,9 @@ fragment FeaturedPublicationsSection on FeaturedPublicationsSectionRecord {
     id
     _publishedAt
     title
-    slug
+    slug 
+    author {
+      name
+    }
   }
 }

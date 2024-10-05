@@ -34,40 +34,36 @@ const FeautredBlogPostsGrid = ({ fragment, globalPageProps }: Props) => {
       className="space-y-w16"
     >
       <div className="container">
-        <div
-          className={cn(
-            "flex flex-wrap",
-            "gap-6 w-full justify-center"
-          )}
-        >
+        <div className={cn("flex flex-wrap", "gap-6 w-full justify-center")}>
           {posts.map((item) => (
             <div
               key={item.id}
-              className={cn(
-                "w-full md:basis-1/2-gap-6 xl:basis-1/3-gap-6 "
-              )}
+              className={cn("w-full md:basis-1/2-gap-6 xl:basis-1/3-gap-6 ")}
             >
-              <div className={clsx([
-                "flex flex-col relative",
-                "p-12 pb-20 h-full space-y-4",
-                "shadow-md  bg-white",
-              ])}>
-                
-                <div className="mb-2 border-b border-body-color border-opacity-10 pb-4">   
+              <div
+                className={clsx([
+                  "flex flex-col relative",
+                  "p-12 pb-20 h-full space-y-4",
+                  "shadow-md bg-white",
+                  "before:content-['_'] before:-ml-12 before:bg-[url(/images/section-bg.png)] before:absolute before:w-full before:h-2.5 before:bg-cover before:bg-no-repeat before:top-0",
+                  "before:bg-theme-citron"
+                ])}
+              >
+                <div className="mb-2 border-b border-body-color border-opacity-10 pb-4">
                   <Text as="p" size="meta" weight="bold">
                     {item.author?.name}
                   </Text>
                 </div>
                 <Text caps size="large" weight="bold">
-                    {item.title}
+                  {item.title}
+                </Text>
+                {item.description && (
+                  <Text as="div" size="base">
+                    {item.description}
                   </Text>
-                  {item.description && 
-                    <Text as="div" size="base">
-                      {item.description}
-                    </Text>
-                  }
-                <Link 
-                  href={buildUrl(globalPageProps, `/blog/${item.slug}`)} 
+                )}
+                <Link
+                  href={buildUrl(globalPageProps, `/blog/${item.slug}`)}
                   className="underline absolute bottom-[2rem]"
                 >
                   <Text size="base" className="underline pb-[inherit]">
