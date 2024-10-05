@@ -5,6 +5,7 @@ import { RequestSchema } from "./schema";
 
 export type SignupFormState = {
   success?: boolean;
+  message?: string;
   id?: string;
   error?: {
     type: 'mailchimp' | 'validation' | 'unknown';
@@ -17,6 +18,8 @@ export type SignupFormState = {
     fields?: Record<string, string>;
     issues?: Record<string, string[]>;
   }
+  fields?: Record<string, string>;
+  issues?: Record<string, string[]>;
 };
 
 export const SignupAction = async (
@@ -25,12 +28,9 @@ export const SignupAction = async (
 ): Promise<SignupFormState> => {
   const data = Object.fromEntries(formData);
   const parsed = RequestSchema.safeParse(data);
-  console.log("formData", data);
-  console.log("parsed", parsed);
 
   // return validation error to the client
   if (!parsed.success) {
-    console.log('unsuccessful');
     const fields: Record<string, string> = {};
     for (const key of Object.keys(formData)) {
       fields[key] = data[key].toString();
@@ -38,7 +38,7 @@ export const SignupAction = async (
     const error = parsed.error;
     const formattedErrors = error.flatten(); 
     
-    console.log(formattedErrors.fieldErrors);
+    console.log('fieldErrors', formattedErrors.fieldErrors);
     return {
       success: false,
       error: {
@@ -46,12 +46,12 @@ export const SignupAction = async (
         detail: {
           message: "Invalid form data",
         },
-        fields,
-        issues: formattedErrors.fieldErrors,
-      }
+      },
+      fields,
+      issues: formattedErrors.fieldErrors,
     };
   }
-
+  
   try {
     const {
       firstName,

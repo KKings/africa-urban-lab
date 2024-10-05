@@ -3,6 +3,7 @@ import { NewsletterFormSectionFragmentDoc } from "@/graphql/types/graphql";
 import { NewsletterForm as NewsletterSignupForm } from "@/components/NewsletterForm";
 import { GlobalPageProps } from "@/utils/globalPageProps";
 import { Section } from "@/components/ui/section";
+import { Markdown } from "@/components/ui/markdown";
 
 type Props = {
   fragment: FragmentType<typeof NewsletterFormSectionFragmentDoc>;
@@ -10,14 +11,17 @@ type Props = {
 };
 
 const NewsletterForm = ({ fragment }: Props) => {
-  const { audienceId, textColor, bgColor } = getFragmentData(
+  const { successMessage, textColor, bgColor } = getFragmentData(
     NewsletterFormSectionFragmentDoc,
     fragment
   );
   return (
     <Section bgColor={bgColor?.hex} textColor={textColor?.hex}>
       <div className="container max-w-[700px]">
-        <NewsletterSignupForm />
+        <NewsletterSignupForm
+          successMessage={
+            <Markdown>{successMessage}</Markdown>}
+        />
       </div>
     </Section>
   );

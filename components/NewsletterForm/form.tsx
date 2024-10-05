@@ -2,7 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import clsx from "clsx";
-import { FormEvent, useCallback, useRef } from "react";
+import { FormEvent, useCallback, useEffect, useRef } from "react";
 import { useFormState, useFormStatus } from "react-dom";
 import { useForm } from "react-hook-form";
 import { Text, textVariants } from "@/components/ui";
@@ -30,13 +30,14 @@ import {
   HowDidYouHearAboutUsOptions,
   ReasonForInterestOptions,
 } from "./constants";
+import { ReactElement } from "react-markdown/lib/react-markdown";
 
-export function NewsletterForm() {
+export type NewsletterFromProps = {
+  successMessage?: ReactElement;
+};
+
+export function NewsletterForm({ successMessage }: NewsletterFromProps) {
   const [state, formAction] = useFormState(SignupAction, {});
-
-  console.log('fields', {
-    ...state?.error?.fields
-  })
 
   const form = useForm<SignupSchema>({
     resolver: zodResolver(RequestSchema),
@@ -49,20 +50,44 @@ export function NewsletterForm() {
       reasonForInterest: "",
       educationalBackground: "",
       howDidYouHearAboutUs: "",
-      // spread any prior values that contain errors to show the user
-      ...(state?.error?.fields ?? {}),
+      ...((!state.success && state?.error?.fields) ?? {}),
     },
   });
 
-  const onSubmit = useCallback((event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    formAction(new FormData(formRef.current!));
-  }, []);
+  const {
+    formState: { isDirty, isValid },
+  } = form;
+
+  const onSubmit = useCallback(
+    (event: FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+      // state.success = false;
+      // delete state.error;
+
+      form.handleSubmit(() => {
+        formAction(new FormData(formRef.current!));
+      })(event);
+    },
+    [form, formAction]
+  );
 
   const formRef = useRef<HTMLFormElement>(null);
 
   // show a confirmation message after submission
   const { pending } = useFormStatus();
+
+  useEffect(() => {
+    if (!pending && state.success) {
+      form.reset({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phoneNumber: "",
+        country: "",
+      });
+      window.scrollTo({ top: formRef?.current?.clientTop });
+    }
+  }, [pending, state.success]);
 
   return (
     <>
@@ -71,19 +96,23 @@ export function NewsletterForm() {
           <Text size="meta" weight="bold" className="bg-red-400 p-6">
             {state?.error?.detail?.message?.includes("Member Exists")
               ? "This email address has already been subscribed, please try a different email address."
-              : (state?.error?.detail?.detail || 'An error occurred processing your request. Please try again later.' )
-            }
+              : state?.error?.detail?.detail ||
+                "An error occurred processing your request. Please try again later."}
           </Text>
         </div>
       )}
 
       {!pending && state?.success && (
-        <div className="pt-w4 space-y-w4">
-          <Text size="large" weight="extra" align="center">
-            Thank you for your interest.
-            <br />
-            <span className="font-medium italic">Stay tuned for updates.</span>
-          </Text>
+        <div className="py-6 space-y-w4 flex flex-col items-center">
+          {successMessage || (
+            <Text size="large" weight="extra" align="center">
+              Thank you for your interest.
+              <br />
+              <span className="font-medium italic">
+                Stay tuned for updates.
+              </span>
+            </Text>
+          )}
         </div>
       )}
 
@@ -100,9 +129,15 @@ export function NewsletterForm() {
             name="firstName"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className={clsx(labelStyle)}>First Name</FormLabel>
+                <FormLabel
+                  required
+                  aria-required={true}
+                  className={clsx(labelStyle)}
+                >
+                  First Name
+                </FormLabel>
                 <FormControl>
-                  <Input {...field} />
+                  <Input {...field} aria-required={true} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -113,9 +148,15 @@ export function NewsletterForm() {
             name="lastName"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className={clsx(labelStyle)}>Last Name</FormLabel>
+                <FormLabel
+                  required
+                  aria-required={true}
+                  className={clsx(labelStyle)}
+                >
+                  Last Name
+                </FormLabel>
                 <FormControl>
-                  <Input {...field} />
+                  <Input {...field} aria-required={true} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -126,9 +167,15 @@ export function NewsletterForm() {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className={clsx(labelStyle)}>Email</FormLabel>
+                <FormLabel
+                  required
+                  aria-required={true}
+                  className={clsx(labelStyle)}
+                >
+                  Email
+                </FormLabel>
                 <FormControl>
-                  <Input {...field} />
+                  <Input {...field} aria-required={true} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -139,9 +186,20 @@ export function NewsletterForm() {
             name="phoneNumber"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className={clsx(labelStyle)}>Phone number</FormLabel>
+                <FormLabel
+                  required
+                  aria-required={true}
+                  className={clsx(labelStyle)}
+                >
+                  Phone number
+                </FormLabel>
                 <FormControl>
-                  <Input type="tel" placeholder="" {...field} />
+                  <Input
+                    type="tel"
+                    placeholder=""
+                    aria-required={true}
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -152,9 +210,15 @@ export function NewsletterForm() {
             name="country"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className={clsx(labelStyle)}>Country</FormLabel>
+                <FormLabel
+                  required
+                  aria-required={true}
+                  className={clsx(labelStyle)}
+                >
+                  Country
+                </FormLabel>
                 <FormControl>
-                  <Input placeholder="" {...field} />
+                  <Input placeholder="" {...field} aria-required={true} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -166,13 +230,25 @@ export function NewsletterForm() {
             name="reasonForInterest"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className={clsx(labelStyle)}>
+                <FormLabel 
+                  required
+                  aria-required={true}
+                  className={clsx(labelStyle)}
+                >
                   Reason for interest
                 </FormLabel>
-                <Select {...field} onValueChange={field.onChange}>
+                <Select
+                  value={field.value}
+                  name={field.name}
+                  onValueChange={field.onChange}
+                >
                   <FormControl>
                     <SelectTrigger>
-                      <SelectValue placeholder="Select a Reason" />
+                      <SelectValue
+                        placeholder="Select a Reason"
+                        onBlur={field.onBlur}
+                        ref={field.ref}
+                      />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
@@ -192,13 +268,25 @@ export function NewsletterForm() {
             name="educationalBackground"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className={clsx(labelStyle)}>
+                <FormLabel 
+                  required
+                  aria-required={true}
+                  className={clsx(labelStyle)}
+                >
                   Highest Educational background
                 </FormLabel>
-                <Select {...field} onValueChange={field.onChange}>
+                <Select
+                  value={field.value}
+                  name={field.name}
+                  onValueChange={field.onChange}
+                >
                   <FormControl>
                     <SelectTrigger>
-                      <SelectValue placeholder="Select an option" />
+                      <SelectValue
+                        placeholder="Select an option"
+                        onBlur={field.onBlur}
+                        ref={field.ref}
+                      />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
@@ -218,13 +306,25 @@ export function NewsletterForm() {
             name="howDidYouHearAboutUs"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className={clsx(labelStyle)}>
+                <FormLabel 
+                  required
+                  aria-required={true}
+                  className={clsx(labelStyle)}
+                >
                   How did you hear about us?
                 </FormLabel>
-                <Select {...field} onValueChange={field.onChange}>
+                <Select
+                  value={field.value}
+                  name={field.name}
+                  onValueChange={field.onChange}
+                >
                   <FormControl>
                     <SelectTrigger>
-                      <SelectValue placeholder="Select a Channel" />
+                      <SelectValue
+                        placeholder="Select a Channel"
+                        onBlur={field.onBlur}
+                        ref={field.ref}
+                      />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
@@ -242,7 +342,7 @@ export function NewsletterForm() {
 
           <div className="pt-w4 space-y-w4">
             <div className="flex justify-end">
-              <SubmitButton disabled={pending} />
+              <SubmitButton disabled={!isDirty || !isValid} />
             </div>
           </div>
         </form>

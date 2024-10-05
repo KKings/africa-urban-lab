@@ -7,6 +7,10 @@ fragment FeaturedPublicationsSection on FeaturedPublicationsSectionRecord {
   textColor {
     hex
   }
+  link {
+    label
+    url
+  }
   posts {
     id
     _publishedAt
