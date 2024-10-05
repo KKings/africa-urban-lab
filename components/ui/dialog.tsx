@@ -73,7 +73,7 @@ const DialogContent = React.forwardRef<
               buttonClassName
             )}
           >
-            <Cross2Icon className="size-em" />
+            <Cross2Icon className="size-8" />
             <span className="sr-only">Close</span>
           </DialogPrimitive.Close>
         )}

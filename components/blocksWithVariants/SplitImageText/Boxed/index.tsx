@@ -39,7 +39,7 @@ const SplitImageTextBoxed = ({ fragment }: Props) => {
       <div
         className={clsx([
           "grid grid-flow-row md:grid-flow-column gap-16 items-center",
-          "bg-theme-grey text-background",
+          "bg-theme-grey text-background 100dvh md:h-auto",
           {
             ['md:grid-cols-[var(--image-grid-size)_auto] md:[grid-template-areas:"image_text"]']:
               imageAlignment === ImageAlignment.Left,

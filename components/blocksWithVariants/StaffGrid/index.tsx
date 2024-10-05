@@ -9,6 +9,7 @@ import { buttonVariants, Text } from "@/components/ui";
 import Link from "next/link";
 import { EnvelopeOpenIcon } from "@radix-ui/react-icons";
 import { Markdown } from "@/components/ui/markdown";
+import clsx from "clsx";
 
 type Props = {
   fragment: FragmentType<typeof StaffSectionFragmentDoc>;
@@ -77,11 +78,15 @@ const StaffGrid = ({ fragment }: Props) => {
               </DialogTrigger>
               <DialogContent
                 overlayClassName="bg-[rgba(239,239,239,0.9)]"
-                className="bg-background max-w-[840px] max-h-[85vh] overflow-auto"
+                className={clsx([
+                  "bg-background w-full max-w-[840px]",
+                  "h-auto max-h-[100vh] lg:max-h-[85vh]",
+                  "overflow-auto mt-[-1px]",
+                ])}
                 buttonClassName="fixed"
                 showClose
               >
-                <div className="space-y-w8 h-full overflow-y-auto">
+                <div className="space-y-w8 h-full overflow-hidden">
                   <div className="flex justify-center pb-2">
                     <div className="relative aspect-[320/290] w-[320px] mx-auto">
                       <NextImage

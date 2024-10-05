@@ -11,7 +11,7 @@ type Props = {
 };
 
 const PageImageTitle = ({ fragment }: Props) => {
-  const { pageTitle, pageImage, textColor, textBgColor, bgColor, pageBgImage } = getFragmentData(
+  const { pageTitle, pageImage, textBgColor, bgColor, pageBgImage } = getFragmentData(
     PageImageTitleSectionFragmentDoc,
     fragment
   );
@@ -22,9 +22,9 @@ const PageImageTitle = ({ fragment }: Props) => {
         backgroundColor: bgColor?.hex ?? "",
       }}
       className={clsx([
-        "h-[50vh] md:h-[66vh] relative flex items-center justify-center",
+        "relative flex items-center justify-center py-24 md:py-36",
         "bg-cover bg-no-repeat bg-center",
-        "h-[calc(100vh-var(--height-nav))]",
+        "h-[calc(100dvh-var(--height-nav))]",
       ])}
     >
       { pageBgImage?.responsiveImage?.src && 
