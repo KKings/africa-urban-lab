@@ -2,9 +2,9 @@ query CommonLayout($locale: SiteLocale, $fallbackLocale: [SiteLocale!]) {
   layout(locale: $locale, fallbackLocales: $fallbackLocale) {
     logo {
       url
-      responsiveImage {
-        ...DatoImage_responsiveImage
-      }
+      width
+      height
+      alt
     }
     menu {
       ... on MenuItemRecord {

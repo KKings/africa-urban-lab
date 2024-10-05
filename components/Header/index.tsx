@@ -46,13 +46,6 @@ const Header = ({ globalPageProps, data }: Props) => {
 
   return (
     <>
-      {/* {notificationStrip && (
-        <NotificationStrip
-          notification={data.layout?.notification}
-          globalPageProps={globalPageProps}
-          setNotificationStrip={setNotificationStrip}
-        />
-      )} */}
       <header className="sticky top-0 w-full bg-background z-50 drop-shadow-sm">
         <div className="container h-navH flex items-center justify-between">
           <Link
@@ -62,10 +55,10 @@ const Header = ({ globalPageProps, data }: Props) => {
             {data.layout?.logo.url && (
               <Image
                 src={data.layout.logo.url}
-                alt="logo"
-                width={140}
-                height={30}
-                className="w-full dark:hidden h-[90px]"
+                alt={data.layout.logo.alt || "logo"}
+                width={data.layout.logo.width ?? 140}
+                height={data.layout.logo.height ?? 30}
+                className="w-full dark:hidden max-h-[90px]"
               />
             )}
           </Link>

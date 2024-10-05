@@ -40,10 +40,32 @@ const Content: ContentPage<PageProps, Query> = ({
                   {transformDate(data.publication._publishedAt)}
                 </Text>
               )}
-              <div className='mb-10 border-b border-body-color border-opacity-10 pb-6'>
-                <Text as="h1" className="font-bold leading-tight [&.text-base]:text-3xl [&.text-base]:sm:text-4xl sm:leading-tight">
-                  {data.publication.title}
-                </Text>
+              <Text as="h1" className="mb-8 font-bold leading-tight [&.text-base]:text-3xl [&.text-base]:sm:text-4xl sm:leading-tight">
+                {data.publication.title}
+              </Text>
+              <div className="mb-10 flex items-center justify-between border-b border-body-color border-opacity-10 dark:border-white dark:border-opacity-10">
+                <div className="flex flex-col items-start md:flex-row md:items-center">
+                  <div
+                    className="mb-5 mr-10 flex items-center"
+                  >
+                    <div className="mr-4">
+                      <div className="relative h-10 w-10 overflow-hidden rounded-full">
+                        <DatoImage
+                          className="h-full w-full object-cover"
+                          fragment={data.publication.author.picture.responsiveImage}
+                        />
+                      </div>
+                    </div>
+                    <div className="w-full">
+                      <Text size="large" weight="semi" className="mb-1">
+                        {data.publication.author.name}
+                      </Text>
+                      <Text size="meta">
+                        {data.publication.author.jobTitle}
+                      </Text>
+                    </div>
+                  </div>
+                </div>
               </div>
               <div className='flex flex-col space-y-4'>
                 <StructuredText

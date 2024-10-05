@@ -11,6 +11,15 @@ query Publications($slug: String, $locale: SiteLocale, $fallbackLocale: [SiteLoc
     }
     _publishedAt
     title
+    author {
+      name
+      jobTitle
+      picture {
+        responsiveImage(imgixParams: { w: "64", h: "64", fit: crop }) {
+          ...DatoImage_responsiveImage
+        }
+      }
+    }
     content {
       value
       links {
