@@ -13,6 +13,7 @@ fragment FeaturedBlogPostsSection on FeaturedBlogPostsSectionRecord {
   }
   sectionImage: bgImage {
     url
+    alt
   }
   posts {
     id

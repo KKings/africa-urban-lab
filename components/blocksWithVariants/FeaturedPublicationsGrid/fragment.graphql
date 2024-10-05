@@ -9,6 +9,9 @@ fragment FeaturedPublicationsSection on FeaturedPublicationsSectionRecord {
   }
   sectionImage: bgImage {
     url
+    alt
+    width
+    height
   }
   link {
     label

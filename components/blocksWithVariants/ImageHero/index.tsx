@@ -27,6 +27,7 @@ const ImageHero = ({ fragment }: Props) => {
         height={bgImage?.responsiveImage?.height}
         sizes={bgImage?.responsiveImage?.sizes}
         priority
+        quality={100}
         className={clsx([
           "relative block w-full object-cover",
           {["lg:max-h-[640px]"]: !useImageHeight }

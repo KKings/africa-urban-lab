@@ -20,9 +20,6 @@ const PageImageTitle = ({ fragment }: Props) => {
     <div
       style={{
         backgroundColor: bgColor?.hex ?? "",
-        backgroundImage: pageBgImage?.responsiveImage?.src
-          ? `url(${pageBgImage?.responsiveImage?.src})`
-          : "none",
       }}
       className={clsx([
         "h-[50vh] md:h-[66vh] relative flex items-center justify-center",
@@ -30,7 +27,19 @@ const PageImageTitle = ({ fragment }: Props) => {
         "h-[calc(100vh-var(--height-nav))]",
       ])}
     >
-      <div className="container flex flex-col items-center space-y-w16">
+      { pageBgImage?.responsiveImage?.src && 
+        <NextImage
+          src={pageBgImage?.responsiveImage?.src}
+          alt={pageBgImage?.responsiveImage?.alt ?? ''}
+          width={pageBgImage?.responsiveImage?.width}
+          height={pageBgImage?.responsiveImage?.height}
+          quality={100}
+          priority
+          object-position="center"
+          className="absolute left-0 top-0 w-full h-full object-cover z-[1]"
+        />
+      }
+      <div className="container flex flex-col items-center space-y-w16 z-[2]">
         {pageImage?.url && (
           <NextImage
             src={pageImage?.url ?? ""}

@@ -1,5 +1,6 @@
 import { type FragmentType, getFragmentData } from "@/graphql/types";
 import { PageTitleSectionFragmentDoc } from "@/graphql/types/graphql";
+import NextImage from 'next/image';
 import { GlobalPageProps } from "@/utils/globalPageProps";
 import { Text } from "@/components/ui";
 import clsx from "clsx";
@@ -23,20 +24,28 @@ const PageTitle = ({ fragment }: Props) => {
   return (
     <div
       style={{
-        backgroundColor: bgColor?.hex ?? "",
-        backgroundImage: pageBgImage?.responsiveImage?.src
-          ? `url(${pageBgImage?.responsiveImage?.src})`
-          : "none",
+        backgroundColor: bgColor?.hex ?? ""
       }}
       className={clsx([
         "relative flex items-center justify-center py-24 md:py-36",
         "bg-cover bg-no-repeat bg-center",
       ])}
     >
-      <div className="container flex flex-col items-center space-y-w16">
+      <div className="container flex flex-col items-center">
+        { pageBgImage?.responsiveImage?.src && 
+          <NextImage
+            src={pageBgImage?.responsiveImage?.src}
+            alt={pageBgImage?.responsiveImage?.alt ?? ''}
+            width={pageBgImage?.responsiveImage?.width}
+            height={pageBgImage?.responsiveImage?.height}
+            quality={100}
+            object-position="center"
+            className="absolute left-0 top-0 w-full h-full z-[1] object-cover"
+          />
+        }
         <div
           className={cn([
-            "inline-flex flex-col space-y-8",
+            "inline-flex flex-col space-y-8 z-[2]",
             "lg:w-[60%]",
             { ["p-12 shadow-md"]: textBgColor?.hex },
           ])}
