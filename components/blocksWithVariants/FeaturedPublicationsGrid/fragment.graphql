@@ -7,6 +7,9 @@ fragment FeaturedPublicationsSection on FeaturedPublicationsSectionRecord {
   textColor {
     hex
   }
+  sectionImage: bgImage {
+    url
+  }
   link {
     label
     url

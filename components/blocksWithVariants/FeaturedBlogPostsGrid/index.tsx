@@ -21,6 +21,8 @@ const FeautredBlogPostsGrid = ({ fragment, globalPageProps }: Props) => {
     title,
     text,
     posts = [],
+    link,
+    sectionImage: bgImage,
     bgColor,
     textColor,
   } = getFragmentData(FeaturedBlogPostsSectionFragmentDoc, fragment);
@@ -32,8 +34,12 @@ const FeautredBlogPostsGrid = ({ fragment, globalPageProps }: Props) => {
       bgColor={bgColor?.hex}
       textColor={textColor?.hex}
       className="space-y-w16"
+      style={{
+        backgroundImage: `url(${bgImage?.url ? bgImage?.url : ''})`,
+        backgroundRepeat: 'no-repeat',
+      }}
     >
-      <div className="container">
+      <div className="container flex flex-col items-center space-y-8">
         <div className={cn("flex flex-wrap", "gap-6 w-full justify-center")}>
           {posts.map((item) => (
             <div
@@ -74,6 +80,16 @@ const FeautredBlogPostsGrid = ({ fragment, globalPageProps }: Props) => {
             </div>
           ))}
         </div>
+        {link?.url && (
+          <Button
+            asChild
+            variant="outline"
+            size="default"
+            className="w-max self-center text-center"
+          >
+            <Link href={link?.url}>{link?.label || "Read More"}</Link>
+          </Button>
+        )}
       </div>
     </Section>
   );

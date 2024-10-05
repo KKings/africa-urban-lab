@@ -23,6 +23,7 @@ const FeaturedPublicationsGrid = ({ fragment, globalPageProps }: Props) => {
     text,
     posts = [],
     bgColor,
+    sectionImage: bgImage,
     textColor,
     link,
   } = getFragmentData(FeaturedPublicationsSectionFragmentDoc, fragment);
@@ -34,6 +35,10 @@ const FeaturedPublicationsGrid = ({ fragment, globalPageProps }: Props) => {
       bgColor={bgColor?.hex}
       textColor={textColor?.hex}
       className="space-y-w16"
+      style={{
+        backgroundImage: `url(${bgImage?.url ? bgImage?.url : ''})`,
+        backgroundRepeat: 'no-repeat',
+      }}
     >
       <div className="container flex flex-col items-center space-y-8">
         <div className={cn("flex flex-wrap", "gap-6 w-full justify-center")}>

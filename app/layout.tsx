@@ -1,5 +1,6 @@
 import { sans, serif } from "@/components/ui/fonts";
 import '@/styles/global.css';
+import { GoogleAnalytics } from "@next/third-parties/google";
 import type { GlobalPageProps } from '@/utils/globalPageProps';
 import clsx from "clsx";
 
@@ -14,7 +15,8 @@ export default async function RootLayout({
   return (
     <html lang={locale}>
       <meta content="width=device-width, initial-scale=1" name="viewport" />
-      <body  className={clsx(sans.variable, serif.variable)}>{children}</body>
+      <body  className={clsx(sans.variable, serif.variable)}>{children}</body> 
+      { false && <GoogleAnalytics gaId="G-NWH42RW0GZ" /> }
     </html>
   );
 }

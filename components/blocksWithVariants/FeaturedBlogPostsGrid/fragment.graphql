@@ -7,6 +7,13 @@ fragment FeaturedBlogPostsSection on FeaturedBlogPostsSectionRecord {
   textColor {
     hex
   }
+  link {
+    url
+    label
+  }
+  sectionImage: bgImage {
+    url
+  }
   posts {
     id
     _publishedAt
