@@ -1,11 +1,13 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
 import type {
   DocumentCallback,
 } from "react-pdf/dist/cjs/shared/types";
 import { PdfViewerControls } from "./PdfViewerControls";
+import { Size, useResizeObserver } from "@/hooks/useResizeObserver";
+import { cn } from "../utils";
 
 export type PdfViewerProps = JSX.IntrinsicElements["div"] & {
   source: string;
@@ -24,12 +26,15 @@ enum Status {
 
 const PdfViewer = ({
   source,
+  className,
   ...props
 }: PdfViewerProps) => {
   const [pdfState, setPdfState] = useState(Status.Loading);
   const [totalPages, setTotalPages] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [renderedPage, setRenderedPage] = useState<number>();
+  const containerRef = useRef(null);
+  const [pageWidth, setPageWidth] = useState(0);
 
   const onLoadSuccessHandler = useCallback(({ numPages }: DocumentCallback) => {
     setTotalPages(numPages);
@@ -47,41 +52,44 @@ const PdfViewer = ({
     setRenderedPage(currentPage)
   }, [currentPage])
 
+  const handleResize = useCallback((entry: Size) => {
+    const { width } = entry;
+    console.log('here');
+    if (width) {
+      console.log(width);
+      setPageWidth(width);
+    }
+  }, []);
+
+  useResizeObserver({
+    onResize: handleResize,
+    ref: containerRef,
+  });
+
   const isLoading = renderedPage !== currentPage;
 
   return (
-    <div {...props}>
+    <div className={cn([
+      "w-full block",
+      className
+    ])} 
+    {...props} 
+    ref={containerRef}
+    >
       <Document
         className="PDFDocument relative group"
         file={source}
         onLoadSuccess={onLoadSuccessHandler}
         onLoadError={onLoadErrorHandler}
       >
-        {/* { (isLoading && renderedPage) && 
-          <Page
-            key={renderedPage}
-            pageNumber={renderedPage}
-            renderAnnotationLayer={false}
-            renderTextLayer={false}
-            className="PDFPage !absolute z-1"
-          />
-        }
-
-        <Page
-          key={currentPage}
-          pageNumber={currentPage}
-          renderAnnotationLayer={false}
-          renderTextLayer={false}
-          onRenderSuccess={() => setRenderedPage(currentPage)}
-        /> */}
-
-        {isLoading && renderedPage ? (
+      {isLoading && renderedPage ? (
           <Page
             key={renderedPage}
             className="prevPage !absolute z-0 shadow-md" 
             pageNumber={renderedPage}
             renderAnnotationLayer={false}
             renderTextLayer={false}
+            width={pageWidth}
           />
         ) : null}
         <Page
@@ -91,6 +99,7 @@ const PdfViewer = ({
           renderAnnotationLayer={false}
           renderTextLayer={false}
           onRenderSuccess={callback}
+          width={pageWidth}
         />
 
         <PdfViewerControls
