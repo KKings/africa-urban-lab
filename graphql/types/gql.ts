@@ -25,6 +25,7 @@ const documents = {
     "query Layout {\n  _site {\n    faviconMetaTags {\n      attributes\n      content\n      tag\n    }\n  }\n}": types.LayoutDocument,
     "query Locales {\n  _site {\n    locales\n  }\n}": types.LocalesDocument,
     "fragment DatoImage_responsiveImage on ResponsiveImage {\n  src\n  srcSet\n  base64\n  width\n  height\n  alt\n  title\n}": types.DatoImage_ResponsiveImageFragmentDoc,
+    "fragment NewsletterFormSection on NewsletterFormSectionRecord {\n  audienceId\n  successMessage\n  alreadySubscribedErrorMessage\n  textColor {\n    hex\n  }\n  bgColor {\n    hex\n  }\n}": types.NewsletterFormSectionFragmentDoc,
     "fragment PostExcerpt on PostRecord {\n  _publishedAt\n  slug\n  id\n  title\n  tags {\n    tag\n  }\n  seoTags {\n    description\n    image {\n      responsiveImage {\n        ...DatoImage_responsiveImage\n      }\n    }\n  }\n  author {\n    name\n    jobTitle\n    picture {\n      responsiveImage(imgixParams: {w: \"64\", h: \"64\", fit: crop}) {\n        ...DatoImage_responsiveImage\n      }\n    }\n  }\n}": types.PostExcerptFragmentDoc,
     "fragment AccordionSection on AccordionSectionRecord {\n  title\n  items {\n    id\n    title\n    subtitle\n    text\n  }\n  bgColor {\n    hex\n  }\n  textColor {\n    hex\n  }\n}": types.AccordionSectionFragmentDoc,
     "fragment BannerCTASection on BannerCtaSectionRecord {\n  bannerTitle: title\n  subtitle\n  link {\n    url\n    label\n  }\n  bannerBGImage: bgImage {\n    url\n  }\n  bgColor {\n    hex\n  }\n  textBgColor {\n    hex\n  }\n  textColor {\n    hex\n  }\n}": types.BannerCtaSectionFragmentDoc,
@@ -106,6 +107,10 @@ export function graphql(source: "query Locales {\n  _site {\n    locales\n  }\n}
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "fragment DatoImage_responsiveImage on ResponsiveImage {\n  src\n  srcSet\n  base64\n  width\n  height\n  alt\n  title\n}"): (typeof documents)["fragment DatoImage_responsiveImage on ResponsiveImage {\n  src\n  srcSet\n  base64\n  width\n  height\n  alt\n  title\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "fragment NewsletterFormSection on NewsletterFormSectionRecord {\n  audienceId\n  successMessage\n  alreadySubscribedErrorMessage\n  textColor {\n    hex\n  }\n  bgColor {\n    hex\n  }\n}"): (typeof documents)["fragment NewsletterFormSection on NewsletterFormSectionRecord {\n  audienceId\n  successMessage\n  alreadySubscribedErrorMessage\n  textColor {\n    hex\n  }\n  bgColor {\n    hex\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

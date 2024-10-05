@@ -8,8 +8,8 @@ export interface InputProps
 
 export const defaultInputStyle = [
   "flex h-[44px] w-full rounded-0 border border-foreground bg-background px-3 py-2 text-foreground",
-  // "text-meta uppercase",
-  textVariants({ size: "meta", caps: true }),
+  // "text-meta",
+  textVariants({ size: "meta" }),
   "text-meta",
 ];
 

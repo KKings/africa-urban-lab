@@ -20,6 +20,7 @@ import BannerCTA from '@/components/blocksWithVariants/BannerCTA';
 import FeautredBlogPostsGrid from '@/components/blocksWithVariants/FeaturedBlogPostsGrid';
 import PageTitle from '@/components/blocksWithVariants/PageTitle';
 import FeaturedPublicationsGrid from '@/components/blocksWithVariants/FeaturedPublicationsGrid';
+import NewsletterForm from '@/components/blocksWithVariants/NewsletterForm';
 
 const Content: ContentPage<PageProps, Query> = ({
   data,
@@ -120,6 +121,11 @@ const Content: ContentPage<PageProps, Query> = ({
           case 'FeaturedPublicationsSectionRecord': {
             return (
               <FeaturedPublicationsGrid key={section.id} fragment={section} globalPageProps={globalPageProps} />
+            )
+          }
+          case 'NewsletterFormSectionRecord': {
+            return (
+              <NewsletterForm key={section.id} fragment={section} globalPageProps={globalPageProps} />
             )
           }
           case 'RedirectSectionRecord': {

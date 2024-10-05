@@ -1,0 +1,11 @@
+fragment NewsletterFormSection on NewsletterFormSectionRecord {
+  audienceId
+  successMessage
+  alreadySubscribedErrorMessage
+  textColor {
+    hex
+  }
+  bgColor {
+    hex
+  }
+}

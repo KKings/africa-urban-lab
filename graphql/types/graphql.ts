@@ -3509,6 +3509,36 @@ export type NewsPostRecordTitleArgs = {
   locale?: InputMaybe<SiteLocale>;
 };
 
+/** Block of type Newsletter Form Section (newsletter_form_section) */
+export type NewsletterFormSectionRecord = RecordInterface & {
+  __typename?: 'NewsletterFormSectionRecord';
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** Generates SEO and Social card meta tags to be used in your frontend */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  alreadySubscribedErrorMessage: Scalars['String']['output'];
+  audienceId: Scalars['String']['output'];
+  bgColor?: Maybe<ColorField>;
+  id: Scalars['ItemId']['output'];
+  successMessage: Scalars['String']['output'];
+  textColor?: Maybe<ColorField>;
+};
+
+
+/** Block of type Newsletter Form Section (newsletter_form_section) */
+export type NewsletterFormSectionRecord_SeoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
 /** Block of type 📬 CTA Newsletter Subscription (newsletter_subscription) */
 export type NewsletterSubscriptionRecord = RecordInterface & {
   __typename?: 'NewsletterSubscriptionRecord';
@@ -3624,7 +3654,7 @@ export enum PageModelOrderBy {
   LabelDesc = 'label_DESC'
 }
 
-export type PageModelSectionsField = AccordionSectionRecord | BannerCtaSectionRecord | BorderDividerRecord | CardSectionRecord | CourseTableSectionRecord | FeaturedBlogPostsSectionRecord | FeaturedContentSectionRecord | FeaturedPublicationsSectionRecord | ImageHeroSectionRecord | LecturersSectionRecord | LogoCarouselSectionRecord | PageImageTitleSectionRecord | PageTitleSectionRecord | RedirectSectionRecord | SplitImageTextSectionRecord | StaffSectionRecord | TextSectionRecord;
+export type PageModelSectionsField = AccordionSectionRecord | BannerCtaSectionRecord | BorderDividerRecord | CardSectionRecord | CourseTableSectionRecord | FeaturedBlogPostsSectionRecord | FeaturedContentSectionRecord | FeaturedPublicationsSectionRecord | ImageHeroSectionRecord | LecturersSectionRecord | LogoCarouselSectionRecord | NewsletterFormSectionRecord | PageImageTitleSectionRecord | PageTitleSectionRecord | RedirectSectionRecord | SplitImageTextSectionRecord | StaffSectionRecord | TextSectionRecord;
 
 export type PageModelSectionsFieldListListNonNullMultiLocaleField = {
   __typename?: 'PageModelSectionsFieldListListNonNullMultiLocaleField';
@@ -5335,7 +5365,7 @@ export type PageQuery = { __typename?: 'Query', page?: { __typename: 'PageRecord
     ) | (
       { __typename: 'LogoCarouselSectionRecord', id: string }
       & { ' $fragmentRefs'?: { 'LogoCarouselSectionFragment': LogoCarouselSectionFragment } }
-    ) | (
+    ) | { __typename: 'NewsletterFormSectionRecord', id: string } | (
       { __typename: 'PageImageTitleSectionRecord', id: string }
       & { ' $fragmentRefs'?: { 'PageImageTitleSectionFragment': PageImageTitleSectionFragment } }
     ) | (
@@ -5446,6 +5476,8 @@ export type LocalesQuery = { __typename?: 'Query', _site: { __typename?: 'Site',
 
 export type DatoImage_ResponsiveImageFragment = { __typename?: 'ResponsiveImage', src: string, srcSet: string, base64?: string | null, width: number, height: number, alt?: string | null, title?: string | null } & { ' $fragmentName'?: 'DatoImage_ResponsiveImageFragment' };
 
+export type NewsletterFormSectionFragment = { __typename?: 'NewsletterFormSectionRecord', audienceId: string, successMessage: string, alreadySubscribedErrorMessage: string, textColor?: { __typename?: 'ColorField', hex: string } | null, bgColor?: { __typename?: 'ColorField', hex: string } | null } & { ' $fragmentName'?: 'NewsletterFormSectionFragment' };
+
 export type PostExcerptFragment = { __typename?: 'PostRecord', _publishedAt?: string | null, slug: string, id: string, title: string, tags: Array<{ __typename?: 'TagRecord', tag: string }>, seoTags?: { __typename?: 'SeoField', description?: string | null, image?: { __typename?: 'FileField', responsiveImage?: (
         { __typename?: 'ResponsiveImage' }
         & { ' $fragmentRefs'?: { 'DatoImage_ResponsiveImageFragment': DatoImage_ResponsiveImageFragment } }
@@ -5489,6 +5521,7 @@ export type StaffSectionFragment = { __typename?: 'StaffSectionRecord', staffTit
 
 export type TextSectionFragment = { __typename?: 'TextSectionRecord', textVariant: string, textBlockSize: string, textSectionTitle?: string | null, textSectionText: string, link?: { __typename?: 'ButtonRecord', url?: string | null, label: string } | null, bgColor?: { __typename?: 'ColorField', hex: string } | null, textColor?: { __typename?: 'ColorField', hex: string } | null } & { ' $fragmentName'?: 'TextSectionFragment' };
 
+export const NewsletterFormSectionFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"NewsletterFormSection"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"NewsletterFormSectionRecord"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"audienceId"}},{"kind":"Field","name":{"kind":"Name","value":"successMessage"}},{"kind":"Field","name":{"kind":"Name","value":"alreadySubscribedErrorMessage"}},{"kind":"Field","name":{"kind":"Name","value":"textColor"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"bgColor"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}}]}}]} as unknown as DocumentNode<NewsletterFormSectionFragment, unknown>;
 export const DatoImage_ResponsiveImageFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"DatoImage_responsiveImage"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ResponsiveImage"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"src"}},{"kind":"Field","name":{"kind":"Name","value":"srcSet"}},{"kind":"Field","name":{"kind":"Name","value":"base64"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"alt"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]} as unknown as DocumentNode<DatoImage_ResponsiveImageFragment, unknown>;
 export const PostExcerptFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"PostExcerpt"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"PostRecord"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"_publishedAt"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"tags"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"tag"}}]}},{"kind":"Field","name":{"kind":"Name","value":"seoTags"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"responsiveImage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"DatoImage_responsiveImage"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"author"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"jobTitle"}},{"kind":"Field","name":{"kind":"Name","value":"picture"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"responsiveImage"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"imgixParams"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"w"},"value":{"kind":"StringValue","value":"64","block":false}},{"kind":"ObjectField","name":{"kind":"Name","value":"h"},"value":{"kind":"StringValue","value":"64","block":false}},{"kind":"ObjectField","name":{"kind":"Name","value":"fit"},"value":{"kind":"EnumValue","value":"crop"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"DatoImage_responsiveImage"}}]}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"DatoImage_responsiveImage"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ResponsiveImage"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"src"}},{"kind":"Field","name":{"kind":"Name","value":"srcSet"}},{"kind":"Field","name":{"kind":"Name","value":"base64"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"alt"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]} as unknown as DocumentNode<PostExcerptFragment, unknown>;
 export const AccordionSectionFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"AccordionSection"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"AccordionSectionRecord"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"text"}}]}},{"kind":"Field","name":{"kind":"Name","value":"bgColor"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"textColor"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}}]}}]} as unknown as DocumentNode<AccordionSectionFragment, unknown>;
