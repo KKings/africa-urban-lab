@@ -64,19 +64,19 @@ const CourseTable = ({ fragment }: Props) => {
           'md:[grid-template-areas:"a_a_a_b_b_b_b_c_c_c_c_c""d_d_d_e_e_e_e_c_c_c_c_c"]',
         ])}
       >
-        <Cell area="a" header className="border-b-0">
+        <Cell area="a" header className="flex flex-col justify-center border-b-0">
           {courses[0].text ?? ""}
         </Cell>
-        <Cell area="b" className="sm:border-r-0 border-b-0">
+        <Cell area="b" className="flex flex-col justify-center sm:border-r-0 border-b-0">
           {courses[1].text ?? ""}
         </Cell>
-        <Cell area="c" className="border-t-0 sm:border-t">
+        <Cell area="c" className="flex flex-col justify-center border-t-0 sm:border-t">
           {courses[2].text ?? ""}
         </Cell>
-        <Cell area="d" header className="border-r-0 border-t-foreground">
+        <Cell area="d" header className="flex flex-col justify-center border-r-0 border-t-foreground">
           {courses[3].text ?? ""}
         </Cell>
-        <Cell area="e" className="sm:border-r-0">
+        <Cell area="e" className="flex flex-col justify-center sm:border-r-0">
           {courses[4].text ?? ""}
         </Cell>
       </div>

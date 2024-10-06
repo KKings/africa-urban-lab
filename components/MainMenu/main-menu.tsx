@@ -95,7 +95,7 @@ export const MainMenuMobile = ({ globalPageProps, menus = []}: MenuProps) => {
   const pathname = usePathname();
 
   return (     
-    <MainMenuDialog key={pathname}>
+    <MainMenuDialog key={pathname} className="overflow-y-scroll overflow-x-hidden block">
       <NavigationMenu.Root className="w-screen" orientation="vertical">
         <NavigationMenu.List className="flex flex-col text-foreground">
           {menus.map((item, index) => (
