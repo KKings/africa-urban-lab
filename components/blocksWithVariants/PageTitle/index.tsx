@@ -29,7 +29,7 @@ const PageTitle = ({ fragment }: Props) => {
       className={clsx([
         "relative flex items-center justify-center py-24 md:py-36",
         "bg-cover bg-no-repeat bg-center",
-        "h-[calc(100dvh-var(--height-nav))] lg:h-auto",
+        "h-[calc(100svh-var(--height-nav))] lg:h-auto max-h-full"
       ])}
     >
       <div className="container flex flex-col items-center">

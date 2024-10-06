@@ -49,8 +49,7 @@ const CardGrid = ({ fragment }: Props) => {
                 <NextImage
                   src={item?.image?.responsiveImage?.src ?? ""}
                   alt={item?.image?.responsiveImage?.alt ?? ""}
-                  // height={290}
-                  // width={320}
+                  sizes={item?.image?.responsiveImage?.sizes}
                   fill
                   className="object-cover"
                 />

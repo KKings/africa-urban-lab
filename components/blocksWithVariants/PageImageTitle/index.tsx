@@ -24,7 +24,7 @@ const PageImageTitle = ({ fragment }: Props) => {
       className={clsx([
         "relative flex items-center justify-center py-24 md:py-36",
         "bg-cover bg-no-repeat bg-center",
-        "h-[calc(100dvh-var(--height-nav))]",
+        "h-[calc(100svh-var(--height-nav))]",
       ])}
     >
       { pageBgImage?.responsiveImage?.src && 
