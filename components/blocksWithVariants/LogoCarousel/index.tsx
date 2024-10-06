@@ -32,7 +32,7 @@ const LogoCarousel = ({ fragment }: Props) => {
           // https://www.embla-carousel.com/plugins/autoplay/
           Autoplay({
             delay: 2000,
-            stopOnInteraction: false,
+            stopOnInteraction: true,
             stopOnMouseEnter: true,
           }),
         ]}
