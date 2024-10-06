@@ -56,8 +56,8 @@ export const LecturerGroup = ({ kind, lecturers }: LecturerGroupProps) => {
               overlayClassName="bg-[rgba(239,239,239,0.9)]"
               className={clsx([
                 "bg-background  w-full max-w-[840px]",
-                  "h-auto max-h-[100vh] lg:max-h-[85vh]",
-                  "overflow-auto mt-[-1px]",
+                "h-100svh max-h-[100%] lg:max-h-[85vh]",
+                "overflow-auto mt-[-1px]",
               ])}
               buttonClassName="fixed"
               showClose

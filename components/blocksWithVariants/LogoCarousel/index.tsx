@@ -1,3 +1,6 @@
+"use client";
+
+import Autoplay from "embla-carousel-autoplay";
 import {
   Carousel,
   CarouselContent,
@@ -23,7 +26,17 @@ const LogoCarousel = ({ fragment }: Props) => {
   );
   return (
     <Section title={logoCarouselTitle ?? ''}>
-      <Carousel opts={{ align: 'start' }}>
+      <Carousel 
+        opts={{ align: 'start', loop: true }}
+        plugins={[
+          // https://www.embla-carousel.com/plugins/autoplay/
+          Autoplay({
+            delay: 2000,
+            stopOnInteraction: false,
+            stopOnMouseEnter: true,
+          }),
+        ]}
+      >
         <CarouselContent className="flex items-center touch-pan-y touch-pinch-zoom w-full xl:max-w-[1216px]">
           {cards.map((card, index) => (
             <CarouselItem key={`${index}_${card.id}`} className="min-w-0 flex-[0_0_100%] md:flex-[0_0_32%] lg:flex-[0_0_25%] justify-center">
