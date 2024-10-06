@@ -58,7 +58,7 @@ const Header = ({ globalPageProps, data }: Props) => {
                 alt={data.layout.logo.alt || "logo"}
                 width={data.layout.logo.width ?? 140}
                 height={data.layout.logo.height ?? 30}
-                className="w-full dark:hidden max-h-[90px]"
+                className="dark:hidden w-[200px] max-w-[200px] max-h-[90px]"
               />
             )}
           </Link>

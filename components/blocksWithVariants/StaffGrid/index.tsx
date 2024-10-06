@@ -33,8 +33,6 @@ const StaffGrid = ({ fragment }: Props) => {
         <div
           className={cn(
             "flex flex-wrap",
-            // "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3",
-            // "last:[nth-child(3n-1)]:w-6",
             "gap-x-6 gap-y-10 w-full justify-center items-start"
           )}
         >
@@ -80,7 +78,7 @@ const StaffGrid = ({ fragment }: Props) => {
                 overlayClassName="bg-[rgba(239,239,239,0.9)]"
                 className={clsx([
                   "bg-background w-full max-w-[840px]",
-                  "h-auto max-h-[100vh] lg:max-h-[85vh]",
+                  "h-auto max-h-[100svh] lg:max-h-[85vh]",
                   "overflow-auto mt-[-1px]",
                 ])}
                 buttonClassName="fixed"
