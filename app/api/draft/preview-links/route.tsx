@@ -20,28 +20,18 @@ const generatePreviewUrl = (
   switch (itemType.attributes.api_key) {
     case 'page':
       return buildUrl(globalPageProps, `/${item.attributes.slug}`);
+    case 'news_post':
+      return buildUrl(globalPageProps, `/news/${item.attributes.slug}`);
     case 'post':
-      return buildUrl(globalPageProps, `/posts/${item.attributes.slug}`);
+      return buildUrl(globalPageProps, `/blog/${item.attributes.slug}`);
     case 'tag':
-      return buildUrl(globalPageProps, `/posts/tag/${item.attributes.slug}`);
+      return buildUrl(globalPageProps, `/blog/tag/${item.attributes.slug}`);
     case 'author':
-      return buildUrl(globalPageProps, `/posts/author/${item.attributes.slug}`);
-    case 'legal_page':
-      return buildUrl(globalPageProps, `/legal/${item.attributes.slug}`);
-    case 'header':
-      return buildUrl(globalPageProps, '/home');
-    case 'documentation_home':
-      return buildUrl(globalPageProps, '/docs');
-    case 'documentation_page':
-      return buildUrl(globalPageProps, `/docs/${item.attributes.slug}`);
+      return buildUrl(globalPageProps, `/blog/author/${item.attributes.slug}`);
+    case 'publication':
+      return buildUrl(globalPageProps, `/publications/${item.attributes.slug}`);
     case 'layout':
       return buildUrl(globalPageProps, '/home');
-    case 'footer':
-      return buildUrl(globalPageProps, '/home');
-    case 'pricing_tier':
-      return buildUrl(globalPageProps, '/pricing');
-    case 'change_log':
-      return buildUrl(globalPageProps, '/changelog');
   }
 };
 
