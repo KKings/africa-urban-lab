@@ -3,6 +3,8 @@ import { Text } from "@/components/ui/text";
 import {
   Dialog,
   DialogContent,
+  DialogTitle,
+  DialogDescription,
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Markdown } from "@/components/ui/markdown";
@@ -62,6 +64,8 @@ export const LecturerGroup = ({ kind, lecturers }: LecturerGroupProps) => {
               buttonClassName="fixed"
               showClose
             >
+            <DialogTitle className="sr-only">{item.name}</DialogTitle>
+            <DialogDescription className="sr-only">More information about {item.name}</DialogDescription>
               <div className="space-y-w8 h-full overflow-hidden">
                 <div className="flex justify-center pb-2">
                   <div className="relative aspect-[320/290] w-[320px] mx-auto">

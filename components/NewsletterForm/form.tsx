@@ -84,10 +84,13 @@ export function NewsletterForm({ successMessage }: NewsletterFromProps) {
         email: "",
         phoneNumber: "",
         country: "",
+        reasonForInterest: "",
+        educationalBackground: "",
+        howDidYouHearAboutUs: "",
       });
       window.scrollTo({ top: formRef?.current?.clientTop });
     }
-  }, [pending, state.success]);
+  }, [pending, state.success, form]);
 
   return (
     <>

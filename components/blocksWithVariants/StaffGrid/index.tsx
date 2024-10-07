@@ -4,7 +4,7 @@ import { StaffSectionFragmentDoc } from "@/graphql/types/graphql";
 import { GlobalPageProps } from "@/utils/globalPageProps";
 import { Section } from "@/components/ui/section";
 import { cn } from "@/components/utils";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { buttonVariants, Text } from "@/components/ui";
 import Link from "next/link";
 import { EnvelopeOpenIcon } from "@radix-ui/react-icons";
@@ -84,6 +84,8 @@ const StaffGrid = ({ fragment }: Props) => {
                 buttonClassName="fixed"
                 showClose
               >
+                <DialogTitle className="sr-only">{item.name}</DialogTitle>
+                <DialogDescription className="sr-only">More information about {item.name}</DialogDescription>
                 <div className="space-y-w8 h-full overflow-hidden">
                   <div className="flex justify-center pb-2">
                     <div className="relative aspect-[320/290] w-[320px] mx-auto">

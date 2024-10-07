@@ -3,11 +3,12 @@
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogHeader,
+  DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { useDialogContext } from "@/components/Dialog/hooks/use-dialog-context";
-import clsx from "clsx";
 import { Cross2Icon, HamburgerMenuIcon } from "@radix-ui/react-icons";
 import { cn } from "../utils";
 
@@ -30,6 +31,8 @@ export const MainMenuDialog = ({ children, className }: { children: React.ReactN
           className
         )}
       >
+        <DialogTitle className="sr-only">Main Menu</DialogTitle>
+        <DialogDescription className="sr-only">Main Menu</DialogDescription>
         <DialogHeader className="">{children}</DialogHeader>
       </DialogContent>
     </Dialog>
