@@ -1,26 +1,26 @@
 import { cookies, draftMode } from 'next/headers';
 import { redirect } from 'next/navigation';
+import type { NextRequest, NextResponse } from 'next/server';
+import { handleUnexpectedError, invalidRequestResponse, makeDraftModeWorkWithinIframes } from '../../utils';
 
-export async function GET(request: Request) {
+export const dynamic = 'force-dynamic';
+
+export async function GET(request: NextRequest): Promise<NextResponse> {
   const { searchParams } = new URL(request.url);
 
-  const url = searchParams.get('url');
+  const url = searchParams.get('url') ?? '/';
 
-  draftMode().disable();
+  try {
+    // Avoid open redirect vulnerabilities
+    if (!url.startsWith('/')) {
+      return invalidRequestResponse('Invalid URL provided. Please try again.', 422);
+    }
 
-  if (!url) return new Response('Draft mode is disabled');
-
-  //to avoid losing the cookie on redirect in the iFrame
-  const cookieStore = cookies();
-  const cookie = cookieStore.get('__prerender_bypass')!;
-  cookies().set({
-    name: '__prerender_bypass',
-    value: cookie?.value,
-    httpOnly: true,
-    path: '/',
-    secure: true,
-    sameSite: 'none',
-  });
+    draftMode().disable();
+    makeDraftModeWorkWithinIframes();
+  } catch (error) {
+    return handleUnexpectedError(error);
+  }
 
   redirect(url);
 }

@@ -1,6 +1,6 @@
 import { DialogProvider } from '@/components/Dialog/hooks/use-dialog-context';
 import { ManinMenuEvents } from '@/components/MainMenu';
-import ScrollToTop from '@/components/ScrollToTop';
+import DraftModeToggler from '@/components/DraftModeToggler';
 import { LayoutDocument } from '@/graphql/types/graphql';
 import type { GlobalPageProps } from '@/utils/globalPageProps';
 import queryDatoCMS from '@/utils/queryDatoCMS';
@@ -27,6 +27,9 @@ export default async function RootLayout({ children, ...pageProps }: Params) {
       <Suspense fallback={null}>
         <ManinMenuEvents />
       </Suspense>
+      { (isDraft || process.env.NODE_ENV === 'development') &&
+        <DraftModeToggler globalPageProps={pageProps} isDraft={isDraft} />
+      }
     </DialogProvider>
   );
 }

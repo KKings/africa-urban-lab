@@ -65,8 +65,7 @@ const AuthenticationModal = ({
         <p className="font-medium sm:text-lg">Authenticate First!</p>
       </div>
       <p className="mt-4 text-gray-500">
-        Please insert the password to access the content drafts (default:{' '}
-        <code>superSecretToken</code>):
+        Please insert the password to access the content drafts:
       </p>
       <div>
         <input
