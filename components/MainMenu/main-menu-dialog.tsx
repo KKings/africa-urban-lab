@@ -24,7 +24,7 @@ export const MainMenuDialog = ({ children, className }: { children: React.ReactN
         overlayClassName="bg-background top-navH"
         className={cn(
           "fixed inset-0 top-navH bottom-[auto] translate-x-[0] translate-y-[0] max-w-[none] bg-theme-blue text-white",
-          "h-[calc(100vh-var(--height-nav))] w-full",
+          "h-[calc(100dvh-var(--height-nav))] w-full",
           "duration-[1000ms]",
           "data-[state=open]:!slide-in-from-left-0 data-[state=closed]:!slide-out-to-left-0 data-[state=open]:!zoom-in-100 data-[state=closed]:!zoom-in-100",
           className
