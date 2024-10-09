@@ -3008,7 +3008,6 @@ export type LayoutRecord = RecordInterface & {
   _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
   _updatedAt: Scalars['DateTime']['output'];
   footerCopyright?: Maybe<Scalars['String']['output']>;
-  footerLinks: Array<LegalPageRecord>;
   footerLogoAttribution?: Maybe<FileField>;
   footerLogoAttributionText?: Maybe<Scalars['String']['output']>;
   footerLogoLeft?: Maybe<FileField>;
