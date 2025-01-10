@@ -52,10 +52,10 @@ const Content: ContentPage<PageProps, Query> = ({
                     switch (record.__typename) {
                       case 'ImageBlockRecord': {
                         return (
-                          <div className="relative my-6 overflow-hidden shadow-md sm:h-[300px] md:h-[400px]">
+                          <div className="relative my-6 overflow-hidden shadow-md h-auto text-center">
                             <DatoImage
                               fragment={record.image.responsiveImage}
-                              layout="fill"
+                              layout="responsive"
                               objectFit="cover"
                               objectPosition="50% 50%"
                             />
