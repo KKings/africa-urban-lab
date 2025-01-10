@@ -45,41 +45,39 @@ const Header = ({ globalPageProps, data }: Props) => {
   });
 
   return (
-    <>
-      <header className="sticky top-0 w-full bg-background z-50 drop-shadow-sm">
-        <div className="container h-navH flex items-center justify-between">
-          <Link
-            href={buildUrl(globalPageProps, "/")}
-            className="h-navH flex items-center"
-          >
-            {data.layout?.logo.url && (
-              <Image
-                src={data.layout.logo.url}
-                alt={data.layout.logo.alt || "logo"}
-                width={data.layout.logo.width ?? 140}
-                height={data.layout.logo.height ?? 30}
-                className="dark:hidden w-[200px] max-w-[200px] max-h-[90px]"
-              />
-            )}
-          </Link>
-          <div className="relative flex justify-end z-[1]">
-            <MainMenu
-              key={pathname}
-              globalPageProps={globalPageProps}
-              menus={menuData}
+    <header className="sticky top-0 w-full bg-background z-50 drop-shadow-sm">
+      <div className="container h-navH flex items-center justify-between">
+        <Link
+          href={buildUrl(globalPageProps, "/")}
+          className="h-navH flex items-center"
+        >
+          {data.layout?.logo.url && (
+            <Image
+              src={data.layout.logo.url}
+              alt={data.layout.logo.alt || "logo"}
+              width={data.layout.logo.width ?? 140}
+              height={data.layout.logo.height ?? 30}
+              className="dark:hidden w-[200px] max-w-[130px] h-auto"
             />
-          </div>
-          <div className="relative flex justify-end z-50 min-[1140px]:hidden">
-            <MainMenuMobile
-              key={pathname}
-              globalPageProps={globalPageProps}
-              menus={menuData}
-            />
-            <hr />
-          </div>
+          )}
+        </Link>
+        <div className="relative flex justify-end z-[1]">
+          <MainMenu
+            key={pathname}
+            globalPageProps={globalPageProps}
+            menus={menuData}
+          />
         </div>
-      </header>
-    </>
+        <div className="relative flex justify-end z-50 min-[1140px]:hidden">
+          <MainMenuMobile
+            key={pathname}
+            globalPageProps={globalPageProps}
+            menus={menuData}
+          />
+          <hr />
+        </div>
+      </div>
+    </header>
   );
 };
 
