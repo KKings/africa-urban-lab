@@ -20,6 +20,9 @@ export default async function queryDatoCMS<
     Accept: 'application/json',
     'X-Exclude-Invalid': 'true',
     Authorization: `Bearer ${process.env.DATOCMS_READONLY_API_TOKEN}`,
+    ...(process.env.DATOCMS_ENVIRONMENT
+      ? { "X-Environment": process.env.DATOCMS_ENVIRONMENT }
+      : {}),
   };
 
   if (isDraft) headers['X-Include-Drafts'] = 'true';
