@@ -8,6 +8,9 @@ const config: IGraphQLConfig = {
         headers: {
           Authorization: `Bearer ${process.env.DATOCMS_READONLY_API_TOKEN}`,
           'X-Exclude-Invalid': 'true',
+          ...(process.env.DATOCMS_ENVIRONMENT
+            ? { "X-Environment": process.env.DATOCMS_ENVIRONMENT }
+            : {}),
         },
       },
     },

@@ -24,5 +24,14 @@ fragment FeaturedBlogPostsSection on FeaturedBlogPostsSectionRecord {
     author {
       name
     }
+    promoImage {
+      responsiveImage(imgixParams: { auto: format, fit: crop }) {
+        alt
+        src
+        width
+        height
+        sizes
+      }
+    }
   }
 }
