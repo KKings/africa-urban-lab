@@ -66,6 +66,7 @@ const FeautredBlogPostsGrid = ({ fragment, globalPageProps }: Props) => {
                       sizes={item?.promoImage?.responsiveImage?.sizes}
                       width={item?.promoImage?.responsiveImage?.width ?? 346}
                       height={item?.promoImage?.responsiveImage?.height ?? 230.67}
+                      quality={100}
                       className={clsx([
                         "-ml-12 w-[calc(100%+6rem)] max-w-[calc(100%+6rem)]",
                         "object-cover h-auto mb-6"
