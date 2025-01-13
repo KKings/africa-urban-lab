@@ -65,6 +65,9 @@ query Page($locale: SiteLocale, $fallbackLocale: [SiteLocale!], $slug: String) {
       ... on FeaturedPublicationsSectionRecord {
         ...FeaturedPublicationsSection
       }
+      ... on FeaturedNewsSectionRecord {
+        ...FeaturedNewsSection
+      }
       ... on NewsletterFormSectionRecord {
         ... NewsletterFormSection
       }

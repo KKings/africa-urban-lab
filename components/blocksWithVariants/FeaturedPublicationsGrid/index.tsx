@@ -1,8 +1,6 @@
 import { type FragmentType, getFragmentData } from "@/graphql/types";
 import NextImage from "next/image";
 import {
-  CardSectionFragmentDoc,
-  FeaturedBlogPostsSectionFragmentDoc,
   FeaturedPublicationsSectionFragmentDoc,
 } from "@/graphql/types/graphql";
 import { buildUrl, GlobalPageProps } from "@/utils/globalPageProps";
@@ -11,6 +9,7 @@ import { cn } from "@/components/utils";
 import { Button, Text } from "@/components/ui";
 import Link from "next/link";
 import clsx from "clsx";
+import transformDate from "@/utils/transformDate";
 
 type Props = {
   fragment: FragmentType<typeof FeaturedPublicationsSectionFragmentDoc>;
@@ -45,24 +44,43 @@ const FeaturedPublicationsGrid = ({ fragment, globalPageProps }: Props) => {
           {posts.map((item) => (
             <div
               key={item.id}
-              className={cn(
-                "w-full md:basis-1/2-gap-6 xl:basis-1/2-gap-6 relative"
-              )}
+              className={cn("w-full md:basis-1/2-gap-6 lg:basis-1/3-gap-6 ")}
             >
               <div
                 className={clsx([
+                  {'pt-12': !item?.promoImage?.responsiveImage?.src},
+                  { 'pt-[10px]': item?.promoImage?.responsiveImage?.src },
                   "flex flex-col relative",
-                  "px-12 pt-12 pb-20 h-full space-y-4",
+                  " pr-12 pl-12 pb-20 h-full space-y-4",
                   "shadow-md  bg-white",
                   "before:content-['_'] before:-ml-12 before:bg-[url(/images/section-bg.png)] before:absolute before:w-full before:h-2.5 before:bg-cover before:bg-no-repeat before:top-0",
                   "before:bg-theme-turquoise",
                 ])}
               >
                 <div className="mb-2 border-b border-body-color border-opacity-10 pb-4">
+                  {item?.promoImage?.responsiveImage?.src && (
+                    <NextImage
+                      src={item?.promoImage?.responsiveImage?.src ?? "https://placehold.co/346x232"}
+                      alt={item.promoImage?.responsiveImage?.alt ?? ""}
+                      sizes={item?.promoImage?.responsiveImage?.sizes}
+                      width={item?.promoImage?.responsiveImage?.width ?? 346}
+                      height={item?.promoImage?.responsiveImage?.height ?? 230.67}
+                      quality={100}
+                      className={clsx([
+                        "-ml-12 w-[calc(100%+6rem)] max-w-[calc(100%+6rem)]",
+                        "object-cover h-auto mb-6"
+                      ])}
+                    />
+                  )}
                   <Text as="p" size="meta" weight="bold">
                     {item.author?.name}
                   </Text>
                 </div>
+                {item._publishedAt && (
+                  <Text size="meta" weight="semi" className="mb-2">
+                    {transformDate(item._publishedAt)}
+                  </Text>
+                )}
                 <Text caps size="large" weight="bold">
                   {item.title}
                 </Text>
