@@ -1,4 +1,4 @@
-fragment FeaturedPublicationsSection on FeaturedPublicationsSectionRecord {
+fragment FeaturedNewsSection on FeaturedNewsSectionRecord {
   title
   text
   bgColor {
@@ -21,10 +21,7 @@ fragment FeaturedPublicationsSection on FeaturedPublicationsSectionRecord {
     id
     _publishedAt
     title
-    slug 
-    author {
-      name
-    }
+    slug
     promoImage {
       responsiveImage(imgixParams: { auto: format, fit: crop, w: 430, h: 286.67 }) {
         alt

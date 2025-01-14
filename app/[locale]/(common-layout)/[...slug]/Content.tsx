@@ -21,6 +21,7 @@ import FeautredBlogPostsGrid from '@/components/blocksWithVariants/FeaturedBlogP
 import PageTitle from '@/components/blocksWithVariants/PageTitle';
 import FeaturedPublicationsGrid from '@/components/blocksWithVariants/FeaturedPublicationsGrid';
 import NewsletterForm from '@/components/blocksWithVariants/NewsletterForm';
+import FeaturedNewsGrid from '@/components/blocksWithVariants/FeaturedNewsGrid';
 
 const Content: ContentPage<PageProps, Query> = ({
   data,
@@ -121,6 +122,11 @@ const Content: ContentPage<PageProps, Query> = ({
           case 'FeaturedPublicationsSectionRecord': {
             return (
               <FeaturedPublicationsGrid key={section.id} fragment={section} globalPageProps={globalPageProps} />
+            )
+          }
+          case 'FeaturedNewsSectionRecord': {
+            return (
+              <FeaturedNewsGrid key={section.id} fragment={section} globalPageProps={globalPageProps} />
             )
           }
           case 'NewsletterFormSectionRecord': {
