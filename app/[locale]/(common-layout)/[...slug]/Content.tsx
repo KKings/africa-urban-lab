@@ -22,6 +22,7 @@ import PageTitle from '@/components/blocksWithVariants/PageTitle';
 import FeaturedPublicationsGrid from '@/components/blocksWithVariants/FeaturedPublicationsGrid';
 import NewsletterForm from '@/components/blocksWithVariants/NewsletterForm';
 import FeaturedNewsGrid from '@/components/blocksWithVariants/FeaturedNewsGrid';
+import HeroCarousel from '@/components/blocksWithVariants/HeroCarousel';
 
 const Content: ContentPage<PageProps, Query> = ({
   data,
@@ -127,6 +128,12 @@ const Content: ContentPage<PageProps, Query> = ({
           case 'FeaturedNewsSectionRecord': {
             return (
               <FeaturedNewsGrid key={section.id} fragment={section} globalPageProps={globalPageProps} />
+            )
+          }
+          
+          case 'HeroCarouselSectionRecord': {
+            return (
+              <HeroCarousel key={section.id} fragment={section} globalPageProps={globalPageProps} />
             )
           }
           case 'NewsletterFormSectionRecord': {

@@ -1,0 +1,8 @@
+fragment HeroCarouselSection on HeroCarouselSectionRecord {
+  heroImages {
+    url
+    alt
+    height
+    width
+  }
+}
