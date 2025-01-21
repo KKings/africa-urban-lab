@@ -19,7 +19,7 @@ export const textVariants = cva([], {
       link: "underline-offset-4 hover:underline link",
       markdown: "prose", // unsure it should be here?
     },
-      size: {
+    size: {
       default: "text-base",
       inherit: "text-inherit",
       fine: "text-fine subpixel-antialiased",

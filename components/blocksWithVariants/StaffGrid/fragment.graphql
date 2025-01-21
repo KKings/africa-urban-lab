@@ -11,11 +11,8 @@ fragment StaffSection on StaffSectionRecord {
     name
     jobTitle
     email
-    cvLink {
-      url
-    }
-    biography
-    image {
+    slug
+    picture {
       responsiveImage(imgixParams: { auto: format, w: 400, fit: crop, q: 100 }) {
         alt
         src

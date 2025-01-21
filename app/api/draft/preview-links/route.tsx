@@ -27,7 +27,7 @@ const generatePreviewUrl = (
     case 'tag':
       return buildUrl(globalPageProps, `/blog/tag/${item.attributes.slug}`);
     case 'author':
-      return buildUrl(globalPageProps, `/blog/author/${item.attributes.slug}`);
+      return buildUrl(globalPageProps, `/staff/${item.attributes.slug}`);
     case 'publication':
       return buildUrl(globalPageProps, `/publications/${item.attributes.slug}`);
     case 'layout':

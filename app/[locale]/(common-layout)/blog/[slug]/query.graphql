@@ -13,6 +13,7 @@ query Post($slug: String, $locale: SiteLocale, $fallbackLocale: [SiteLocale!]) {
     title
     author {
       name
+      slug
       jobTitle
       picture {
         responsiveImage(imgixParams: { w: "64", h: "64", fit: crop }) {
