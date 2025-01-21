@@ -47,8 +47,8 @@ const Content: ContentPage<PageProps, Query> = ({
               </Text>
               <div className="mb-10 flex items-center justify-between border-b border-body-color border-opacity-10 dark:border-white dark:border-opacity-10">
                 <div className="flex flex-col items-start md:flex-row md:items-center">
-                <NextLink href={`/staff/${data.post.author.slug}`}>
-                  <div className="mb-5 mr-10 flex items-center">
+                  <NextLink href={`/staff/${data.post.author.slug}`}>
+                    <div className="mb-5 mr-10 flex items-center">
                       <div className="mr-4">
                         <div className="relative h-10 w-10 overflow-hidden rounded-full">
                           <DatoImage
@@ -63,8 +63,8 @@ const Content: ContentPage<PageProps, Query> = ({
                         </Text>
                         <Text size="meta">{data.post.author.jobTitle}</Text>
                       </div>
-                      </div>
-                    </NextLink>
+                    </div>
+                  </NextLink>
                 </div>
               </div>
               <div className="space-y-4">

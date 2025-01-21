@@ -14,7 +14,7 @@ const SvgRenderer = ({ url, className }: Props) => {
   useEffect(() => {
     const fetchSvg = async () => {
       try {
-        const response = await fetch(url);
+        const response = await fetch(url?.toString());
         const svgText = await response.text();
         setSvgContent(svgText);
       } catch (error) {

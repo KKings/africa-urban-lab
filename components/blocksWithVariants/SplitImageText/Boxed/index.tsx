@@ -1,3 +1,5 @@
+'use client';
+
 import Link from "next/link";
 import NextImage from "next/image";
 import clsx from "clsx";
@@ -9,6 +11,8 @@ import { Button, Text } from "@/components/ui";
 import { Section } from "@/components/ui/section";
 import { ImageAlignment, ImageGrid, TextVariants } from "@/components/types";
 import { IMAGE_SIZES } from "../constants";
+import { arrowStyle, Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
 
 type Props = {
   fragment: FragmentType<typeof SplitImageTextSectionFragmentDoc>;
@@ -19,7 +23,7 @@ const SplitImageTextBoxed = ({ fragment }: Props) => {
   const {
     splitImageTitle: title,
     splitImageText: text,
-    image,
+    images,
     imageAlignment,
     imageGrid = ImageGrid["2/5"],
     bgColor,
@@ -33,6 +37,8 @@ const SplitImageTextBoxed = ({ fragment }: Props) => {
       ? IMAGE_SIZES[imageGrid as ImageGrid]
       : IMAGE_SIZES[ImageGrid["2/5"]],
   } as React.CSSProperties;
+
+  const useCarousel = images.length > 1;
 
   return (
     <Section bgColor={bgColor?.hex}>
@@ -55,13 +61,46 @@ const SplitImageTextBoxed = ({ fragment }: Props) => {
         }}
       >
         <div className="w-full relative md:[grid-area:image] md:justify-center">
+          { !useCarousel ? (
           <NextImage
-            src={image?.responsiveImage?.src ?? ""}
-            alt={image?.responsiveImage?.alt ?? ""}
-            height={image?.responsiveImage?.height}
-            width={image?.responsiveImage?.width}
+            src={images?.[0]?.responsiveImage?.src ?? ""}
+            alt={images?.[0]?.responsiveImage?.alt ?? ""}
+            height={images?.[0]?.responsiveImage?.height}
+            width={images?.[0]?.responsiveImage?.width}
             className="inset-0 w-full h-auto"
           />
+          ) : (
+            <Carousel
+              className="w-full"
+              opts={{ align: "start", loop: true }}
+              plugins={[
+                Autoplay({
+                  delay: 5000,
+                  stopOnInteraction: true,
+                  stopOnMouseEnter: true,
+                }),
+              ]}
+            >
+              <CarouselContent>
+                {images.map((image, index) => (
+                  <CarouselItem
+                    key={`${index}`}
+                    className="min-w-0 shrink-0 grow-0 basis-full"
+                  >
+                    <NextImage
+                      src={image.responsiveImage?.src ?? ""}
+                      alt={image.responsiveImage?.alt ?? ""}
+                      height={images?.[0]?.responsiveImage?.height}
+                      width={images?.[0]?.responsiveImage?.width}
+                      className="inset-0 w-full h-full object-cover"
+                    />
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious className={clsx(arrowStyle)} />
+              <CarouselNext className={clsx(arrowStyle)} />
+            </Carousel>
+          )}
         </div>
         <div
           className={clsx([
