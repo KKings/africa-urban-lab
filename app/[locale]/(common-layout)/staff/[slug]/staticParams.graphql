@@ -1,0 +1,9 @@
+query StaffStaticParams {
+  allAuthors(
+    filter: { name: { isBlank: "false" } }
+    orderBy: _createdAt_DESC
+    first: 9
+  ) {
+    slug
+  }
+}

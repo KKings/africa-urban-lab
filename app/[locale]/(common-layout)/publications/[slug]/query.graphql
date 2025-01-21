@@ -13,6 +13,7 @@ query Publications($slug: String, $locale: SiteLocale, $fallbackLocale: [SiteLoc
     title
     author {
       name
+      slug
       jobTitle
       picture {
         responsiveImage(imgixParams: { w: "64", h: "64", fit: crop }) {

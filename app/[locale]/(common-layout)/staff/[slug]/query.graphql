@@ -1,0 +1,27 @@
+query Staff($slug: String, $locale: SiteLocale, $fallbackLocale: [SiteLocale!]) {
+  author(
+    filter: { slug: { eq: $slug }, name: { isBlank: "false" } }
+    locale: $locale
+    fallbackLocales: $fallbackLocale
+  ) {
+    seo: _seoMetaTags {
+      attributes
+      content
+      tag
+    }
+    name
+    jobTitle
+    biography {
+      value
+    }
+    email
+    cvLink {
+      url
+    }
+    picture {
+      responsiveImage(imgixParams: { w: "320", h: "320", fit: crop }) {
+        ...DatoImage_responsiveImage
+      }
+    }
+  }
+}
