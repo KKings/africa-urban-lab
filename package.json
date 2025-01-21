@@ -11,6 +11,7 @@
     "generate-ts-types": "graphql-codegen --config graphql.config.ts --verbose --debug"
   },
   "dependencies": {
+    "@datocms/cli": "^2.0.18",
     "@datocms/cma-client-node": "^2.0.0",
     "@formatjs/intl-localematcher": "^0.4.0",
     "@graphql-codegen/typed-document-node": "^5.0.1",

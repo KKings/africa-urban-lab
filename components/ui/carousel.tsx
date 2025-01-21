@@ -256,6 +256,9 @@ const CarouselNext = forwardRef<
 });
 CarouselNext.displayName = "CarouselNext";
 
+
+export const arrowStyle = ["rounded-full", "bg-white bg-opacity-50 text-foreground"];
+
 export {
   type CarouselApi,
   Carousel,
