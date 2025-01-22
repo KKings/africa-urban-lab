@@ -1,25 +1,14 @@
-"use client";
-
 import NextImage from "next/image";
+import Link from "next/link";
 import clsx from "clsx";
 import { type FragmentType, getFragmentData } from "@/graphql/types";
 import { SplitImageTextSectionFragmentDoc } from "@/graphql/types/graphql";
 import { GlobalPageProps } from "@/utils/globalPageProps";
 import { Markdown } from "@/components/ui/markdown";
 import { Button, Text } from "@/components/ui";
-import Link from "next/link";
 import { IMAGE_SIZES } from "../constants";
 import { ImageAlignment, ImageGrid, TextVariants } from "@/components/types";
-import { use } from "react";
-import {
-  arrowStyle,
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
-import Autoplay from "embla-carousel-autoplay";
+import { ImageCarousel } from "../ImageCarousel";
 
 type Props = {
   fragment: FragmentType<typeof SplitImageTextSectionFragmentDoc>;
@@ -50,14 +39,14 @@ const SplitImageTextFullWidth = ({ fragment }: Props) => {
   return (
     <div
       className={clsx([
-        "grid grid-flow-row md:grid-flow-col",
+        "grid grid-flow-row lg:grid-flow-col",
         "bg-theme-grey text-background",
         {
-          ['md:grid-cols-[var(--image-grid-size)_auto] md:[grid-template-areas:"image_text"]']:
+          ['lg:grid-cols-[var(--image-grid-size)_auto] lg:[grid-template-areas:"image_text"]']:
             imageAlignment === ImageAlignment.Left,
         },
         {
-          ['md:grid-cols-[auto_var(--image-grid-size)] md:[grid-template-areas:"text_image"]']:
+          ['lg:grid-cols-[auto_var(--image-grid-size)] lg:[grid-template-areas:"text_image"]']:
             imageAlignment === ImageAlignment.Right,
         },
       ])}
@@ -66,53 +55,26 @@ const SplitImageTextFullWidth = ({ fragment }: Props) => {
         ...vars,
       }}
     >
-      <div className="w-full relative md:[grid-area:image]">
+      <div className="w-full relative lg:[grid-area:image]">
         {!useCarousel ? (
           <NextImage
             src={images?.[0]?.responsiveImage?.src ?? ""}
             alt={images?.[0]?.responsiveImage?.alt ?? ""}
             height={images?.[0]?.responsiveImage?.height}
             width={images?.[0]?.responsiveImage?.width}
-            className="inset-0 object-cover w-full md:h-full"
+            className="inset-0 object-cover w-full lg:h-full"
           />
         ) : (
-          <Carousel
-            className="w-full"
-            opts={{ align: "start", loop: true }}
-            plugins={[
-              Autoplay({
-                delay: 5000,
-                stopOnInteraction: true,
-                stopOnMouseEnter: true,
-              }),
-            ]}
-          >
-            <CarouselContent>
-              {images.map((image, index) => (
-                <CarouselItem
-                  key={`${index}`}
-                  className="min-w-0 shrink-0 grow-0 basis-full"
-                >
-                  <NextImage
-                    src={image.responsiveImage?.src ?? ""}
-                    alt={image.responsiveImage?.alt ?? ""}
-                    height={images?.[0]?.responsiveImage?.height}
-                    width={images?.[0]?.responsiveImage?.width}
-                    className="inset-0 w-full h-full object-cover"
-                  />
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <CarouselPrevious className={clsx(arrowStyle)} />
-            <CarouselNext className={clsx(arrowStyle)} />
-          </Carousel>
+          <div className="md:inline-flex xl:block md:items-center sm:h-auto lg:h-full xl:h-auto">
+            <ImageCarousel images={images} />
+          </div>
         )}
       </div>
       <div
         className={clsx([
           "flex flex-col text-center justify-center",
-          "space-y-8 py-16 px-4 md:p-16",
-          "md:[grid-area:text]",
+          "space-y-8 py-16 px-4 lg:p-16",
+          "lg:[grid-area:text]",
         ])}
         style={{ color: textColor?.hex ?? "" }}
       >
