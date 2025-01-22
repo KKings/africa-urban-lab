@@ -18,6 +18,10 @@ query Staff($slug: String, $locale: SiteLocale, $fallbackLocale: [SiteLocale!]) 
     cvLink {
       url
     }
+    publications {
+      tabName
+      tabContent
+    }
     picture {
       responsiveImage(imgixParams: { w: "320", h: "320", fit: crop }) {
         ...DatoImage_responsiveImage
