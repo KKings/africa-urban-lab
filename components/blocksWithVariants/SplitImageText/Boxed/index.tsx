@@ -1,5 +1,3 @@
-'use client';
-
 import Link from "next/link";
 import NextImage from "next/image";
 import clsx from "clsx";
@@ -11,8 +9,7 @@ import { Button, Text } from "@/components/ui";
 import { Section } from "@/components/ui/section";
 import { ImageAlignment, ImageGrid, TextVariants } from "@/components/types";
 import { IMAGE_SIZES } from "../constants";
-import { arrowStyle, Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import Autoplay from "embla-carousel-autoplay";
+import { ImageCarousel } from "../ImageCarousel";
 
 type Props = {
   fragment: FragmentType<typeof SplitImageTextSectionFragmentDoc>;
@@ -61,45 +58,16 @@ const SplitImageTextBoxed = ({ fragment }: Props) => {
         }}
       >
         <div className="w-full relative md:[grid-area:image] md:justify-center">
-          { !useCarousel ? (
-          <NextImage
-            src={images?.[0]?.responsiveImage?.src ?? ""}
-            alt={images?.[0]?.responsiveImage?.alt ?? ""}
-            height={images?.[0]?.responsiveImage?.height}
-            width={images?.[0]?.responsiveImage?.width}
-            className="inset-0 w-full h-auto"
-          />
+          {!useCarousel ? (
+            <NextImage
+              src={images?.[0]?.responsiveImage?.src ?? ""}
+              alt={images?.[0]?.responsiveImage?.alt ?? ""}
+              height={images?.[0]?.responsiveImage?.height}
+              width={images?.[0]?.responsiveImage?.width}
+              className="inset-0 w-full h-auto"
+            />
           ) : (
-            <Carousel
-              className="w-full"
-              opts={{ align: "start", loop: true }}
-              plugins={[
-                Autoplay({
-                  delay: 5000,
-                  stopOnInteraction: true,
-                  stopOnMouseEnter: true,
-                }),
-              ]}
-            >
-              <CarouselContent>
-                {images.map((image, index) => (
-                  <CarouselItem
-                    key={`${index}`}
-                    className="min-w-0 shrink-0 grow-0 basis-full"
-                  >
-                    <NextImage
-                      src={image.responsiveImage?.src ?? ""}
-                      alt={image.responsiveImage?.alt ?? ""}
-                      height={images?.[0]?.responsiveImage?.height}
-                      width={images?.[0]?.responsiveImage?.width}
-                      className="inset-0 w-full h-full object-cover"
-                    />
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-              <CarouselPrevious className={clsx(arrowStyle)} />
-              <CarouselNext className={clsx(arrowStyle)} />
-            </Carousel>
+            <ImageCarousel images={images} />
           )}
         </div>
         <div
@@ -123,7 +91,10 @@ const SplitImageTextBoxed = ({ fragment }: Props) => {
               className={clsx(
                 "space-y-w4 mx-auto",
                 "[&_img]:mx-auto [&_img]:w-[72px] [&_img]:pt-w8 [&_img+h2]:!pt-0",
-                {["[&_p.text-base]:text-4xl"]: textVariant === TextVariants.Large}
+                {
+                  ["[&_p.text-base]:text-4xl"]:
+                    textVariant === TextVariants.Large,
+                }
               )}
             >
               <Markdown>{text}</Markdown>
