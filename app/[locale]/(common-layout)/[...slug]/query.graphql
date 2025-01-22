@@ -71,6 +71,9 @@ query Page($locale: SiteLocale, $fallbackLocale: [SiteLocale!], $slug: String) {
       ... on HeroCarouselSectionRecord {
         ...HeroCarouselSection
       }
+      ... on SplitVideoTextSectionRecord {
+        ...SplitVideoTextSection
+      }
       ... on NewsletterFormSectionRecord {
         ... NewsletterFormSection
       }

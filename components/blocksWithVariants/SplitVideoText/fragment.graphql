@@ -1,0 +1,18 @@
+fragment SplitVideoTextSection on SplitVideoTextSectionRecord {
+  splitImageTitle: title
+  splitImageText: text
+  alignment
+  textVariant
+  grid
+  link {
+    url
+    label
+  }
+  bgColor {
+    hex
+  }
+  textColor {
+    hex
+  }
+  videoUrl
+}
