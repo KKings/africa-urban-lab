@@ -1,0 +1,3 @@
+fragment HeroVideoSection on HeroVideoSectionRecord {
+  videoUrl
+}

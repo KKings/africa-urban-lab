@@ -24,6 +24,7 @@ import NewsletterForm from '@/components/blocksWithVariants/NewsletterForm';
 import FeaturedNewsGrid from '@/components/blocksWithVariants/FeaturedNewsGrid';
 import HeroCarousel from '@/components/blocksWithVariants/HeroCarousel';
 import SplitVideoTextBoxed from '@/components/blocksWithVariants/SplitVideoText/Boxed';
+import HeroVideoSection from '@/components/blocksWithVariants/HeroVideoSection';
 
 const Content: ContentPage<PageProps, Query> = ({
   data,
@@ -145,6 +146,11 @@ const Content: ContentPage<PageProps, Query> = ({
           case 'SplitVideoTextSectionRecord': {
             return (
               <SplitVideoTextBoxed key={section.id} fragment={section} globalPageProps={globalPageProps} />
+            )
+          }
+          case 'HeroVideoSectionRecord': {
+            return (
+              <HeroVideoSection key={section.id} fragment={section} globalPageProps={globalPageProps} />
             )
           }
           case 'RedirectSectionRecord': {
