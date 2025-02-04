@@ -80,6 +80,9 @@ query Page($locale: SiteLocale, $fallbackLocale: [SiteLocale!], $slug: String) {
       ... on HeroVideoSectionRecord {
         ... HeroVideoSection
       }
+      ... on AdmissionFormSectionRecord {
+        ... AdmissionFormSection
+      }
     }
     id
     label

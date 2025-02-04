@@ -25,6 +25,7 @@ import FeaturedNewsGrid from '@/components/blocksWithVariants/FeaturedNewsGrid';
 import HeroCarousel from '@/components/blocksWithVariants/HeroCarousel';
 import SplitVideoTextBoxed from '@/components/blocksWithVariants/SplitVideoText/Boxed';
 import HeroVideoSection from '@/components/blocksWithVariants/HeroVideoSection';
+import AdmissionForm from '@/components/blocksWithVariants/AdmissionForm';
 
 const Content: ContentPage<PageProps, Query> = ({
   data,
@@ -141,6 +142,11 @@ const Content: ContentPage<PageProps, Query> = ({
           case 'NewsletterFormSectionRecord': {
             return (
               <NewsletterForm key={section.id} fragment={section} globalPageProps={globalPageProps} />
+            )
+          }
+          case 'AdmissionFormSectionRecord': {
+            return (
+              <AdmissionForm key={section.id} fragment={section} globalPageProps={globalPageProps} />
             )
           }
           case 'SplitVideoTextSectionRecord': {

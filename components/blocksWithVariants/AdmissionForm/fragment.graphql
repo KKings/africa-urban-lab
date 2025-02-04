@@ -1,0 +1,19 @@
+fragment AdmissionFormSection on AdmissionFormSectionRecord {
+  personalInfoTitle
+  personalInfoDescription
+  referralTitle
+  referralDescription
+  experienceTitle
+  experienceDescription
+  documentsTitle
+  documentsDescription
+  submitTitle
+  submitDescription
+  
+  textColor {
+    hex
+  }
+  bgColor {
+    hex
+  }
+}

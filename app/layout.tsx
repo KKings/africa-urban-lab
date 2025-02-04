@@ -1,8 +1,9 @@
 import { sans, serif } from "@/components/ui/fonts";
-import '@/styles/global.css';
 import { GoogleAnalytics } from "@next/third-parties/google";
 import type { GlobalPageProps } from '@/utils/globalPageProps';
 import clsx from "clsx";
+
+import '@/styles/global.css';
 
 type Params = GlobalPageProps & {
   children: React.ReactNode;
