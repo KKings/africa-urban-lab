@@ -100,8 +100,6 @@ export const SignupAction = async (
       `Success: added "${email}" to the Mailchimp list.`,
       responseBody
     );
-
-    revalidatePath("/");
     return {
       success: true,
       id: Date.now().toString(),

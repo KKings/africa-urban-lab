@@ -37,6 +37,10 @@ export async function middleware(request: NextRequest) {
     normalizedPathnameWithoutLocale,
   );
 
+  if (pathname.startsWith('/test/')) {
+    return;
+  }
+
   if (normalizedLocale === SiteLocale.En) {
     return NextResponse.rewrite(new URL(normalizedPathname, request.url));
   }
