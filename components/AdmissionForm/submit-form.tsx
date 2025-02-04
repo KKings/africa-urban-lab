@@ -184,6 +184,13 @@ const SubmitForm = ({
   return (
     <div className={clsx(className, "md:max-w-full lg:max-w-[600px]")}>
       <div className="flex flex-col items-center gap-4 rounded-lg shadow-lg p-8">
+        {error && !success && (
+          <div aria-live="polite">
+            <Text size="meta" weight="bold" className="bg-red-400 p-6">
+              An error occurred processing your request. Please try again later.
+            </Text>
+          </div>
+        )}
         <Image
           src={illustration}
           alt="Admission Checkbox Illustration"
@@ -215,13 +222,6 @@ const SubmitForm = ({
               {pending && <LoadingIcon className="text-white" />}
             </Text>
           </Button>
-        )}
-        {error && !success && (
-          <div aria-live="polite">
-            <Text size="meta" weight="bold" className="bg-red-400 p-6">
-              An error occurred processing your request. Please try again later.
-            </Text>
-          </div>
         )}
       </div>
 
