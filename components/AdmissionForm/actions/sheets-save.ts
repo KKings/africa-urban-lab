@@ -36,89 +36,95 @@ const RequestSchema = personalSchema
 export type SheetValues = z.infer<typeof RequestSchema>;
 
 export const saveToSheets = async (
-  request: SheetValues,
+  request: SheetValues
 ): Promise<SaveToSheetsResponse> => {
-  const parsed = RequestSchema.safeParse(request);
+  try {
+    const parsed = RequestSchema.safeParse(request);
+    if (!parsed.success) {
+      const fields: Record<string, unknown> = {};
+      for (const key of Object.keys(request) as (keyof typeof request)[]) {
+        fields[key] = request[key];
+      }
+      const error = parsed.error;
+      const formattedErrors = error.flatten();
 
-  // return validation error to the client
-  if (!parsed.success) {
-    const fields: Record<string, unknown> = {};
-    for (const key of Object.keys(request) as (keyof typeof request)[]) {
-      fields[key] = request[key];
-    }
-    const error = parsed.error;
-    const formattedErrors = error.flatten();
+      console.log("fieldErrors", formattedErrors.fieldErrors);
 
-    console.log("fieldErrors", formattedErrors.fieldErrors);
-    return {
-      success: false,
-      error: {
-        type: "validation",
-        detail: {
-          message: "Invalid form data",
+      return {
+        success: false,
+        error: {
+          type: "validation",
+          detail: {
+            message: "Invalid form data",
+          },
         },
-      },
-      fields,
-      issues: formattedErrors.fieldErrors,
-    };
-  }
+        fields,
+        issues: formattedErrors.fieldErrors,
+      };
+    }
 
-  const {
-    firstName,
-    lastName,
-    email,
-    dateOfBirth,
-    nationality,
-    countryOfResidence,
-    yearlyIncome,
-    totalYearsOfRelevantExperience,
-    currentJob,
-    jobResponsibilities,
-    additionalExperience,
-    referralName,
-    referralTitle,
-    referralEmail,
-    referralOccupation,
-    referralCompany,
-    resume,
-    transcriptsBachelor,
-    transcriptsMasters,
-    personalStatement,
-    writingSample,
-  } = request;
-
-  const identifier = `${firstName}-${lastName}`.replace(/[^0-9a-z\-]/gi, "");
-  const timestamp = new Date().toISOString();
-
-  const result = await append({
-    identifier,
-    row: [
+    const {
       firstName,
       lastName,
       email,
       dateOfBirth,
       nationality,
       countryOfResidence,
-      String(yearlyIncome),
-      String(totalYearsOfRelevantExperience),
+      yearlyIncome,
+      totalYearsOfRelevantExperience,
       currentJob,
       jobResponsibilities,
       additionalExperience,
-      resume,
-      transcriptsBachelor,
-      transcriptsMasters,
-      personalStatement,
-      writingSample,
       referralName,
       referralTitle,
       referralEmail,
       referralOccupation,
       referralCompany,
-      timestamp,
-    ],
-  });
+      resume,
+      transcriptsBachelor,
+      transcriptsMasters,
+      personalStatement,
+      writingSample,
+    } = request;
 
-  return {
-    success: result.success,
-  };
+    const identifier = `${firstName}-${lastName}`.replace(/[^0-9a-z\-]/gi, "");
+    const timestamp = new Date().toISOString();
+
+    const result = await append({
+      identifier,
+      row: [
+        firstName,
+        lastName,
+        email,
+        dateOfBirth,
+        nationality,
+        countryOfResidence,
+        String(yearlyIncome),
+        String(totalYearsOfRelevantExperience),
+        currentJob,
+        jobResponsibilities,
+        additionalExperience,
+        resume,
+        transcriptsBachelor,
+        transcriptsMasters,
+        personalStatement,
+        writingSample,
+        referralName,
+        referralTitle,
+        referralEmail,
+        referralOccupation,
+        referralCompany,
+        timestamp,
+      ],
+    });
+
+    return {
+      success: result.success,
+    };
+  } catch (error) {
+    console.error(
+      `[saveToSheets.action] Error occurred saving row to Google Sheets.`, error
+    );
+    throw new Error('Failed to save data to Google Sheets');
+  }
 };

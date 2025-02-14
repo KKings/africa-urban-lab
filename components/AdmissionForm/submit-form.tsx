@@ -1,21 +1,18 @@
 import Image from "next/image";
 import { useCallback, useState } from "react";
 import { Button, Text } from "../ui";
+import clsx from "clsx";
 import { StepperButtons } from "./form-stepper-buttons";
 import type { FormValues } from "./schema";
 import type { StepperForm } from "./types";
 
 import illustration from "@/public/images/admission-checkbox-illustration.png";
-import { createDriveLinks } from "./actions/drive-create";
-import type { CreateFileRequest } from "@/services/google-drive";
 import {
   MIME_TYPE_MAPPINGS,
   type SUPPORTED_DOCUMENTS_TYPES,
 } from "./constants";
-import { readFileAsBuffer } from "./utils";
 import { upload, UploadFileResponse } from "./actions/drive-upload";
 import { saveToSheets, SheetValues } from "./actions/sheets-save";
-import clsx from "clsx";
 import { LoadingIcon } from "../Icons";
 
 type SubmitFormProps = StepperForm<FormValues>;
@@ -48,7 +45,7 @@ const toDriveLink = (id?: string): string => {
     return "";
   }
 
-  return `https://docs.google.com/document/d/${id}/edit`;
+  return `https://drive.google.com/file/d/${id}/view`;
 };
 
 const uploadPromise = (formData?: FormData): Promise<UploadFileResponse> => {
@@ -169,24 +166,23 @@ const SubmitForm = ({
       const appendResult = await saveToSheets(sheetData);
 
       setSuccess(appendResult.success || false);
-      setPending(false);
-      setIdle(true);
     } catch (error) {
-      console.error(error);
+      console.error('Error occurred processing the request.');
+      setSuccess(false);
       setError(true);
     }
-
-    setPending(false);
-    setIdle(true);
-    setError(false);
-  }, []);
+    finally {
+      setPending(false);
+      setIdle(true);
+    }
+  }, [formValues, personalStatement, resume, transcriptsBachelor, transcriptsMasters, writingSample]);
 
   return (
     <div className={clsx(className, "md:max-w-full lg:max-w-[600px]")}>
       <div className="flex flex-col items-center gap-4 rounded-lg shadow-lg p-8">
         {error && !success && (
-          <div aria-live="polite">
-            <Text size="meta" weight="bold" className="bg-red-400 p-6">
+          <div aria-live="polite" className="w-full">
+            <Text size="meta" weight="bold" className="bg-red-400 p-4">
               An error occurred processing your request. Please try again later.
             </Text>
           </div>

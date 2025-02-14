@@ -7,7 +7,7 @@ import { Readable } from "stream";
 export type UploadFileResponse = {
   id?: string;
   success: boolean;
-}
+};
 
 export async function upload(data: FormData): Promise<UploadFileResponse> {
   try {
@@ -16,7 +16,7 @@ export async function upload(data: FormData): Promise<UploadFileResponse> {
     if (!file) {
       throw new Error("No file uploaded");
     }
-    
+
     const mimeType = data.get(
       "mimeType"
     ) as string as SUPPORTED_DOCUMENTS_TYPES;
@@ -29,14 +29,16 @@ export async function upload(data: FormData): Promise<UploadFileResponse> {
     });
 
     if (!response.success) {
-      throw new Error(`Service returned an invalid success status for, ${name}:${mimeType}.`);
+      throw new Error(
+        `Service returned an invalid success status for, ${name}:${mimeType}.`
+      );
     }
-    
+
     const { success, id } = response;
 
     return { success, id };
   } catch (error) {
-    console.error('[upload.action] Error occurred uploading file.', error);
-    return { success: false };
+    console.error("[upload.action] Error occurred uploading file.", error);
+    throw new Error("Failed to upload file to Google Drive");
   }
 }
