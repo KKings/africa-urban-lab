@@ -57,6 +57,6 @@ export const append = async ({
       `[Google Sheets] Failed to append rows, ${identifier}`,
       error
     );
-    return { success: false };
+    throw error;
   }
 };

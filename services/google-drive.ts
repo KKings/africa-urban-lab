@@ -96,7 +96,7 @@ export const uploadFile = async (
       `[Google Drive] Failed to upload, ${file.name}:${file.mimeType}`,
       error
     );
-    return { success: false };
+    throw error;
   }
 };
 
