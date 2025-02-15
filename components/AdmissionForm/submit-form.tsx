@@ -14,6 +14,7 @@ import {
 import { upload, UploadFileResponse } from "./actions/drive-upload";
 import { saveToSheets, SheetValues } from "./actions/sheets-save";
 import { LoadingIcon } from "../Icons";
+import { addContacts } from "./actions/mailchimp-add";
 
 type SubmitFormProps = StepperForm<FormValues>;
 
@@ -129,6 +130,25 @@ const SubmitForm = ({
     ...formValues
   } = data;
 
+  
+  /**
+   * Handles the form submission process.
+   * 
+   * This function performs the following steps:
+   * 1. Sets the form state to pending and not idle.
+   * 2. Generates an identifier based on the form values.
+   * 3. Uploads the provided files and retrieves their links.
+   * 4. Constructs the sheet data with the form values and uploaded file links.
+   * 5. Saves the sheet data to Google Sheets.
+   * 6. Adds the contacts using the sheet data to Mailchimp.
+   * 7. Sets the success state based on the result of the sheet data append operation.
+   * 8. Handles any errors that occur during the process.
+   * 9. Resets the form state to not pending and idle.
+   * 
+   * @async
+   * @function handleOnSubmit
+   * @returns {Promise<void>} A promise that resolves when the form submission process is complete.
+   */
   const handleOnSubmit = useCallback(async () => {
     setPending(true);
     setIdle(false);
@@ -164,6 +184,10 @@ const SubmitForm = ({
       } as SheetValues;
 
       const appendResult = await saveToSheets(sheetData);
+
+      await addContacts({
+        ...sheetData
+      });
 
       setSuccess(appendResult.success || false);
     } catch (error) {

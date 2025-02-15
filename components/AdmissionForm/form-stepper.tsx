@@ -94,23 +94,22 @@ export function AdmissionForm({
 
   const handleStepSubmit = useCallback(
     async (stepData: z.infer<typeof stepper.current.schema>) => {
-      console.log("stepData", stepData);
-      console.log("formData", formData);
-
       setFormData({
         ...formData,
         ...stepData,
       });
       stepper.next();
+      document.querySelector('#admission-stepper')?.scrollIntoView({ behavior: 'smooth'});
     },
-    [stepper, setFormData]
+    [stepper, formData]
   );
 
   const handleFinalSubmit = useCallback(
     async (_: z.infer<typeof stepper.current.schema>) => {
       setFormData({});
+      document.querySelector('#admission-stepper')?.scrollIntoView({ behavior: 'smooth', });
     },
-    [setFormData]
+    [stepper]
   );
 
   const currentIndex = utils.getIndex(stepper.current.id);
@@ -119,12 +118,13 @@ export function AdmissionForm({
   return (
     <div className="space-y-w12">
       <nav
+        id="admission-stepper"
         aria-label="Admission Submission Steps"
         className="group my-4 flex justify-center w-full sm:w-auto"
+        style={{ scrollMarginTop: 'var(--height-nav)'}}
       >
         <ol
           className="flex items-center justify-between gap-2 w-full sm:w-auto"
-          aria-orientation="horizontal"
         >
           {stepper.all.map((step, index, array) => (
             <React.Fragment key={step.id}>
