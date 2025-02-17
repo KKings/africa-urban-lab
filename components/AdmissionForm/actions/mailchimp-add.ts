@@ -1,7 +1,7 @@
 "use server";
 
 import { z } from "zod";
-import { addOrUpdateContact } from "@/services/mailchimp";
+import { addOrUpdateContact, triggerJourney } from "@/services/mailchimp";
 import { personalSchema, referralSchema } from "../schema";
 
 export type AddContactsResponse = {
@@ -62,14 +62,31 @@ export const addContacts = async (
       tags: ["Applicant Referral"],
     });
 
+    /**
+     * Two journeys:
+     * 1. Initial request for reference
+     * 2. Follow-up
+     */
+    await triggerJourney({
+      email: referralEmail,
+      journeyId: '792',
+      stepId: '6620'
+    });
+
+    await triggerJourney({
+      email: referralEmail,
+      journeyId: '790',
+      stepId: '6616'
+    });
+
     return {
       success: true,
     };
   } catch (error) {
     console.error(
-      `[addContacts.action] Error occurred adding contacts.`,
+      `[addContacts.action] Error occurred processing the contacts.`,
       error
     );
-    throw new Error("Failed to add contacts");
+    throw new Error("Failed to process the contacts");
   }
 };
