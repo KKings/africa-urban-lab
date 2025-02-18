@@ -46,7 +46,12 @@ export const sendReferenceEmail = async (
       data: {
         FNAME: referralName,
         SNAME: `${firstName} ${lastName}`,
-        DUEDATE: dueDate.toLocaleDateString("af-ZA"),
+        DUEDATE: dueDate.toLocaleDateString(undefined, {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+          weekday: "long",
+        }),
       },
       tags: ["Admission - Request for Referral"],
     });
