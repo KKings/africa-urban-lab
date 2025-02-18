@@ -29,15 +29,17 @@ const FeaturedContent = ({ fragment }: Props) => {
       textColor={textColor?.hex}
     >
       <div className="flex flex-col space-y-8 lg:space-y-12">
-        <div className="w-full relative">
-          <NextImage
-            src={image?.responsiveImage?.src ?? ""}
-            alt={image?.responsiveImage?.alt ?? ""}
-            height={image?.responsiveImage?.height}
-            width={image?.responsiveImage?.width}
-            className="inset-0 object-cover w-full h-full"
-          />
-        </div>
+        { image?.responsiveImage?.src && 
+          <div className="w-full relative">
+            <NextImage
+              src={image?.responsiveImage?.src ?? ""}
+              alt={image?.responsiveImage?.alt ?? ""}
+              height={image?.responsiveImage?.height}
+              width={image?.responsiveImage?.width}
+              className="inset-0 object-cover w-full h-full"
+            />
+          </div>
+        }
         <div className={clsx([
           "grid gap-8", 
           "lg:grid-cols-3 lg:gap-16"
