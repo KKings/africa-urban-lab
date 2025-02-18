@@ -15,6 +15,7 @@ import { upload, UploadFileResponse } from "./actions/drive-upload";
 import { saveToSheets, SheetValues } from "./actions/sheets-save";
 import { LoadingIcon } from "../Icons";
 import { addContacts } from "./actions/mailchimp-add";
+import { sendReferenceEmail } from "./actions/mandrill-send";
 
 type SubmitFormProps = StepperForm<FormValues>;
 
@@ -186,6 +187,10 @@ const SubmitForm = ({
       const appendResult = await saveToSheets(sheetData);
 
       await addContacts({
+        ...sheetData
+      });
+
+      await sendReferenceEmail({
         ...sheetData
       });
 

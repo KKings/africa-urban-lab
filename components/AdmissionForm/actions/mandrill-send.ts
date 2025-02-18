@@ -1,23 +1,23 @@
 "use server";
 
 import { z } from "zod";
-import { addOrUpdateContact } from "@/services/mailchimp";
+import { sendEmail } from "@/services/mandrill";
 import { personalSchema, referralSchema } from "../schema";
 
-export type AddContactsResponse = {
+export type SendEmailResponse = {
   success?: boolean;
   message?: string;
 };
 
 const RequestSchema = personalSchema.merge(referralSchema);
 
-export type AddContactsValues = z.infer<typeof RequestSchema>;
+export type SendInitialEmailValues = z.infer<typeof RequestSchema>;
 
 const DUE_DATE_DAYS = 14;
 
-export const addContacts = async (
-  request: AddContactsValues
-): Promise<AddContactsResponse> => {
+export const sendReferenceEmail = async (
+  request: SendInitialEmailValues
+): Promise<SendEmailResponse> => {
   try {
     const parsed = RequestSchema.safeParse(request);
     if (!parsed.success) {
@@ -35,31 +35,20 @@ export const addContacts = async (
       };
     }
 
-    const { firstName, lastName, email, referralName, referralEmail } = request;
+    const { firstName, lastName, referralName, referralEmail } = request;
 
     const dueDate = new Date();
     dueDate.setDate(new Date().getDate() + DUE_DATE_DAYS);
 
-    await addOrUpdateContact({
-      audienceId: process.env.ADMISSIONS_MAILCHIMP_AUDIENCE_ID || "",
-      email,
-      fields: {
-        FNAME: firstName,
-        LNAME: lastName,
-        DUEDATE: dueDate.toDateString() 
-      },
-      tags: ["Applicant"],
-    });
-
-    await addOrUpdateContact({
-      audienceId: process.env.ADMISSIONS_MAILCHIMP_AUDIENCE_ID || "",
-      email: referralEmail,
-      fields: {
+    await sendEmail({
+      to: referralEmail,
+      templateName: "request-for-reference-initial",
+      data: {
         FNAME: referralName,
         SNAME: `${firstName} ${lastName}`,
-        DUEDATE: dueDate.toDateString() 
+        DUEDATE: dueDate.toLocaleDateString("af-ZA"),
       },
-      tags: ["Applicant Referral"],
+      tags: ["Admission - Request for Referral"],
     });
 
     return {
@@ -67,9 +56,9 @@ export const addContacts = async (
     };
   } catch (error) {
     console.error(
-      `[addContacts.action] Error occurred processing the contacts.`,
+      `[mandrill.send] Error occurred sending initial email.`,
       error
     );
-    throw new Error("Failed to process the contacts");
+    throw new Error("Failed to send email");
   }
 };

@@ -88,36 +88,42 @@ export function NewsletterForm({ successMessage }: NewsletterFromProps) {
         educationalBackground: "",
         howDidYouHearAboutUs: "",
       });
-      window.scrollTo({ top: formRef?.current?.clientTop });
     }
-  }, [pending, state.success, form]);
+    if (state.error || state.success) {
+      document
+        .querySelector("#form-messages")
+        ?.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [pending, state.error, state.success, form]);
 
   return (
     <>
-      {!state.success && state.error && (
-        <div aria-live="polite" className="pt-w4 pb-w8">
-          <Text size="meta" weight="bold" className="bg-red-400 p-6">
-            {state?.error?.detail?.message?.includes("Member Exists")
-              ? "This email address has already been subscribed, please try a different email address."
-              : state?.error?.detail?.detail ||
-                "An error occurred processing your request. Please try again later."}
-          </Text>
-        </div>
-      )}
-
-      {!pending && state?.success && (
-        <div className="py-6 space-y-w4 flex flex-col items-center">
-          {successMessage || (
-            <Text size="large" weight="extra" align="center">
-              Thank you for your interest.
-              <br />
-              <span className="font-medium italic">
-                Stay tuned for updates.
-              </span>
+      <div id="form-messages" style={{ scrollMarginTop: "var(--height-nav)" }}>
+        {!state.success && state.error && (
+          <div aria-live="polite" className="pt-w4 pb-w8">
+            <Text size="meta" weight="bold" className="bg-red-400 p-6">
+              {state?.error?.detail?.message?.includes("Member Exists")
+                ? "This email address has already been subscribed, please try a different email address."
+                : state?.error?.detail?.detail ||
+                  "An error occurred processing your request. Please try again later."}
             </Text>
-          )}
-        </div>
-      )}
+          </div>
+        )}
+
+        {!pending && state?.success && (
+          <div className="py-6 space-y-w4 flex flex-col items-center">
+            {successMessage || (
+              <Text size="large" weight="extra" align="center">
+                Thank you for your interest.
+                <br />
+                <span className="font-medium italic">
+                  Stay tuned for updates.
+                </span>
+              </Text>
+            )}
+          </div>
+        )}
+      </div>
 
       <Form {...form}>
         <form
@@ -140,7 +146,7 @@ export function NewsletterForm({ successMessage }: NewsletterFromProps) {
                   First Name
                 </FormLabel>
                 <FormControl>
-                  <Input {...field} aria-required={true} />
+                  <Input {...field} autoFocus={true} aria-required={true} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -233,7 +239,7 @@ export function NewsletterForm({ successMessage }: NewsletterFromProps) {
             name="reasonForInterest"
             render={({ field }) => (
               <FormItem>
-                <FormLabel 
+                <FormLabel
                   required
                   aria-required={true}
                   className={clsx(labelStyle)}
@@ -271,7 +277,7 @@ export function NewsletterForm({ successMessage }: NewsletterFromProps) {
             name="educationalBackground"
             render={({ field }) => (
               <FormItem>
-                <FormLabel 
+                <FormLabel
                   required
                   aria-required={true}
                   className={clsx(labelStyle)}
@@ -309,7 +315,7 @@ export function NewsletterForm({ successMessage }: NewsletterFromProps) {
             name="howDidYouHearAboutUs"
             render={({ field }) => (
               <FormItem>
-                <FormLabel 
+                <FormLabel
                   required
                   aria-required={true}
                   className={clsx(labelStyle)}
