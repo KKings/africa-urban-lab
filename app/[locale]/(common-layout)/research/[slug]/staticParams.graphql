@@ -1,6 +1,6 @@
 
-query PublicationsStaticParams {
-  allPublications(
+query ResearchesStaticParams {
+  allResearches(
     filter: { title: { isBlank: "false" } }
     orderBy: _createdAt_DESC
     first: 9
