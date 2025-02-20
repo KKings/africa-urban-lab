@@ -30,6 +30,8 @@ const generatePreviewUrl = (
       return buildUrl(globalPageProps, `/staff/${item.attributes.slug}`);
     case 'publication':
       return buildUrl(globalPageProps, `/publications/${item.attributes.slug}`);
+    case 'research':
+      return buildUrl(globalPageProps, `/research/${item.attributes.slug}`);
     case 'layout':
       return buildUrl(globalPageProps, '/home');
   }
