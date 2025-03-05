@@ -6,7 +6,7 @@ export const dynamic = "force-dynamic";
 
 type EmailRequests = [string, Record<string, string>][];
 
-const FOLLOW_UP_DAYS = 1;
+const FOLLOW_UP_DAYS = 11;
 
 const findFollowUps = (rows: string[][], index: number): string[][] => {
   const today = new Date(new Date().toDateString());
