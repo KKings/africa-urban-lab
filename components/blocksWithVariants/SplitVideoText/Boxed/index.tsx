@@ -42,7 +42,7 @@ const SplitVideoTextBoxed = ({ fragment }: Props) => {
     <Section bgColor={bgColor?.hex}>
       <div
         className={clsx([
-          "grid grid-flow-row md:grid-flow-column gap-16 items-center",
+          "grid grid-flow-row md:grid-flow-column items-center",
           "bg-theme-grey text-background 100dvh md:h-auto",
           {
             ['md:grid-cols-[var(--image-grid-size)_auto] md:[grid-template-areas:"image_text"]']:
@@ -72,7 +72,7 @@ const SplitVideoTextBoxed = ({ fragment }: Props) => {
         <div
           className={clsx([
             "flex flex-col text-center md:justify-center",
-            "space-y-8",
+            "space-y-8 py-16 px-4 lg:p-12",
             "md:[grid-area:text]",
           ])}
           style={{ color: textColor?.hex ?? "" }}
