@@ -7,6 +7,15 @@ fragment FeaturedContentSection on FeaturedContentSectionRecord {
     link {
       slug
     }
+    image {
+      responsiveImage(imgixParams: { auto: format, w: 400 }) {
+        alt
+        src
+        width
+        height
+        sizes
+      }
+    }
   }
   textColor {
     hex

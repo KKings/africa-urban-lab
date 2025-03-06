@@ -49,6 +49,19 @@ const FeaturedContent = ({ fragment }: Props) => {
               key={feature.id}
               className="flex flex-col space-y-6 md:space-y-8 text-center"
             >
+              { feature?.image?.responsiveImage?.src && 
+                <div className="relative flex justify-center">
+                  <NextImage
+                    src={feature?.image?.responsiveImage?.src ?? ""}
+                    alt={feature?.image?.responsiveImage?.alt ?? ""}
+                    sizes={feature?.image?.responsiveImage?.sizes}
+                    width={feature?.image?.responsiveImage?.width}
+                    height={feature?.image?.responsiveImage?.height}
+                    className="object-cover"
+                    style={{ height: "auto" }}
+                  />
+                </div>
+              }
               <Link href={feature.link.slug}>
                 <Text as="h3" size="subheading">
                   {feature.title}
