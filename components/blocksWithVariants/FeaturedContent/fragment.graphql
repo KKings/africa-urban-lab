@@ -23,6 +23,7 @@ fragment FeaturedContentSection on FeaturedContentSectionRecord {
   bgColor {
     hex
   }
+  grid
   image {
     responsiveImage(imgixParams: { auto: format, w: 1152 }) {
       alt

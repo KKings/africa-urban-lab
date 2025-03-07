@@ -15,3 +15,10 @@ export enum ImageGrid {
   '2/5' = '2/5',
   '3/5' = '3/5'
 };
+
+export enum Grid {
+  'two' = 'two',
+  'three' = 'three',
+  'four' = 'four',
+  'five' = 'five',
+}
