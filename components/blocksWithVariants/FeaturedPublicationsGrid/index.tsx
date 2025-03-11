@@ -1,8 +1,6 @@
 import { type FragmentType, getFragmentData } from "@/graphql/types";
 import NextImage from "next/image";
-import {
-  FeaturedPublicationsSectionFragmentDoc,
-} from "@/graphql/types/graphql";
+import { FeaturedPublicationsSectionFragmentDoc } from "@/graphql/types/graphql";
 import { buildUrl, GlobalPageProps } from "@/utils/globalPageProps";
 import { Section } from "@/components/ui/section";
 import { cn } from "@/components/utils";
@@ -35,8 +33,8 @@ const FeaturedPublicationsGrid = ({ fragment, globalPageProps }: Props) => {
       textColor={textColor?.hex}
       className="space-y-w16"
       style={{
-        backgroundImage: `url(${bgImage?.url ? bgImage?.url : ''})`,
-        backgroundRepeat: 'no-repeat',
+        backgroundImage: `url(${bgImage?.url ? bgImage?.url : ""})`,
+        backgroundRepeat: "no-repeat",
       }}
     >
       <div className="container flex flex-col items-center space-y-8">
@@ -48,8 +46,8 @@ const FeaturedPublicationsGrid = ({ fragment, globalPageProps }: Props) => {
             >
               <div
                 className={clsx([
-                  {'pt-12': !item?.promoImage?.responsiveImage?.src},
-                  { 'pt-[10px]': item?.promoImage?.responsiveImage?.src },
+                  { "pt-12": !item?.promoImage?.responsiveImage?.src },
+                  { "pt-[10px]": item?.promoImage?.responsiveImage?.src },
                   "flex flex-col relative",
                   " pr-12 pl-12 pb-20 h-full space-y-4",
                   "shadow-md  bg-white",
@@ -57,24 +55,37 @@ const FeaturedPublicationsGrid = ({ fragment, globalPageProps }: Props) => {
                   "before:bg-theme-turquoise",
                 ])}
               >
-                <div className="mb-2 border-b border-body-color border-opacity-10 pb-4">
+                <div
+                  className={clsx("mb-2", {
+                    " border-b border-body-color border-opacity-10 pb-4 mb-6":
+                      item.publicationAuthor?.name,
+                  })}
+                >
                   {item?.promoImage?.responsiveImage?.src && (
                     <NextImage
-                      src={item?.promoImage?.responsiveImage?.src ?? "https://placehold.co/346x232"}
+                      src={
+                        item?.promoImage?.responsiveImage?.src ??
+                        "https://placehold.co/346x232"
+                      }
                       alt={item.promoImage?.responsiveImage?.alt ?? ""}
                       sizes={item?.promoImage?.responsiveImage?.sizes}
                       width={item?.promoImage?.responsiveImage?.width ?? 346}
-                      height={item?.promoImage?.responsiveImage?.height ?? 230.67}
+                      height={
+                        item?.promoImage?.responsiveImage?.height ?? 230.67
+                      }
                       quality={100}
                       className={clsx([
                         "-ml-12 w-[calc(100%+6rem)] max-w-[calc(100%+6rem)]",
-                        "object-cover h-auto mb-6"
+                        "object-cover h-auto",
+                        { " mb-6": item.publicationAuthor?.name },
                       ])}
                     />
                   )}
-                  <Text as="p" size="meta" weight="bold">
-                    {item.author?.name}
-                  </Text>
+                  {item.publicationAuthor?.name && (
+                    <Text as="p" size="meta" weight="bold">
+                      {item.publicationAuthor?.name}
+                    </Text>
+                  )}
                 </div>
                 {item._publishedAt && (
                   <Text size="meta" weight="semi" className="mb-2">

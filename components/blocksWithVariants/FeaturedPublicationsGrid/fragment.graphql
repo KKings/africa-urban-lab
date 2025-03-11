@@ -22,7 +22,7 @@ fragment FeaturedPublicationsSection on FeaturedPublicationsSectionRecord {
     _publishedAt
     title
     slug 
-    author {
+    publicationAuthor: author {
       name
     }
     promoImage {
