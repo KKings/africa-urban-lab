@@ -47,30 +47,35 @@ const Content: ContentPage<PageProps, Query> = ({
                 {data.publication.title}
               </Text>
               <div className="mb-10 flex items-center justify-between border-b border-body-color border-opacity-10 dark:border-white dark:border-opacity-10">
-                <div className="flex flex-col items-start md:flex-row md:items-center">
-                  <NextLink href={`/staff/${data.publication.author.slug}`}>
-                    <div className="mb-5 mr-10 flex items-center">
-                      <div className="mr-4">
-                        <div className="relative h-10 w-10 overflow-hidden rounded-full">
-                          <DatoImage
-                            className="h-full w-full object-cover"
-                            fragment={
-                              data.publication.author.picture.responsiveImage
-                            }
-                          />
+                {data.publication.publicationAuthor && (
+                  <div className="flex flex-col items-start md:flex-row md:items-center">
+                    <NextLink
+                      href={`/staff/${data.publication.publicationAuthor.slug}`}
+                    >
+                      <div className="mb-5 mr-10 flex items-center">
+                        <div className="mr-4">
+                          <div className="relative h-10 w-10 overflow-hidden rounded-full">
+                            <DatoImage
+                              className="h-full w-full object-cover"
+                              fragment={
+                                data.publication.publicationAuthor.picture
+                                  .responsiveImage
+                              }
+                            />
+                          </div>
+                        </div>
+                        <div className="w-full">
+                          <Text size="large" weight="semi" className="mb-1">
+                            {data.publication.publicationAuthor.name}
+                          </Text>
+                          <Text size="meta">
+                            {data.publication.publicationAuthor.jobTitle}
+                          </Text>
                         </div>
                       </div>
-                      <div className="w-full">
-                        <Text size="large" weight="semi" className="mb-1">
-                          {data.publication.author.name}
-                        </Text>
-                        <Text size="meta">
-                          {data.publication.author.jobTitle}
-                        </Text>
-                      </div>
-                    </div>
-                  </NextLink>
-                </div>
+                    </NextLink>
+                  </div>
+                )}
               </div>
               <div className="flex flex-col space-y-4">
                 <StructuredText
@@ -92,7 +97,7 @@ const Content: ContentPage<PageProps, Query> = ({
                       }
                       case "PdfBlockRecord": {
                         return (
-                          <div className="relative overflow-hidden flex justify-center">
+                          <div className="relative overflow-hidden flex justify-center lg:min-h-[1136px]">
                             <PdfViewer
                               key={record.id}
                               source={record?.url}
@@ -214,10 +219,13 @@ const Content: ContentPage<PageProps, Query> = ({
                     }),
                     renderNodeRule(isLink, ({ node, children, key }) => {
                       const attributeObject =
-                        node.meta?.reduce((acc, { id, value }) => {
-                          acc[id] = value;
-                          return acc;
-                        }, {} as Record<string, string>) || {};
+                        node.meta?.reduce(
+                          (acc, { id, value }) => {
+                            acc[id] = value;
+                            return acc;
+                          },
+                          {} as Record<string, string>
+                        ) || {};
 
                       return (
                         <Link
