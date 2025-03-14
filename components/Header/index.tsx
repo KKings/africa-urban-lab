@@ -23,15 +23,23 @@ const Header = ({ globalPageProps, data }: Props) => {
       menuData.push({
         id: "1",
         title: dropdownItem.title || "Other Items",
-        newTab: false,
+        isButton: false,
         submenu: dropdownItem.items.map((item) => {
           return {
             id: item.id,
             title: item.title,
             path: `/${item.page.slug}`,
-            newTab: true,
+            isButton: false,
           };
         }),
+      });
+    } else if (item.__typename === "MenuItemButtonRecord") {
+      const menuItem = item;
+      menuData.push({
+        id: menuItem.id,
+        title: menuItem.title,
+        path: `/${menuItem.page.slug}`,
+        isButton: true,
       });
     } else {
       const menuItem = item;
@@ -39,7 +47,7 @@ const Header = ({ globalPageProps, data }: Props) => {
         id: menuItem.id,
         title: menuItem.title,
         path: `/${menuItem.page.slug}`,
-        newTab: false,
+        isButton: false,
       });
     }
   });

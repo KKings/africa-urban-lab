@@ -7,13 +7,14 @@ import { Link } from "../ui/link";
 import { Text } from "../ui/text";
 import { MainMenuDialog } from "./main-menu-dialog";
 import { buildUrl, GlobalPageProps } from "@/utils/globalPageProps";
+import { Button } from "../ui";
 
 export type Menu = {
   id: string;
   title: string;
   path?: string;
-  newTab: boolean;
   submenu?: Menu[];
+  isButton?: boolean;
 };
 
 export type MenuProps = {
@@ -21,24 +22,34 @@ export type MenuProps = {
   globalPageProps: GlobalPageProps;
 };
 
-export const MainMenu = ({ globalPageProps, menus = []}: MenuProps) => {
+export const MainMenu = ({ globalPageProps, menus = [] }: MenuProps) => {
   const pathname = usePathname();
 
   return (
-    <NavigationMenu.Root key={pathname} className="z-10 hidden min-[1140px]:block">
+    <NavigationMenu.Root
+      key={pathname}
+      className="z-10 hidden min-[1140px]:block"
+    >
       <NavigationMenu.List className="flex items-center justify-end gap-w8 text-foreground">
         {menus.map((item) => (
           <NavigationMenu.Item
             key={item.id}
             className="flex items-center justify-end hover:text-primary relative"
           >
-            {(!item.submenu || item.submenu.length === 0) && (
+            {item.isButton && (
+              <Button key={item.id} asChild size="lg" className="text-white">
+                <Link href={buildUrl(globalPageProps, item.path)}>
+                  <Text as="span" weight="semi">
+                    {item.title}
+                  </Text>
+                </Link>
+              </Button>
+            )}
+            {(!item.submenu || item.submenu.length === 0) && !item.isButton && (
               <Link
                 key={item.id}
                 href={buildUrl(globalPageProps, item.path)}
-                className={clsx(
-                  item.path === pathname ? "text-primary" : ""
-                )}
+                className={clsx({ "text-primary": item.path === pathname })}
               >
                 <Text as="span" weight="semi">
                   {item.title}
@@ -62,9 +73,7 @@ export const MainMenu = ({ globalPageProps, menus = []}: MenuProps) => {
                   <NavigationMenu.Sub orientation="vertical" className="w-full">
                     <NavigationMenu.List>
                       {item.submenu.map((submenu) => (
-                        <NavigationMenu.Item
-                          key={`${submenu.id}`}
-                        >
+                        <NavigationMenu.Item key={`${submenu.id}`}>
                           <Link
                             key={submenu.id}
                             href={buildUrl(globalPageProps, submenu.path)}
@@ -91,44 +100,73 @@ export const MainMenu = ({ globalPageProps, menus = []}: MenuProps) => {
   );
 };
 
-export const MainMenuMobile = ({ globalPageProps, menus = []}: MenuProps) => {
+export const MainMenuMobile = ({ globalPageProps, menus = [] }: MenuProps) => {
   const pathname = usePathname();
 
-  return (     
-    <MainMenuDialog key={pathname} className="overflow-y-scroll overflow-x-hidden block">
-      <NavigationMenu.Root className="w-screen" orientation="vertical">
+  return (
+    <MainMenuDialog
+      key={pathname}
+      className="overflow-y-scroll overflow-x-hidden block"
+    >
+      <NavigationMenu.Root orientation="vertical">
         <NavigationMenu.List className="flex flex-col text-foreground">
           {menus.map((item, index) => (
             <NavigationMenu.Item
               key={item.title}
               className="flex flex-col hover:text-primary relative w-full"
             >
-              {(!item.submenu || item.submenu.length === 0) && (
+              {item.isButton && (
                 <NavigationMenu.Link asChild>
-                  <Link
+                  <Button
                     key={item.id}
-                    href={buildUrl(globalPageProps, item.path)}
-                    className={clsx(
-                      item.path === pathname ? "text-primary" : "",
-                      { 'py-3': index !== 0 },
-                      { 'pb-3': index === 0 },
-                    )}
+                    asChild
+                    size="lg"
+                    className="text-white"
                   >
-                    <Text as="span" weight="semi" className="text-white">
-                      {item.title}
-                    </Text>
-                  </Link>
+                    <Link
+                      key={item.id}
+                      href={buildUrl(globalPageProps, item.path)}
+                    >
+                      <Text as="span" weight="semi">
+                        {item.title}
+                      </Text>
+                    </Link>
+                  </Button>
                 </NavigationMenu.Link>
               )}
+              {(!item.submenu || item.submenu.length === 0) &&
+                !item.isButton && (
+                  <NavigationMenu.Link asChild>
+                    <Link
+                      key={item.id}
+                      href={buildUrl(globalPageProps, item.path)}
+                      className={clsx(
+                        item.path === pathname ? "text-primary" : "",
+                        { "py-3": index !== 0 },
+                        { "pb-3": index === 0 }
+                      )}
+                    >
+                      <Text as="span" weight="semi" className="text-white">
+                        {item.title}
+                      </Text>
+                    </Link>
+                  </NavigationMenu.Link>
+                )}
               {item.submenu && item.submenu.length > 0 && (
                 <>
-                  <NavigationMenu.Trigger className={clsx(
-                    'group text-left',
-                    item.path === pathname ? "text-primary" : "",
-                    { 'py-3': index !== 0 },
-                    { 'pb-3': index === 0 },
-                  )}>
-                    <Text as="span" className="text-base text-white" weight="semi">
+                  <NavigationMenu.Trigger
+                    className={clsx(
+                      "group text-left",
+                      item.path === pathname ? "text-primary" : "",
+                      { "py-3": index !== 0 },
+                      { "pb-3": index === 0 }
+                    )}
+                  >
+                    <Text
+                      as="span"
+                      className="text-base text-white"
+                      weight="semi"
+                    >
                       {item.title}
                       <CaretDownIcon
                         width={20}
@@ -138,25 +176,23 @@ export const MainMenuMobile = ({ globalPageProps, menus = []}: MenuProps) => {
                       />
                     </Text>
                   </NavigationMenu.Trigger>
-                  <NavigationMenu.Content className={clsx([
-                    "justify-start top-[100%] left-0 right-0 bottom-0",
-                    "min-w-[150px] w-max",
-                    "bg-theme-blue text-white flex flex-col rounded h-fit ease-in duration-900 overflow-hidden"
-                  ])}>
+                  <NavigationMenu.Content
+                    className={clsx([
+                      "justify-start top-[100%] left-0 right-0 bottom-0",
+                      "min-w-[150px] w-max",
+                      "bg-theme-blue text-white flex flex-col rounded h-fit ease-in duration-900 overflow-hidden",
+                    ])}
+                  >
                     <NavigationMenu.Sub orientation="vertical">
                       <NavigationMenu.List>
                         {item.submenu.map((submenu) => (
-                          <NavigationMenu.Item
-                            key={`${submenu.id}`}
-                          >
+                          <NavigationMenu.Item key={`${submenu.id}`}>
                             <NavigationMenu.Link asChild>
                               <Link
                                 key={submenu.id}
                                 href={buildUrl(globalPageProps, submenu.path)}
                                 className={clsx(
-                                  item.path === pathname
-                                    ? "text-primary"
-                                    : "",
+                                  item.path === pathname ? "text-primary" : "",
                                   "py-2 px-4 block text-white"
                                 )}
                               >
