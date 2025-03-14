@@ -15,6 +15,14 @@ query CommonLayout($locale: SiteLocale, $fallbackLocale: [SiteLocale!]) {
           slug
         }
       }
+      ... on MenuItemButtonRecord {
+        id
+        title
+        __typename
+        page {
+          slug
+        }
+      }
       ... on MenuDropdownRecord {
         id
         title
