@@ -65,7 +65,7 @@ const PersonalForm = ({
                   First Name
                 </FormLabel>
                 <FormControl>
-                  <Input autoFocus={true} {...field} aria-required={true} />
+                  <Input {...field} aria-required={true} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
