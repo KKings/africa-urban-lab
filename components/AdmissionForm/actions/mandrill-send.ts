@@ -35,10 +35,28 @@ export const sendReferenceEmail = async (
       };
     }
 
-    const { firstName, lastName, referralName, referralEmail } = request;
+    const { firstName, lastName, email, referralName, referralEmail } = request;
 
     const dueDate = new Date();
     dueDate.setDate(new Date().getDate() + DUE_DATE_DAYS);
+
+    /** 
+     * Two emails sent:
+     * 
+     *    1. To the applicant to confirm submission
+     *    2. To the referral to request a reference
+     * 
+     * A third email is sent to the reference to follow-up using a cron job.
+     */
+    await sendEmail({
+      to: email,
+      templateName: "applicant-received-submission",
+      data: {
+        FNAME: firstName,
+        SNAME: `${firstName} ${lastName}`,
+      },
+      tags: ["Admission - Submission Received"],
+    });
 
     await sendEmail({
       to: referralEmail,
