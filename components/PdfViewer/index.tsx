@@ -8,6 +8,7 @@ import type {
 import { PdfViewerControls } from "./PdfViewerControls";
 import { Size, useResizeObserver } from "@/hooks/useResizeObserver";
 import { cn } from "../utils";
+import 'react-pdf/dist/Page/TextLayer.css';
 
 export type PdfViewerProps = JSX.IntrinsicElements["div"] & {
   source: string;
@@ -86,7 +87,7 @@ const PdfViewer = ({
             className="prevPage !absolute z-0 shadow-md" 
             pageNumber={renderedPage}
             renderAnnotationLayer={false}
-            renderTextLayer={false}
+            renderTextLayer={true}
             width={pageWidth}
           />
         ) : null}
@@ -95,7 +96,7 @@ const PdfViewer = ({
           className="shadow-md"
           pageNumber={currentPage}
           renderAnnotationLayer={false}
-          renderTextLayer={false}
+          renderTextLayer={true}
           onRenderSuccess={callback}
           width={pageWidth}
         />
