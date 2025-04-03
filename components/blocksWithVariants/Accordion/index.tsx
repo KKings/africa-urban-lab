@@ -1,7 +1,5 @@
 import { type FragmentType, getFragmentData } from "@/graphql/types";
-import {
-  AccordionSectionFragmentDoc,
-} from "@/graphql/types/graphql";
+import { AccordionSectionFragmentDoc } from "@/graphql/types/graphql";
 import { GlobalPageProps } from "@/utils/globalPageProps";
 import { Section } from "@/components/ui/section";
 import {
@@ -25,12 +23,12 @@ const AccordionSection = ({ fragment }: Props) => {
     fragment
   );
   return (
-    <Section 
-      fullWidth 
-      title={title ?? ""} 
-      bgColor={bgColor?.hex} 
+    <Section
+      fullWidth
+      title={title ?? ""}
+      bgColor={bgColor?.hex}
       textColor={textColor?.hex}
-      className="mb-0 pb-0 md:mb-0 md:pb-0"
+      className={clsx("mb-0 pb-0 md:mb-0 md:pb-0", { "py-0 md:py-0": !title })}
     >
       <Accordion type="single" collapsible className="w-full">
         {items.map((item, i) => (
@@ -42,7 +40,7 @@ const AccordionSection = ({ fragment }: Props) => {
             <AccordionTrigger
               className={clsx(
                 "min-h-[100px] lg:min-h-[140px]",
-                "hover:bg-theme-citron",
+                "hover:bg-theme-citron"
               )}
             >
               <div className="container flex flex-col items-center justify-center space-y-1">

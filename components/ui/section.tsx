@@ -1,5 +1,6 @@
 import { Text } from "@/components/ui/text";
 import clsx from "clsx";
+import { cn } from "../utils";
 
 export type SectionProps =  JSX.IntrinsicElements['div'] & {
   title?: string | null;
@@ -27,8 +28,8 @@ export const Section = ({
   return (
     <div
       style={{ backgroundColor: bgColor ?? ''}} 
-      className={clsx(
-        "py-w24 md:py-w32 relative",
+      className={cn(
+        "py-24 md:py-32 relative",
         "flex flex-col items-center justify-center",
         "space-y-w16",
         className
