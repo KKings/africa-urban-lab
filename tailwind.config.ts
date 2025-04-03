@@ -106,6 +106,7 @@ const config = {
         test: '123px',
 
         // lower value is 2/3 of upper value
+        w0: 0,
         w4: generateClampSize(500, 1200, 10.5, 16),
         w6: generateClampSize(500, 1200, 16, 24),
         w8: generateClampSize(500, 1200, 21, 32),
