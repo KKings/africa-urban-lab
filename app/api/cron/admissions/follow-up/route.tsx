@@ -8,16 +8,17 @@ type EmailRequests = [string, Record<string, string>][];
 
 const FOLLOW_UP_DAYS = 11;
 
-const findFollowUps = (rows: string[][], index: number): string[][] => {
+const findFollowUps = (rows: string[][], index: number, receivedReferralIndex: number): string[][] => {
   const today = new Date(new Date().toDateString());
 
   const filteredRows = rows.filter((row) => {
     const rowData = row[index];
+    const receivedReferral = row[receivedReferralIndex];
     const createdOn = rowData ? new Date(rowData) : null;
 
-    console.log(createdOn);
+    console.log('rowData: ', { createdOn, receivedReferral, today });
 
-    if (!createdOn) {
+    if (!createdOn || receivedReferral?.toLocaleLowerCase() === "yes") {
       return false;
     }
 
@@ -132,8 +133,9 @@ export async function GET(request: NextRequest) {
   );
   const firstNameIndex = header.findIndex((value) => value === "First Name");
   const lastNameIndex = header.findIndex((value) => value === "Last Name");
+  const receivedReferralIndex = header.findIndex((value) => value === "Received Referral");
 
-  const followUpData = findFollowUps(rows, createdOnIndex);
+  const followUpData = findFollowUps(rows, createdOnIndex, receivedReferralIndex);
 
   if (followUpData.length === 0) {
     return new Response("Ran successfully, no records processed.", {
