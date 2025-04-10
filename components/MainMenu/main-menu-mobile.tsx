@@ -17,7 +17,6 @@ const SubMenu: React.FC<{
   basePath: string;
   className?: string;
 }> = ({ submenu, globalPageProps, basePath, className }) => {
-  const pathname = usePathname();
   return (
     <NavigationMenu.List className={className}>
       {submenu.map((submenuItem) => (
@@ -33,7 +32,6 @@ const SubMenu: React.FC<{
                 <Link
                   href={buildUrl(globalPageProps, submenuItem.path)}
                   className={clsx(
-                    submenuItem.path === pathname ? "text-primary" : "",
                     "py-2"
                   )}
                 >

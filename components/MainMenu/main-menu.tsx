@@ -32,10 +32,7 @@ const SubMenu: React.FC<{ submenu: Menu[]; globalPageProps: any }> = ({
               >
                 <Link
                   href={buildUrl(globalPageProps, submenuItem.path)}
-                  className={clsx(
-                    submenuItem.path === pathname ? "text-primary" : "",
-                    "py-2"
-                  )}
+                  className={clsx("py-2")}
                 >
                   <Text as="span" size="small">
                     {submenuItem.title}
