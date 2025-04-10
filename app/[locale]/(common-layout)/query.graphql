@@ -28,6 +28,24 @@ query CommonLayout($locale: SiteLocale, $fallbackLocale: [SiteLocale!]) {
         title
         __typename
         items {
+          ... on MenuDropdownItemRecord {
+            id
+            __typename
+            title
+            page {
+              slug
+            }
+            dropdownItems {
+              ... on MenuItemRecord {
+                id
+                title
+                __typename
+                page {
+                  slug
+                }
+              }
+            }
+          }
           ... on MenuItemRecord {
             id
             title
