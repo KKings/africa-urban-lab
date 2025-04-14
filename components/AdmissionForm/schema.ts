@@ -6,7 +6,7 @@ const fileSizeLimit = 2 * 1024 * 1024; // 1MB
 const FILE =
   typeof window === "undefined"
     ? z.any()
-    : z.instanceof(FileList, { message: 'A file is required'});
+    : z.instanceof(FileList, { message: "A file is required" });
 
 export const DOCUMENT_SCHEMA = FILE.refine(
   (file) => SUPPORTED_DOCUMENTS.includes(file?.[0]?.type),
@@ -14,13 +14,14 @@ export const DOCUMENT_SCHEMA = FILE.refine(
 ).refine((file) => file?.[0]?.size <= fileSizeLimit, {
   message: "File size must be smaller than 2MB",
 });
-export const DOCUMENT_SCHEMA_OPTIONAL = FILE
-  .refine((file) => SUPPORTED_DOCUMENTS.includes(file?.[0]?.type), {
+export const DOCUMENT_SCHEMA_OPTIONAL = FILE.refine(
+  (file) => SUPPORTED_DOCUMENTS.includes(file?.[0]?.type),
+  {
     message: "File type must be a .doc, .docx, or a .pdf",
-  })
-  .refine((file) => file?.[0]?.size <= fileSizeLimit, {
-    message: "File size must be smaller than 2MB",
-  });
+  }
+).refine((file) => file?.[0]?.size <= fileSizeLimit, {
+  message: "File size must be smaller than 2MB",
+});
 export const RequestSchema = z.object({
   firstName: z
     .string({ message: "First name is required" })
@@ -79,6 +80,18 @@ export const personalSchema = z.object({
   yearlyIncome: z
     .number({ message: "Yearly Income is required" })
     .nonnegative("Yearly Income must be a positive number"),
+  applicantFullDiploma: z.enum(["yes", "no"], {
+    message: "Applicant Full Diploma is required",
+  }),
+  applicantCourses: z.array(z.string().min(1)).optional(),
+}).refine((data) => { 
+  if (data?.applicantFullDiploma === "no") {
+    return data?.applicantCourses?.length ? data.applicantCourses.length > 0 : false;
+  }
+  return true;
+}, {
+  message: "A course is required",
+  path: ["applicantCourses"],
 });
 
 export const experienceSchema = z.object({

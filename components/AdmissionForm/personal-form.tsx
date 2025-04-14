@@ -1,5 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import Link from "next/link";
 import clsx from "clsx";
 import {
   Form,
@@ -13,7 +14,9 @@ import { Input, labelStyle } from "../ui/input";
 import { type PersonalFormValues, personalSchema } from "./schema";
 import type { StepperForm } from "./types";
 import { StepperButtons } from "./form-stepper-buttons";
-import { Text } from "../ui";
+import { Separator, Text } from "../ui";
+import { Radio, RadioGroupIndicator, RadioGroupItem } from "../ui/radio";
+import { MultiSelect } from "../ui/multi-select";
 
 type PersonalFormProps = StepperForm<PersonalFormValues>;
 
@@ -35,8 +38,10 @@ const PersonalForm = ({
 
   const {
     handleSubmit,
-    formState: { isValid },
+    formState: { isValid, errors },
   } = form;
+
+  console.log(errors);
 
   return (
     <Form {...form}>
@@ -199,6 +204,79 @@ const PersonalForm = ({
               </FormItem>
             )}
           />
+          <Separator className="!my-6" />
+          <FormField
+            control={form.control}
+            name="applicantFullDiploma"
+            defaultValue="yes"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel
+                  required
+                  aria-required={true}
+                  className={clsx(labelStyle)}
+                >
+                  Are you applying for the Full Diploma?
+                </FormLabel>
+                <Radio
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <RadioGroupItem value="yes" id="yes" labelText="Yes">
+                    <RadioGroupIndicator />
+                  </RadioGroupItem>
+
+                  <RadioGroupItem value="no" id="no" labelText="No">
+                    <RadioGroupIndicator />
+                  </RadioGroupItem>
+                </Radio>
+                <Text size="meta" className="text-muted-foreground" as="p">
+                  Full Diploma includes the Capstone Project plus the four
+                  courses — Urban Planning, Urban Economics, Urban Governance,
+                  and Urban Finance. Further details on the Diploma program are{" "}
+                  <Link
+                    href={"/professional-diploma-in-urban-development"}
+                    className="text-theme-blue"
+                  >
+                    here
+                  </Link>
+                  . Scholarships are only available for full diploma applicants.
+                </Text>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          {form.watch("applicantFullDiploma") === "no" && (
+            <FormField
+              control={form.control}
+              name="applicantCourses"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel
+                    required
+                    aria-required={true}
+                    className={clsx(labelStyle)}
+                  >
+                    Which specific courses are you applying for? Select all that apply 
+                  </FormLabel>
+                  <MultiSelect
+                    options={[
+                      { label: "Urban Planning", value: "Urban Planning" },
+                      { label: "Urban Economics", value: "Urban Economics" },
+                      { label: "Urban Governance", value: "Urban Governance" },
+                      { label: "Urban Finance", value: "Urban Finance" },
+                    ]}
+                    maxCount={2}
+                    placeholder="Select courses"
+                    onValueChange={field.onChange}
+                    defaultValue={field.value ?? []}
+                  />
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          )}
+
           <StepperButtons
             isFirst={isFirst}
             isLast={isLast}
