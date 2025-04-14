@@ -29,9 +29,9 @@ export type SaveToSheetsResponse = {
 };
 
 const RequestSchema = personalSchema
-  .merge(experienceSchema)
-  .merge(referralSchema)
-  .merge(documentLinksSchema);
+  .and(experienceSchema)
+  .and(referralSchema)
+  .and(documentLinksSchema);
 
 export type SheetValues = z.infer<typeof RequestSchema>;
 
@@ -71,6 +71,8 @@ export const saveToSheets = async (
       nationality,
       countryOfResidence,
       yearlyIncome,
+      applicantFullDiploma,
+      applicantCourses,
       totalYearsOfRelevantExperience,
       currentJob,
       jobResponsibilities,
@@ -100,6 +102,8 @@ export const saveToSheets = async (
         nationality,
         countryOfResidence,
         String(yearlyIncome),
+        applicantFullDiploma,
+        applicantCourses?.join(", ") || "",
         String(totalYearsOfRelevantExperience),
         currentJob,
         jobResponsibilities,

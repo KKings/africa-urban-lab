@@ -6,7 +6,6 @@ import { Check, ChevronDown, ChevronUp } from "lucide-react";
 import { ChevronDownIcon } from "@radix-ui/react-icons";
 import { defaultInputStyle } from "./input";
 import { cn } from "../utils";
-import clsx from "clsx";
 import { textVariants } from "./text";
 
 const Select = SelectPrimitive.Root;

@@ -1,14 +1,11 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React from "react";
 import { z } from "zod";
 import clsx from "clsx";
 import { useCallback, useState } from "react";
-import { useFormState } from "react-dom";
 import { defineStepper } from "@stepperize/react";
 import { Text, Separator } from "@/components/ui";
-import { saveToSheets } from "./actions/sheets-save";
-import { ReactElement } from "react-markdown/lib/react-markdown";
 import {
   type FormValues,
   personalSchema,

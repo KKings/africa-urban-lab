@@ -9,7 +9,7 @@ export type AddContactsResponse = {
   message?: string;
 };
 
-const RequestSchema = personalSchema.merge(referralSchema);
+const RequestSchema = personalSchema.and(referralSchema);
 
 export type AddContactsValues = z.infer<typeof RequestSchema>;
 

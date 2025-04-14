@@ -9,7 +9,7 @@ export type SendEmailResponse = {
   message?: string;
 };
 
-const RequestSchema = personalSchema.merge(referralSchema);
+const RequestSchema = personalSchema.and(referralSchema);
 
 export type SendInitialEmailValues = z.infer<typeof RequestSchema>;
 
