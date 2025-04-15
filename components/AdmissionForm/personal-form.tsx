@@ -240,7 +240,7 @@ const PersonalForm = ({
                   >
                     here
                   </Link>
-                  . Scholarships are only available for full diploma applicants.
+                  . Scholarships are only available for full Diploma applicants.
                 </Text>
                 <FormMessage />
               </FormItem>
